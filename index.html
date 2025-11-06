@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XyroStore - Retro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.cdnfonts.com/css/press-start-2p" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Press Start 2P', cursive;
+      scroll-behavior: smooth;
+    }
+    
+    /* Loading Screen Styles */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    
+    .loading-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.3;
+    }
+    
+    .loading-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      width: 80%;
+      max-width: 600px;
+    }
+    
+    .loading-logo {
+      margin-bottom: 2rem;
+    }
+    
+    .loading-text {
+      color: #39FF14;
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 10px #39FF14;
+    }
+    
+    .loading-bar-container {
+      width: 100%;
+      height: 20px;
+      background-color: #111;
+      border: 2px solid #39FF14;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .loading-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #39FF14;
+      transition: width 0.3s ease;
+    }
+    
+    .loading-percentage {
+      color: #39FF14;
+      margin-top: 1rem;
+      font-size: 0.8rem;
+    }
+    
+    .pixel-border {
+      border: 2px solid #39FF14;
+      box-shadow: 0 0 8px #39FF14;
+    }
+    
+    .pixel-btn:hover {
+      background-color: #39FF14 !important;
+      color: #000 !important;
+      text-shadow: none !important;
+    }
+    
+    /* Animasi teks loading */
+    @keyframes textGlow {
+      0%, 100% { text-shadow: 0 0 10px #39FF14; }
+      50% { text-shadow: 0 0 20px #39FF14, 0 0 30px #39FF14; }
+    }
+    
+    .glow-text {
+      animation: textGlow 2s infinite;
+    }
+    
+    /* Animasi pixel */
+    @keyframes pixelMove {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100vh); }
+    }
+    
+    .pixel {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #39FF14;
+      opacity: 0.7;
+      z-index: 5;
+    }
+    
+    /* Animasi menu slide dari kiri */
+    @keyframes slideFromLeft {
+      from { 
+        opacity: 0; 
+        transform: translateX(-100%); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateX(0); 
+      }
+    }
+    @keyframes slideToLeft {
+      from { 
+        opacity: 1; 
+        transform: translateX(0); 
+      }
+      to { 
+        opacity: 0; 
+        transform: translateX(-100%); 
+      }
+    }
+    .slide-from-left {
+      animation: slideFromLeft 0.3s ease-out forwards;
+    }
+    .slide-to-left {
+      animation: slideToLeft 0.3s ease-out forwards;
+    }
+    
+    /* Overlay untuk background */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 40;
+      display: none;
+    }
+    
+    /* Styling untuk menu mobile */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 80%;
+      max-width: 320px;
+      background: #000;
+      border-right: 4px solid #39FF14;
+      z-index: 50;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-out;
+      overflow-y: auto;
+    }
+    
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+    
+    /* Scrollbar styling untuk menu mobile */
+    .mobile-menu::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .mobile-menu::-webkit-scrollbar-track {
+      background: #111;
+    }
+    
+    .mobile-menu::-webkit-scrollbar-thumb {
+      background: #39FF14;
+      border-radius: 3px;
+    }
+    
+    /* Animasi scroll ke atas */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: #39FF14;
+      color: #000;
+      border: 2px solid #39FF14;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #39FF14;
+    }
+    
+    .scroll-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .scroll-to-top:hover {
+      background-color: #FFD700;
+      border-color: #FFD700;
+      transform: scale(1.1);
+    }
+    
+    /* Animasi untuk elemen saat scroll */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Animasi untuk tombol "Tampilkan Lebih Banyak/Sedikit" */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+  </style>
+</head>
+<body class="bg-[#000000] text-[#39FF14]">
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <!-- Background Video -->
+  <video class="loading-video" autoplay muted loop playsinline>
+    <source src="vidio/videoplayback.mp4" type="video/mp4">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-digital-grid-53857-large.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+  
+  <!-- Pixel Animation Overlay -->
+  <div id="pixel-container"></div>
+  
+  <!-- Loading Content -->
+  <div class="loading-content">
+    <div class="loading-logo">
+      <img src="img/LogoStore.png" 
+           alt="XyroStore Logo" 
+           style="width:139.5px; height:80px;" 
+           class="object-contain drop-shadow-[0_0_15px_#39FF14] mx-auto mb-4">
+      <h1 class="text-2xl md:text-3xl text-[#39FF14] tracking-widest glow-text">XYROSTORE</h1>
+    </div>
+    
+    <div class="loading-text glow-text">
+      LOADING GAME UNIVERSE...
+    </div>
+    
+    <div class="loading-bar-container pixel-border">
+      <div id="loading-bar" class="loading-bar"></div>
+    </div>
+    
+    <div id="loading-percentage" class="loading-percentage">0%</div>
+    
+    <div class="mt-6 text-xs text-[#39FF14] opacity-70">
+      PREPARING THE ULTIMATE GAMING EXPERIENCE
+    </div>
+  </div>
+</div>
+
+<!-- KONTEN UTAMA WEBSITE (akan disembunyikan selama loading) -->
+<div id="main-content" class="hidden">
+  <!-- NAVBAR ATAS -->
+  <header class="bg-[#111] border-b-4 border-[#39FF14] pixel-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      
+      <!-- LOGO -->
+      <div class="flex items-center space-x-3">
+        <img src="img/LogoStore.png" 
+             alt="XyroStore Logo" 
+             style="width:69.75px; height:40px;" 
+             class="object-contain drop-shadow-[0_0_6px_#39FF14]">
+        <span class="text-xl text-[#39FF14] tracking-widest">XYROSTORE</span>
+      </div>
+
+      <!-- SEARCH BAR -->
+      <div class="hidden md:flex flex-1 mx-6 relative">
+        <input 
+          type="text" 
+          id="navbarSearchInput"
+          placeholder="CARI GAME, APPS, ATAU KEBUTUHAN SOSMED..." 
+          class="w-full bg-[#222222] text-[#39FF14] text-xs px-4 py-2 rounded-none border border-[#39FF14] focus:outline-none placeholder-[#39FF14]/60"
+        >
+        <!-- HASIL PENCARIAN DROPDOWN -->
+        <div id="navbarSearchResults" class="absolute top-full left-0 right-0 bg-[#111] border-2 border-[#39FF14] border-t-0 mt-1 z-50 hidden max-h-96 overflow-y-auto">
+          <div class="p-3 border-b border-[#39FF14] bg-[#0F380F]">
+            <div class="flex justify-between items-center">
+              <span class="text-[#FFD700] text-xs">HASIL PENCARIAN</span>
+              <span id="navbarResultCount" class="text-[#39FF14] text-[10px]"></span>
+            </div>
+          </div>
+          <div id="navbarSearchResultsList" class="p-2 space-y-2">
+            <!-- Hasil pencarian akan muncul di sini -->
+          </div>
+          <div id="navbarNoResults" class="hidden p-4 text-center">
+            <p class="text-[#39FF14] text-xs">Tidak ada hasil yang ditemukan</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- LANGUAGE / CURRENCY -->
+      <div id="langBtn" class="hidden md:flex items-center px-3 py-2 border border-[#39FF14] cursor-pointer hover:bg-[#39FF14] hover:text-black transition">
+        <img src="https://flagcdn.com/w20/id.png" class="w-5 h-4 mr-2">
+        <span class="text-xs">ID / IDR</span>
+      </div>
+
+      <!-- HAMBURGER MENU -->
+      <button id="menu-btn" class="md:hidden border border-[#39FF14] p-2 text-[#39FF14]">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- NAVBAR BAWAH (Desktop Only) -->
+  <nav class="hidden md:block bg-[#0F380F] border-b-2 border-[#39FF14]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between text-xs">
+      
+      <!-- MENU -->
+      <div class="flex space-x-4">
+        <a href="#" class="text-[#FFD700] border-b-2 border-[#FFD700] pb-1">TOPUP</a>
+        <a href="#" class="hover:text-[#FFD700]">TRANSAKSI</a>
+        <a href="#" class="hover:text-[#FFD700]">LEADERBOARD</a>
+        <a href="#" class="hover:text-[#FFD700]">KALKULATOR</a>
+      </div>
+
+      <!-- LOGIN & REGISTER -->
+      <div class="flex space-x-3">
+        <a href="#" class="hover:text-[#FFD700]">MASUK</a>
+        <a href="#" class="hover:text-[#FFD700]">DAFTAR</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- OVERLAY UNTUK MOBILE MENU -->
+  <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+
+  <!-- MENU MOBILE (Slide dari kiri) -->
+  <div id="mobile-menu" class="mobile-menu">
+    <!-- HEADER MOBILE MENU -->
+    <div class="p-4 border-b-2 border-[#39FF14] bg-[#0F380F]">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <img src="img/LogoStore.png" 
+               alt="XyroStore Logo" 
+               style="width:52.31px; height:30px;" 
+               class="object-contain drop-shadow-[0_0_6px_#39FF14]">
+          <span class="text-lg text-[#39FF14] tracking-widest">XYROSTORE</span>
+        </div>
+        <button id="close-menu-btn" class="text-[#39FF14] hover:text-[#FFD700] text-lg">
+          ✖
+        </button>
+      </div>
+    </div>
+
+    <!-- CONTENT MOBILE MENU -->
+    <div class="p-4 space-y-4 overflow-y-auto h-[calc(100%-80px)]">
+      <!-- SEARCH BAR MOBILE -->
+      <div class="relative">
+        <input 
+          type="text" 
+          id="mobileSearchInput"
+          placeholder="CARI GAME, APPS, ATAU KEBUTUHAN SOSMED..." 
+          class="w-full bg-[#222222] text-[#39FF14] text-xs px-4 py-2 border-2 border-[#39FF14] focus:outline-none placeholder-[#39FF14]/60"
+        >
+        <!-- HASIL PENCARIAN MOBILE -->
+        <div id="mobileSearchResults" class="absolute top-full left-0 right-0 bg-[#111] border-2 border-[#39FF14] border-t-0 mt-1 z-50 hidden max-h-64 overflow-y-auto">
+          <div class="p-3 border-b border-[#39FF14] bg-[#0F380F]">
+            <div class="flex justify-between items-center">
+              <span class="text-[#FFD700] text-xs">HASIL PENCARIAN</span>
+              <span id="mobileResultCount" class="text-[#39FF14] text-[10px]"></span>
+            </div>
+          </div>
+          <div id="mobileSearchResultsList" class="p-2 space-y-2">
+            <!-- Hasil pencarian akan muncul di sini -->
+          </div>
+          <div id="mobileNoResults" class="hidden p-4 text-center">
+            <p class="text-[#39FF14] text-xs">Tidak ada hasil yang ditemukan</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- MENU ITEMS -->
+      <div class="space-y-2">
+        <a href="#" class="block py-3 px-4 bg-[#111] border-2 border-[#39FF14] text-[#FFD700] hover:bg-[#39FF14] hover:text-black transition-colors">
+          TOPUP
+        </a>
+        <a href="#" class="block py-3 px-4 bg-[#111] border-2 border-[#39FF14] text-[#39FF14] hover:bg-[#39FF14] hover:text-black transition-colors">
+          TRANSAKSI
+        </a>
+        <a href="#" class="block py-3 px-4 bg-[#111] border-2 border-[#39FF14] text-[#39FF14] hover:bg-[#39FF14] hover:text-black transition-colors">
+          LEADERBOARD
+        </a>
+        <a href="#" class="block py-3 px-4 bg-[#111] border-2 border-[#39FF14] text-[#39FF14] hover:bg-[#39FF14] hover:text-black transition-colors">
+          KALKULATOR
+        </a>
+      </div>
+
+      <!-- LOGIN & REGISTER -->
+      <div class="pt-4 border-t-2 border-[#39FF14]">
+        <div class="space-y-2">
+          <a href="#" class="block py-3 px-4 bg-[#0F380F] border-2 border-[#39FF14] text-[#39FF14] hover:bg-[#39FF14] hover:text-black transition-colors text-center">
+            MASUK
+          </a>
+          <a href="#" class="block py-3 px-4 bg-[#111] border-2 border-[#39FF14] text-[#39FF14] hover:bg-[#39FF14] hover:text-black transition-colors text-center">
+            DAFTAR
+          </a>
+        </div>
+      </div>
+
+      <!-- LANGUAGE SWITCHER MOBILE -->
+      <div class="pt-4 border-t-2 border-[#39FF14]">
+        <button id="mobile-lang-btn" class="w-full py-3 px-4 bg-[#111] border-2 border-[#39FF14] text-[#39FF14] hover:bg-[#39FF14] hover:text-black transition-colors flex items-center justify-center">
+          <img src="https://flagcdn.com/w20/id.png" class="w-4 h-3 mr-2">
+          <span class="text-xs">ID / IDR</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPUP (tetap sama) -->
+  <div id="popup" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+    <div class="bg-[#111] p-6 border-4 border-[#39FF14] pixel-border w-11/12 md:w-[500px]">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-sm text-[#FFD700]">PILIH LOKASI & BAHASA</h2>
+        <button id="closePopup" class="text-[#39FF14] text-lg hover:text-[#FFD700]">✖</button>
+      </div>
+
+      <div class="space-y-5 text-xs">
+        <!-- Lokasi -->
+        <div>
+          <p class="mb-2 text-[#FFD700]">LOKASI</p>
+          <div class="grid grid-cols-2 gap-3">
+            <button class="pixel-btn border border-[#39FF14] px-3 py-2 bg-[#222222] flex items-center">
+              <img src="https://flagcdn.com/w20/id.png" class="mr-2">INDONESIA
+            </button>
+            <button class="pixel-btn border border-[#39FF14] px-3 py-2 bg-[#222222] flex items-center">
+              <img src="https://flagcdn.com/w20/my.png" class="mr-2">MALAYSIA
+            </button>
+            <button class="pixel-btn border border-[#39FF14] px-3 py-2 bg-[#222222] flex items-center">
+              <img src="https://flagcdn.com/w20/sg.png" class="mr-2">SINGAPORE
+            </button>
+            <button class="pixel-btn border border-[#39FF14] px-3 py-2 bg-[#222222] flex items-center">
+              <img src="https://flagcdn.com/w20/th.png" class="mr-2">THAILAND
+            </button>
+          </div>
+        </div>
+
+        <!-- Bahasa -->
+        <div>
+          <p class="mb-2 text-[#FFD700]">BAHASA</p>
+          <div class="grid grid-cols-2 gap-3">
+            <button class="pixel-btn border border-[#39FF14] px-3 py-2 bg-[#222222] flex items-center">
+              <img src="https://flagcdn.com/w20/id.png" class="mr-2">ID
+            </button>
+            <button class="pixel-btn border border-[#39FF14] px-3 py-2 bg-[#222222] flex items-center">
+              <img src="https://flagcdn.com/w20/gb.png" class="mr-2">EN
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION PROMO SLIDER (tetap sama) -->
+  <section class="w-full bg-[#000] border-t-4 border-[#39FF14] py-4 md:py-6 relative overflow-hidden">
+    <!-- Background Video -->
+    <div class="absolute inset-0 z-0">
+      <video 
+        autoplay 
+        muted 
+        loop 
+        playsinline 
+        class="w-full h-full object-cover opacity-30"
+      >
+        <source src="vidio/videoplayback.mp4" type="video/mp4">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-digital-grid-53857-large.webm" type="video/webm">
+        Your browser does not support the video tag.
+      </video>
+      <!-- Overlay untuk meningkatkan kontras -->
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+      <div class="relative overflow-hidden rounded-lg border-2 border-[#39FF14] shadow-[0_0_20px_#39FF14] bg-black/50 backdrop-blur-sm">
+
+        <!-- Wrapper Slide -->
+        <div id="promoSlider" class="flex transition-transform duration-700 ease-in-out">
+          
+          <!-- SLIDE 1 -->
+          <div class="min-w-full">
+            <!-- Desktop -->
+            <img src="img/Benner Game.png" 
+                 alt="Promo 1 Desktop" 
+                 class="hidden md:block w-full h-auto">
+            <!-- Mobile -->
+            <img src="img/Benner Game.png" 
+                 alt="Promo 1 Mobile" 
+                 class="block md:hidden w-full h-auto">
+          </div>
+
+          <!-- SLIDE 2 -->
+          <div class="min-w-full">
+            <!-- Desktop -->
+            <img src="https://i.ibb.co/vQcg1b1/promo2-desktop.jpg" 
+                 alt="Promo 2 Desktop" 
+                 class="hidden md:block w-full h-auto">
+            <!-- Mobile -->
+            <img src="https://i.ibb.co/yP12zV7/promo2-mobile.jpg" 
+                 alt="Promo 2 Mobile" 
+                 class="block md:hidden w-full h-auto">
+          </div>
+
+          <!-- SLIDE 3 -->
+          <div class="min-w-full">
+            <!-- Desktop -->
+            <img src="https://i.ibb.co/wWMcZcN/promo3-desktop.jpg" 
+                 alt="Promo 3 Desktop" 
+                 class="hidden md:block w-full h-auto">
+            <!-- Mobile -->
+            <img src="https://i.ibb.co/3fS79vL/promo3-mobile.jpg" 
+                 alt="Promo 3 Mobile" 
+                 class="block md:hidden w-full h-auto">
+          </div>
+        </div>
+
+        <!-- PANAH KIRI -->
+        <button id="prevSlide" 
+                class="absolute left-3 top-1/2 -translate-y-1/2 bg-[#39FF14]/80 hover:bg-[#39FF14] text-black font-bold rounded-full w-10 h-10 flex items-center justify-center z-20 transition-all duration-300 shadow-lg">
+          ‹
+        </button>
+
+        <!-- PANAH KANAN -->
+        <button id="nextSlide" 
+                class="absolute right-3 top-1/2 -translate-y-1/2 bg-[#39FF14]/80 hover:bg-[#39FF14] text-black font-bold rounded-full w-10 h-10 flex items-center justify-center z-20 transition-all duration-300 shadow-lg">
+          ›
+        </button>
+
+        <!-- DOT NAVIGASI -->
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+          <span class="dot w-3 h-3 bg-[#39FF14] rounded-full cursor-pointer shadow-lg"></span>
+          <span class="dot w-3 h-3 bg-[#39FF14]/40 rounded-full cursor-pointer shadow-lg"></span>
+          <span class="dot w-3 h-3 bg-[#39FF14]/40 rounded-full cursor-pointer shadow-lg"></span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION POPULER SEKARANG (tetap sama) -->
+  <section class="w-full bg-[#000] py-8 md:py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- JUDUL SECTION -->
+      <div class="flex items-center justify-center mb-8">
+        <div class="relative">
+          <h2 class="text-xl md:text-2xl text-[#39FF14] text-center px-6 py-2 border-2 border-[#39FF14] bg-[#111] pixel-border">
+            POPULER SEKARANG
+          </h2>
+          <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#000] rotate-45 border-r-2 border-b-2 border-[#39FF14]"></div>
+        </div>
+      </div>
+
+      <!-- GRID PRODUK POPULER -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        
+        <!-- ITEM 1: Free Fire -->
+        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
+          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
+            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Free Fire</h3>
+          </div>
+          <div class="p-4 flex flex-col items-center">
+            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-qQivqMlXcniOIplM5F92wxlf9h7WBA658w&s" alt="Free Fire" class="w-full h-full object-cover">
+            </div>
+            <p class="text-[#39FF14] text-xs text-center mb-3">Garena</p>
+            <a href="/topup/free-fire" class="w-full">
+              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
+                BELI SEKARANG
+              </button>
+            </a>
+          </div>
+        </div>
+
+        <!-- ITEM 2: Mobile Legend -->
+        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
+          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
+            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Mobile Legend</h3>
+          </div>
+          <div class="p-4 flex flex-col items-center">
+            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
+              <img src="https://play-lh.googleusercontent.com/r54MhnxVyVOhlNQm5QDkwJqwTbiBDojbQ0ZhC1iGGkZo1Z0upUQuzF8rqVbw-Q91PL2ADXz0SzkK1mrO4xwqug" alt="Mobile Legends" class="w-full h-full object-cover">
+            </div>
+            <p class="text-[#39FF14] text-xs text-center mb-3">Moonton</p>
+            <a href="/topup/mobile-legends" class="w-full">
+              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
+                BELI SEKARANG
+              </button>
+            </a>
+          </div>
+        </div>
+
+        <!-- ITEM 3: Magic Chess -->
+        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
+          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
+            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Magic Chess</h3>
+          </div>
+          <div class="p-4 flex flex-col items-center">
+            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
+              <img src="https://play-lh.googleusercontent.com/0YFChom7BdMkIgshcKHweiP7LriiGg7j7CS5mS4JWCSZkmFD5hRZnOsEGf93u5TgpDccD6NmM7SgBgV7txXWNw=w240-h480-rw" alt="Magic Chess" class="w-full h-full object-cover">
+            </div>
+            <p class="text-[#39FF14] text-xs text-center mb-3">Moonton</p>
+            <a href="/topup/magic-chess" class="w-full">
+              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
+                BELI SEKARANG
+              </button>
+            </a>
+          </div>
+        </div>
+
+        <!-- ITEM 4: Genshin Impact -->
+        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
+          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
+            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Genshin Impact</h3>
+          </div>
+          <div class="p-4 flex flex-col items-center">
+            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
+              <img src="https://play-lh.googleusercontent.com/YQqyKaXX-63krqsfIzUEJWUWLINxcb5tbS6QVySdxbS7eZV7YB2dUjUvX27xA0TIGtfxQ5v-tQjwlT5tTB-O=w240-h480-rw" alt="Genshin Impact" class="w-full h-full object-cover">
+            </div>
+            <p class="text-[#39FF14] text-xs text-center mb-3">Mihoyo</p>
+            <a href="/topup/genshin-impact" class="w-full">
+              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
+                BELI SEKARANG
+              </button>
+            </a>
+          </div>
+        </div>
+
+        <!-- ITEM 5: PUBG -->
+        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
+          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
+            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">PUBG</h3>
+          </div>
+          <div class="p-4 flex flex-col items-center">
+            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
+              <img src="https://play-lh.googleusercontent.com/vkziTNqdZU0su1t-AdjiCyre0SSnHTQJmznppAfbGTtj98yzttsChqcvUOihEkXDsoNZ" alt="PUBG" class="w-full h-full object-cover">
+            </div>
+            <p class="text-[#39FF14] text-xs text-center mb-3">Tencent Games</p>
+            <a href="/topup/pubg" class="w-full">
+              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
+                BELI SEKARANG
+              </button>
+            </a>
+          </div>
+        </div>
+
+        <!-- ITEM 6: Honor Of Kings -->
+        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
+          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
+            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Honor Of Kings</h3>
+          </div>
+          <div class="p-4 flex flex-col items-center">
+            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
+              <img src="https://play-lh.googleusercontent.com/JzcfRXNLE--3KDOPziAKzhAHEruqsV1XwN7tz-928zs-wUWN3tx62WAygmv5_eI-I-Kf" alt="Honor Of Kings" class="w-full h-full object-cover">
+            </div>
+            <p class="text-[#39FF14] text-xs text-center mb-3">TiMi Studio Group</p>
+            <a href="/topup/honor-of-kings" class="w-full">
+              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
+                BELI SEKARANG
+              </button>
+            </a>
+          </div>
+        </div>
+
+        <!-- ITEM 7: Zenless Zone Zero -->
+        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
+          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
+            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Zenless Zone Zero</h3>
+          </div>
+          <div class="p-4 flex flex-col items-center">
+            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
+              <img src="https://play-lh.googleusercontent.com/8jEmEvTsNIRW1vLlrDXXCcDlKkQrNb8NzccOXrln4G_DOUZpcBPbN9ssjuwBWz7_yZQ" alt="Zenless Zone Zero" class="w-full h-full object-cover">
+            </div>
+            <p class="text-[#39FF14] text-xs text-center mb-3">Mihoyo</p>
+            <a href="/topup/zenless-zone-zero" class="w-full">
+              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
+                BELI SEKARANG
+              </button>
+            </a>
+          </div>
+        </div>
+
+        <!-- ITEM 8: Valorant -->
+        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
+          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
+            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Valorant</h3>
+          </div>
+          <div class="p-4 flex flex-col items-center">
+            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
+              <img src="https://img.tapimg.net/market/images/d8421f75e13907471e802d0fdf33d2a0.jpg" alt="Valorant" class="w-full h-full object-cover">
+            </div>
+            <p class="text-[#39FF14] text-xs text-center mb-3">Riot Games</p>
+            <a href="/topup/valorant" class="w-full">
+              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
+                BELI SEKARANG
+              </button>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION KATEGORI MENU (tetap sama) -->
+  <section class="w-full bg-[#000] py-8 md:py-12 border-t-2 border-[#39FF14]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- JUDUL SECTION -->
+      <div class="flex items-start mb-8">
+        <div class="relative">
+          <h2 class="text-lg md:text-xl text-[#39FF14] px-4 py-2 border-2 border-[#39FF14] bg-[#111] pixel-border">
+            KATEGORI PRODUK
+          </h2>
+        </div>
+      </div>
+
+      <!-- FILTER REGION -->
+      <div class="flex flex-wrap gap-3 mb-8">
+        <button class="filter-btn px-4 py-2 border-2 border-[#39FF14] bg-[#0F380F] text-[#39FF14] text-xs hover:bg-[#39FF14] hover:text-black transition-colors pixel-border" data-filter="topup-games">
+          Top Up Games
+        </button>
+        <button class="filter-btn px-4 py-2 border-2 border-[#39FF14] bg-[#111] text-[#39FF14] text-xs hover:bg-[#39FF14] hover:text-black transition-colors pixel-border" data-filter="apps-premium">
+          Apps Premium
+        </button>
+        <button class="filter-btn px-4 py-2 border-2 border-[#39FF14] bg-[#111] text-[#39FF14] text-xs hover:bg-[#39FF14] hover:text-black transition-colors pixel-border" data-filter="sosmed">
+          Kebutuhan Sosmed
+        </button>
+      </div>
+
+      <!-- GRID GAME -->
+      <div id="gameGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6">
+        <!-- Game items akan dimuat di sini -->
+      </div>
+
+      <!-- TOMBOL TAMPILKAN LEBIH BANYAK/SEDIKIT -->
+      <div class="flex justify-center mt-8">
+        <button id="toggleMoreBtn" class="px-6 py-3 border-2 border-[#39FF14] bg-[#111] text-[#39FF14] text-sm hover:bg-[#39FF14] hover:text-black transition-colors pixel-border pulse-animation">
+          TAMPILKAN LEBIH BANYAK
+        </button>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- TOMBOL SCROLL KE ATAS -->
+<div id="scrollToTop" class="scroll-to-top">
+  ↑
+</div>
+
+<script>
+  // ===== LOADING SCREEN FUNCTIONALITY =====
+  const loadingScreen = document.getElementById('loading-screen');
+  const mainContent = document.getElementById('main-content');
+  const loadingBar = document.getElementById('loading-bar');
+  const loadingPercentage = document.getElementById('loading-percentage');
+  const pixelContainer = document.getElementById('pixel-container');
+  
+  // Fungsi untuk membuat pixel animation
+  function createPixelAnimation() {
+    const pixelCount = 50;
+    
+    for (let i = 0; i < pixelCount; i++) {
+      const pixel = document.createElement('div');
+      pixel.classList.add('pixel');
+      
+      // Random position
+      const left = Math.random() * 100;
+      const top = Math.random() * 100;
+      pixel.style.left = `${left}%`;
+      pixel.style.top = `${top}%`;
+      
+      // Random size
+      const size = Math.random() * 10 + 5;
+      pixel.style.width = `${size}px`;
+      pixel.style.height = `${size}px`;
+      
+      // Random opacity
+      const opacity = Math.random() * 0.5 + 0.3;
+      pixel.style.opacity = opacity;
+      
+      // Random animation
+      const duration = Math.random() * 5 + 3;
+      const delay = Math.random() * 2;
+      pixel.style.animation = `pixelMove ${duration}s linear ${delay}s infinite`;
+      
+      pixelContainer.appendChild(pixel);
+    }
+  }
+  
+  // Fungsi untuk mensimulasikan loading
+  function simulateLoading() {
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 10;
+      
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+        
+        // Tunggu sebentar sebelum menampilkan konten utama
+        setTimeout(() => {
+          loadingScreen.style.opacity = '0';
+          setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            mainContent.classList.remove('hidden');
+            
+            // Inisialisasi animasi scroll setelah loading selesai
+            initScrollAnimations();
+          }, 500);
+        }, 500);
+      }
+      
+      loadingBar.style.width = `${progress}%`;
+      loadingPercentage.textContent = `${Math.floor(progress)}%`;
+    }, 200);
+  }
+  
+  // Inisialisasi loading screen
+  document.addEventListener('DOMContentLoaded', function() {
+    createPixelAnimation();
+    simulateLoading();
+  });
+
+  // ===== ANIMASI SCROLL =====
+  function initScrollAnimations() {
+    // Scroll to top button
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    // Tampilkan tombol saat scroll ke bawah
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 300) {
+        scrollToTopBtn.classList.add('show');
+      } else {
+        scrollToTopBtn.classList.remove('show');
+      }
+      
+      // Animasi fade-in untuk elemen saat scroll
+      const fadeElements = document.querySelectorAll('.fade-in');
+      fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    });
+    
+    // Scroll ke atas saat tombol diklik
+    scrollToTopBtn.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Animasi untuk elemen yang sudah terlihat saat halaman dimuat
+    const fadeElements = document.querySelectorAll('.fade-in');
+    fadeElements.forEach(element => {
+      const elementTop = element.getBoundingClientRect().top;
+      const elementVisible = 150;
+      
+      if (elementTop < window.innerHeight - elementVisible) {
+        element.classList.add('visible');
+      }
+    });
+  }
+
+  // ===== MOBILE MENU FUNCTIONALITY =====
+  const menuBtn = document.getElementById("menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const closeMenuBtn = document.getElementById("close-menu-btn");
+  const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+  const langBtn = document.getElementById("langBtn");
+  const mobileLangBtn = document.getElementById("mobile-lang-btn");
+  const popup = document.getElementById("popup");
+  const closePopup = document.getElementById("closePopup");
+
+  // Fungsi untuk membuka menu mobile
+  function openMobileMenu() {
+    mobileMenu.classList.add("open");
+    mobileMenuOverlay.style.display = "block";
+    document.body.style.overflow = "hidden"; // Mencegah scroll body
+  }
+
+  // Fungsi untuk menutup menu mobile
+  function closeMobileMenu() {
+    mobileMenu.classList.remove("open");
+    mobileMenuOverlay.style.display = "none";
+    document.body.style.overflow = ""; // Mengembalikan scroll body
+  }
+
+  // Event listener untuk tombol menu
+  menuBtn.addEventListener("click", openMobileMenu);
+  closeMenuBtn.addEventListener("click", closeMobileMenu);
+
+  // Event listener untuk overlay
+  mobileMenuOverlay.addEventListener("click", closeMobileMenu);
+
+  // Event listener untuk tombol bahasa di mobile
+  mobileLangBtn.addEventListener("click", () => {
+    popup.classList.remove("hidden");
+    closeMobileMenu(); // Tutup menu mobile saat membuka popup
+  });
+
+  // Event listener untuk tombol bahasa di desktop
+  langBtn.addEventListener("click", () => {
+    popup.classList.remove("hidden");
+  });
+
+  // Event listener untuk menutup popup
+  closePopup.addEventListener("click", () => {
+    popup.classList.add("hidden");
+  });
+
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) popup.classList.add("hidden");
+  });
+
+  // Event listener untuk tombol bahasa di dalam popup
+  document.querySelectorAll('.pixel-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Update tombol bahasa di navbar desktop
+      const img = this.querySelector('img');
+      const text = this.textContent.trim();
+      
+      if (img) {
+        langBtn.querySelector('img').src = img.src;
+        langBtn.querySelector('span').textContent = text;
+      }
+      
+      // Update tombol bahasa di menu mobile
+      if (mobileLangBtn && img) {
+        mobileLangBtn.querySelector('img').src = img.src;
+        mobileLangBtn.querySelector('span').textContent = text;
+      }
+      
+      popup.classList.add("hidden");
+    });
+  });
+
+  // ===== PROMO SLIDER FUNCTIONALITY =====
+  const slider = document.getElementById("promoSlider");
+  const dots = document.querySelectorAll(".dot");
+  let index = 0;
+  const totalSlides = 3;
+
+  function updateSlider() {
+    slider.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("bg-[#39FF14]", i === index);
+      dot.classList.toggle("bg-[#39FF14]/40", i !== index);
+    });
+  }
+
+  document.getElementById("nextSlide").addEventListener("click", () => {
+    index = (index + 1) % totalSlides;
+    updateSlider();
+  });
+
+  document.getElementById("prevSlide").addEventListener("click", () => {
+    index = (index - 1 + totalSlides) % totalSlides;
+    updateSlider();
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      index = i;
+      updateSlider();
+    });
+  });
+
+  // Auto-slide setiap 5 detik
+  setInterval(() => {
+    index = (index + 1) % totalSlides;
+    updateSlider();
+  }, 5000);
+
+  // ===== SEARCH FUNCTIONALITY =====
+  const allProducts = [
+    // Top Up Games
+    { name: 'Mobile Legends', provider: 'Moonton', image: 'https://play-lh.googleusercontent.com/r54MhnxVyVOhlNQm5QDkwJqwTbiBDojbQ0ZhC1iGGkZo1Z0upUQuzF8rqVbw-Q91PL2ADXz0SzkK1mrO4xwqug', category: 'topup-games' },
+    { name: 'Free Fire', provider: 'Garena', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-qQivqMlXcniOIplM5F92wxlf9h7WBA658w&s', category: 'topup-games' },
+    { name: 'PUBG Mobile', provider: 'Tencent', image: 'https://play-lh.googleusercontent.com/vkziTNqdZU0su1t-AdjiCyre0SSnHTQJmznppAfbGTtj98yzttsChqcvUOihEkXDsoNZ', category: 'topup-games' },
+    { name: 'Magic Chess', provider: 'Moonton', image: 'https://play-lh.googleusercontent.com/0YFChom7BdMkIgshcKHweiP7LriiGg7j7CS5mS4JWCSZkmFD5hRZnOsEGf93u5TgpDccD6NmM7SgBgV7txXWNw=w240-h480-rw', category: 'topup-games' },
+    { name: 'Call of Duty', provider: 'Activision', image: '', category: 'topup-games' },
+    { name: 'Clash of Clans', provider: 'Supercell', image: '', category: 'topup-games' },
+    { name: 'Arena of Valor', provider: 'Tencent', image: '', category: 'topup-games' },
+    { name: 'Point Blank', provider: 'Zepetto', image: '', category: 'topup-games' },
+    { name: 'Mobile Legends Adventure', provider: 'Moonton', image: '', category: 'topup-games' },
+    { name: 'One Punch Man', provider: 'Bandai', image: '', category: 'topup-games' },
+    { name: 'EFootball', provider: 'Konami', image: '', category: 'topup-games' },
+    { name: 'Tower of Fantasy', provider: 'Perfect World', image: '', category: 'topup-games' },
+    { name: 'Genshin Impact', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/YQqyKaXX-63krqsfIzUEJWUWLINxcb5tbS6QVySdxbS7eZV7YB2dUjUvX27xA0TIGtfxQ5v-tQjwlT5tTB-O=w240-h480-rw', category: 'topup-games' },
+    { name: 'Honor of Kings', provider: 'TiMi Studio', image: 'https://play-lh.googleusercontent.com/JzcfRXNLE--3KDOPziAKzhAHEruqsV1XwN7tz-928zs-wUWN3tx62WAygmv5_eI-I-Kf', category: 'topup-games' },
+    { name: 'Valorant', provider: 'Riot Games', image: 'https://img.tapimg.net/market/images/d8421f75e13907471e802d0fdf33d2a0.jpg', category: 'topup-games' },
+    { name: 'Zenless Zone Zero', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/8jEmEvTsNIRW1vLlrDXXCcDlKkQrNb8NzccOXrln4G_DOUZpcBPbN9ssjuwBWz7_yZQ', category: 'topup-games' },
+
+    // Apps Premium
+    { name: 'YouTube Premium', provider: 'Google', image: '', category: 'apps-premium' },
+    { name: 'Spotify', provider: 'Spotify', image: '', category: 'apps-premium' },
+    { name: 'Netflix', provider: 'Netflix', image: '', category: 'apps-premium' },
+    { name: 'Disney+ Hotstar', provider: 'Disney', image: '', category: 'apps-premium' },
+    { name: 'VIU Premium', provider: 'VIU', image: '', category: 'apps-premium' },
+    { name: 'Canva Pro', provider: 'Canva', image: '', category: 'apps-premium' },
+
+    // Kebutuhan Sosmed
+    { name: 'Instagram Followers', provider: 'Meta', image: '', category: 'sosmed' },
+    { name: 'TikTok Followers', provider: 'TikTok', image: '', category: 'sosmed' },
+    { name: 'YouTube Subscribers', provider: 'Google', image: '', category: 'sosmed' },
+    { name: 'Twitter Followers', provider: 'Twitter', image: '', category: 'sosmed' },
+    { name: 'Facebook Likes', provider: 'Meta', image: '', category: 'sosmed' }
+  ];
+
+  // Fungsi untuk membuat item hasil pencarian
+  function createSearchResultItem(product) {
+    return `
+      <div class="flex items-center space-x-3 p-2 bg-[#222] border border-[#39FF14] hover:bg-[#0F380F] cursor-pointer transition-colors">
+        <div class="w-8 h-8 bg-[#333] border border-[#39FF14] flex items-center justify-center overflow-hidden flex-shrink-0">
+          ${product.image ? 
+            `<img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">` : 
+            `<span class="text-[#39FF14] text-[8px]">${product.name.substring(0, 2).toUpperCase()}</span>`
+          }
+        </div>
+        <div class="flex-1 min-w-0">
+          <h4 class="text-[#FFD700] text-xs truncate">${product.name}</h4>
+          <p class="text-[#39FF14] text-[10px] truncate">${product.provider}</p>
+        </div>
+        <span class="text-[#39FF14] text-[8px] px-2 py-1 bg-[#333] border border-[#39FF14]">
+          ${product.category === 'topup-games' ? 'GAME' : 
+            product.category === 'apps-premium' ? 'APP' : 'SOSMED'}
+        </span>
+      </div>
+    `;
+  }
+
+  // Fungsi untuk mencari produk
+  function searchProducts(query, searchType) {
+    const searchTerm = query.toLowerCase().trim();
+    
+    if (searchTerm === '') {
+      hideSearchResults(searchType);
+      return;
+    }
+
+    const results = allProducts.filter(product => 
+      product.name.toLowerCase().includes(searchTerm) ||
+      product.provider.toLowerCase().includes(searchTerm) ||
+      product.category.toLowerCase().includes(searchTerm)
+    );
+
+    displaySearchResults(results, searchTerm, searchType);
+  }
+
+  // Fungsi untuk menampilkan hasil pencarian
+  function displaySearchResults(results, searchTerm, searchType) {
+    const resultsContainer = document.getElementById(`${searchType}SearchResults`);
+    const resultsList = document.getElementById(`${searchType}SearchResultsList`);
+    const resultCount = document.getElementById(`${searchType}ResultCount`);
+    const noResults = document.getElementById(`${searchType}NoResults`);
+
+    // Reset list
+    resultsList.innerHTML = '';
+
+    if (results.length === 0) {
+      resultsContainer.classList.add('hidden');
+      noResults.classList.remove('hidden');
+      return;
+    }
+
+    // Tampilkan jumlah hasil
+    resultCount.textContent = `${results.length} hasil`;
+
+    // Tampilkan hasil (maksimal 5 item untuk dropdown)
+    const limitedResults = results.slice(0, 5);
+    limitedResults.forEach(product => {
+      resultsList.innerHTML += createSearchResultItem(product);
+    });
+
+    resultsContainer.classList.remove('hidden');
+    noResults.classList.add('hidden');
+  }
+
+  // Fungsi untuk menyembunyikan hasil pencarian
+  function hideSearchResults(searchType) {
+    document.getElementById(`${searchType}SearchResults`).classList.add('hidden');
+    document.getElementById(`${searchType}NoResults`).classList.add('hidden');
+  }
+
+  // Event listeners untuk search desktop
+  const navbarSearchInput = document.getElementById('navbarSearchInput');
+  if (navbarSearchInput) {
+    navbarSearchInput.addEventListener('input', function(e) {
+      searchProducts(e.target.value, 'navbar');
+    });
+
+    // Sembunyikan hasil saat klik di luar
+    document.addEventListener('click', function(e) {
+      if (!navbarSearchInput.contains(e.target)) {
+        hideSearchResults('navbar');
+      }
+    });
+  }
+
+  // Event listeners untuk search mobile
+  const mobileSearchInput = document.getElementById('mobileSearchInput');
+  if (mobileSearchInput) {
+    mobileSearchInput.addEventListener('input', function(e) {
+      searchProducts(e.target.value, 'mobile');
+    });
+
+    // Sembunyikan hasil saat klik di luar
+    document.addEventListener('click', function(e) {
+      if (!mobileSearchInput.contains(e.target)) {
+        hideSearchResults('mobile');
+      }
+    });
+  }
+
+  // Event listener untuk item hasil pencarian
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('#navbarSearchResultsList > div, #mobileSearchResultsList > div')) {
+      const productItem = e.target.closest('div');
+      const productName = productItem.querySelector('h4').textContent;
+      console.log('Produk dipilih:', productName);
+      // Redirect ke halaman produk atau lakukan aksi lainnya
+      hideSearchResults('navbar');
+      hideSearchResults('mobile');
+    }
+  });
+
+  // ===== CATEGORY & TOGGLE MORE FUNCTIONALITY =====
+  const gameData = {
+    'topup-games': [
+      { name: 'Mobile Legends', provider: 'Moonton', image: 'https://play-lh.googleusercontent.com/r54MhnxVyVOhlNQm5QDkwJqwTbiBDojbQ0ZhC1iGGkZo1Z0upUQuzF8rqVbw-Q91PL2ADXz0SzkK1mrO4xwqug' },
+      { name: 'Free Fire', provider: 'Garena', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-qQivqMlXcniOIplM5F92wxlf9h7WBA658w&s' },
+      { name: 'PUBG Mobile', provider: 'Tencent', image: 'https://play-lh.googleusercontent.com/vkziTNqdZU0su1t-AdjiCyre0SSnHTQJmznppAfbGTtj98yzttsChqcvUOihEkXDsoNZ' },
+      { name: 'Magic Chess', provider: 'Moonton', image: 'https://play-lh.googleusercontent.com/0YFChom7BdMkIgshcKHweiP7LriiGg7j7CS5mS4JWCSZkmFD5hRZnOsEGf93u5TgpDccD6NmM7SgBgV7txXWNw=w240-h480-rw' },
+      { name: 'Call of Duty', provider: 'Activision', image: '' },
+      { name: 'Clash of Clans', provider: 'Supercell', image: '' },
+      { name: 'Arena of Valor', provider: 'Tencent', image: '' },
+      { name: 'Point Blank', provider: 'Zepetto', image: '' },
+      { name: 'Mobile Legends Adventure', provider: 'Moonton', image: '' },
+      { name: 'One Punch Man', provider: 'Bandai', image: '' },
+      { name: 'EFootball', provider: 'Konami', image: '' },
+      { name: 'Tower of Fantasy', provider: 'Perfect World', image: '' }
+    ],
+    'apps-premium': [
+      { name: 'YouTube Premium', provider: 'Google', image: '' },
+      { name: 'Spotify', provider: 'Spotify', image: '' },
+      { name: 'Netflix', provider: 'Netflix', image: '' },
+      { name: 'Disney+ Hotstar', provider: 'Disney', image: '' },
+      { name: 'VIU Premium', provider: 'VIU', image: '' },
+      { name: 'Canva Pro', provider: 'Canva', image: '' },
+      { name: 'Adobe Creative Cloud', provider: 'Adobe', image: '' },
+      { name: 'Microsoft 365', provider: 'Microsoft', image: '' },
+      { name: 'PlayStation Plus', provider: 'Sony', image: '' },
+      { name: 'Xbox Game Pass', provider: 'Microsoft', image: '' },
+      { name: 'Nintendo Switch Online', provider: 'Nintendo', image: '' },
+      { name: 'Crunchyroll Premium', provider: 'Crunchyroll', image: '' }
+    ],
+    'sosmed': [
+      { name: 'Instagram Followers', provider: 'Meta', image: '' },
+      { name: 'TikTok Followers', provider: 'TikTok', image: '' },
+      { name: 'YouTube Subscribers', provider: 'Google', image: '' },
+      { name: 'Twitter Followers', provider: 'Twitter', image: '' },
+      { name: 'Facebook Likes', provider: 'Meta', image: '' },
+      { name: 'Instagram Likes', provider: 'Meta', image: '' },
+      { name: 'TikTok Likes', provider: 'TikTok', image: '' },
+      { name: 'YouTube Views', provider: 'Google', image: '' },
+      { name: 'Spotify Plays', provider: 'Spotify', image: '' },
+      { name: 'SoundCloud Plays', provider: 'SoundCloud', image: '' },
+      { name: 'Twitch Followers', provider: 'Twitch', image: '' },
+      { name: 'Discord Members', provider: 'Discord', image: '' }
+    ]
+  };
+
+  // Data tambahan untuk toggle more
+  const additionalGames = {
+    'topup-games': [
+      { name: 'Genshin Impact', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/YQqyKaXX-63krqsfIzUEJWUWLINxcb5tbS6QVySdxbS7eZV7YB2dUjUvX27xA0TIGtfxQ5v-tQjwlT5tTB-O=w240-h480-rw' },
+      { name: 'Honor of Kings', provider: 'TiMi Studio', image: 'https://play-lh.googleusercontent.com/JzcfRXNLE--3KDOPziAKzhAHEruqsV1XwN7tz-928zs-wUWN3tx62WAygmv5_eI-I-Kf' },
+      { name: 'Valorant', provider: 'Riot Games', image: 'https://img.tapimg.net/market/images/d8421f75e13907471e802d0fdf33d2a0.jpg' },
+      { name: 'Zenless Zone Zero', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/8jEmEvTsNIRW1vLlrDXXCcDlKkQrNb8NzccOXrln4G_DOUZpcBPbN9ssjuwBWz7_yZQ' },
+      { name: 'League of Legends', provider: 'Riot Games', image: '' },
+      { name: 'Roblox', provider: 'Roblox', image: '' },
+      { name: 'Minecraft', provider: 'Mojang', image: '' },
+      { name: 'Apex Legends', provider: 'EA', image: '' },
+      { name: 'Overwatch 2', provider: 'Blizzard', image: '' },
+      { name: 'Wild Rift', provider: 'Riot Games', image: '' },
+      { name: 'Dota 2', provider: 'Valve', image: '' },
+      { name: 'CS:GO', provider: 'Valve', image: '' }
+    ],
+    'apps-premium': [
+      { name: 'Amazon Prime', provider: 'Amazon', image: '' },
+      { name: 'HBO Max', provider: 'Warner Bros', image: '' },
+      { name: 'Apple Music', provider: 'Apple', image: '' },
+      { name: 'Apple TV+', provider: 'Apple', image: '' },
+      { name: 'Google One', provider: 'Google', image: '' },
+      { name: 'iCloud+', provider: 'Apple', image: '' },
+      { name: 'Dropbox Plus', provider: 'Dropbox', image: '' },
+      { name: 'LastPass Premium', provider: 'LastPass', image: '' },
+      { name: 'NordVPN', provider: 'NordVPN', image: '' },
+      { name: 'ExpressVPN', provider: 'ExpressVPN', image: '' },
+      { name: 'Grammarly Premium', provider: 'Grammarly', image: '' },
+      { name: 'Notion Premium', provider: 'Notion', image: '' }
+    ],
+    'sosmed': [
+      { name: 'Instagram Story Views', provider: 'Meta', image: '' },
+      { name: 'TikTok Views', provider: 'TikTok', image: '' },
+      { name: 'YouTube Comments', provider: 'Google', image: '' },
+      { name: 'Twitter Retweets', provider: 'Twitter', image: '' },
+      { name: 'Facebook Shares', provider: 'Meta', image: '' },
+      { name: 'LinkedIn Connections', provider: 'LinkedIn', image: '' },
+      { name: 'Pinterest Followers', provider: 'Pinterest', image: '' },
+      { name: 'Snapchat Followers', provider: 'Snapchat', image: '' },
+      { name: 'Telegram Members', provider: 'Telegram', image: '' },
+      { name: 'Reddit Karma', provider: 'Reddit', image: '' },
+      { name: 'Quora Followers', provider: 'Quora', image: '' },
+      { name: 'Clubhouse Followers', provider: 'Clubhouse', image: '' }
+    ]
+  };
+
+  let currentCategory = 'topup-games';
+  let isShowingMore = false;
+  const initialItemsPerPage = 12;
+
+  // Fungsi untuk membuat item game
+  function createGameItem(game) {
+    return `
+      <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
+        <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
+          <h3 class="text-xs text-[#FFD700] text-center truncate">${game.name}</h3>
+        </div>
+        <div class="p-4 flex flex-col items-center">
+          <div class="w-12 h-12 md:w-16 md:h-16 mb-2 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
+            ${game.image ? 
+              `<img src="${game.image}" alt="${game.name}" class="w-full h-full object-cover">` : 
+              `<span class="text-[#39FF14] text-xs text-center">${game.name.substring(0, 3).toUpperCase()}</span>`
+            }
+          </div>
+          <p class="text-[#39FF14] text-[10px] text-center mb-2">${game.provider}</p>
+          <button class="w-full bg-[#39FF14] text-black text-[10px] py-1 hover:bg-[#FFD700] transition-colors">
+            BELI
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Fungsi untuk memuat game berdasarkan kategori dan status show more
+  function loadGames() {
+    const gameGrid = document.getElementById('gameGrid');
+    const toggleMoreBtn = document.getElementById('toggleMoreBtn');
+    
+    // Gabungkan game utama dan tambahan
+    const allGames = [...gameData[currentCategory], ...additionalGames[currentCategory]];
+    
+    // Reset grid
+    gameGrid.innerHTML = '';
+    
+    // Tentukan jumlah item yang akan ditampilkan
+    const itemsToShow = isShowingMore ? allGames.length : initialItemsPerPage;
+    const gamesToShow = allGames.slice(0, itemsToShow);
+    
+    // Tampilkan item
+    gamesToShow.forEach(game => {
+      gameGrid.innerHTML += createGameItem(game);
+    });
+    
+    // Update teks tombol
+    toggleMoreBtn.textContent = isShowingMore ? 'TAMPILKAN LEBIH SEDIKIT' : 'TAMPILKAN LEBIH BANYAK';
+    
+    // Hentikan animasi pulse jika sudah menampilkan semua item
+    if (isShowingMore) {
+      toggleMoreBtn.classList.remove('pulse-animation');
+    } else {
+      toggleMoreBtn.classList.add('pulse-animation');
+    }
+    
+    // Trigger animasi fade-in untuk elemen baru
+    setTimeout(() => {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    }, 100);
+  }
+
+  // Fungsi untuk toggle show more/less
+  function toggleMoreGames() {
+    isShowingMore = !isShowingMore;
+    loadGames();
+    
+    // Scroll ke bagian game grid jika menampilkan lebih banyak
+    if (isShowingMore) {
+      const gameGridSection = document.querySelector('#gameGrid').closest('section');
+      gameGridSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  // Event listeners untuk filter kategori
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Update active filter
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('bg-[#0F380F]');
+        b.classList.add('bg-[#111]');
+      });
+      this.classList.remove('bg-[#111]');
+      this.classList.add('bg-[#0F380F]');
+      
+      // Update current category dan reset show more
+      currentCategory = this.dataset.filter;
+      isShowingMore = false;
+      loadGames();
+    });
+  });
+
+  document.getElementById('toggleMoreBtn').addEventListener('click', toggleMoreGames);
+
+  // Load games pertama kali
+  loadGames();
+</script>
+
+</body>
+</html>
