@@ -8,6 +8,7 @@
   <link href="https://fonts.cdnfonts.com/css/press-start-2p" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    /* Semua style CSS tetap sama seperti sebelumnya */
     body {
       font-family: 'Press Start 2P', cursive;
       scroll-behavior: smooth;
@@ -245,6 +246,251 @@
     .pulse-animation {
       animation: pulse 2s infinite;
     }
+    
+    /* STYLING BARU UNTUK GAME ICON GRID - TANPA BORDER */
+    .game-icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 25px;
+    }
+    
+    @media (min-width: 768px) {
+      .game-icon-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 30px;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .game-icon-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 35px;
+      }
+    }
+    
+    .game-icon-item {
+      position: relative;
+      background: transparent;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0;
+    }
+    
+    .game-icon-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .game-icon {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+    }
+    
+    @media (min-width: 768px) {
+      .game-icon {
+        width: 120px;
+        height: 120px;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .game-icon {
+        width: 140px;
+        height: 140px;
+      }
+    }
+    
+    .game-info {
+      text-align: center;
+      padding: 10px 5px 0;
+      width: 100%;
+    }
+    
+    .game-name {
+      color: #FFD700;
+      font-size: 10px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      line-height: 1.3;
+      text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    }
+    
+    .game-developer {
+      color: #39FF14;
+      font-size: 8px;
+      line-height: 1.2;
+      opacity: 0.8;
+    }
+    
+    .game-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    
+    /* Animasi untuk game icon */
+    @keyframes iconGlow {
+      0%, 100% { box-shadow: 0 0 5px rgba(57, 255, 20, 0.3); }
+      50% { box-shadow: 0 0 15px rgba(57, 255, 20, 0.6); }
+    }
+    
+    .game-icon {
+      animation: iconGlow 3s infinite;
+    }
+    
+        /* STYLING UNTUK SECTION POPULER SEKARANG */
+        .populer-card {
+            width: 100%;
+            height: 152px;
+            background: #111;
+            border: 2px solid #39FF14;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .populer-card:hover {
+            box-shadow: 0 0 15px #39FF14;
+            transform: translateY(-5px);
+        }
+        
+        .populer-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+        
+        .populer-card:hover .populer-image {
+            filter: grayscale(0%);
+        }
+        
+        .populer-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 8px;
+            border-top: 2px solid #39FF14;
+        }
+        
+        .populer-name {
+            color: #FFD700;
+            font-size: 10px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            line-height: 1.3;
+        }
+        
+        .populer-developer {
+            color: #39FF14;
+            font-size: 8px;
+            line-height: 1.2;
+        }
+        
+        /* GRID LAYOUT */
+        .populer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        /* Desktop - 4 kolom */
+        @media (min-width: 1024px) {
+            .populer-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+            
+            .populer-card {
+                height: 180px;
+            }
+        }
+        
+        /* Tablet - 3 kolom */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .populer-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+            
+            .populer-card {
+                height: 160px;
+            }
+        }
+        
+        /* Mobile - 2 kolom (default) */
+        @media (max-width: 767px) {
+            .populer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .populer-card {
+                height: 140px;
+            }
+            
+            .populer-name {
+                font-size: 8px;
+            }
+            
+            .populer-developer {
+                font-size: 7px;
+            }
+        }
+        
+        /* Very small mobile */
+        @media (max-width: 380px) {
+            .populer-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .populer-card {
+                height: 120px;
+            }
+        }
+        
+        .section-title {
+            text-shadow: 0 0 10px #39FF14;
+        }
+        
+        /* Scroll horizontal untuk mobile jika diperlukan */
+        .scroll-container {
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .scroll-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 280px);
+            gap: 12px;
+        }
+        
+        @media (min-width: 768px) {
+            .scroll-container {
+                overflow-x: visible;
+            }
+            
+            .scroll-grid {
+                grid-template-columns: repeat(4, 1fr);
+                width: 100%;
+            }
+        }
   </style>
 </head>
 <body class="bg-[#000000] text-[#39FF14]">
@@ -530,11 +776,11 @@
           <!-- SLIDE 2 -->
           <div class="min-w-full">
             <!-- Desktop -->
-            <img src="https://i.ibb.co/vQcg1b1/promo2-desktop.jpg" 
+            <img src="img/Benner New.png" 
                  alt="Promo 2 Desktop" 
                  class="hidden md:block w-full h-auto">
             <!-- Mobile -->
-            <img src="https://i.ibb.co/yP12zV7/promo2-mobile.jpg" 
+            <img src="img/Benner New.png" 
                  alt="Promo 2 Mobile" 
                  class="block md:hidden w-full h-auto">
           </div>
@@ -542,11 +788,11 @@
           <!-- SLIDE 3 -->
           <div class="min-w-full">
             <!-- Desktop -->
-            <img src="https://i.ibb.co/wWMcZcN/promo3-desktop.jpg" 
+            <img src="img/Frame 3.png" 
                  alt="Promo 3 Desktop" 
                  class="hidden md:block w-full h-auto">
             <!-- Mobile -->
-            <img src="https://i.ibb.co/3fS79vL/promo3-mobile.jpg" 
+            <img src="img/Frame 3.png" 
                  alt="Promo 3 Mobile" 
                  class="block md:hidden w-full h-auto">
           </div>
@@ -575,174 +821,126 @@
     </div>
   </section>
 
-  <!-- SECTION POPULER SEKARANG (tetap sama) -->
-  <section class="w-full bg-[#000] py-8 md:py-12">
+  <!-- SECTION POPULER SEKARANG -->
+<section class="w-full bg-[#000] py-8 md:py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- JUDUL SECTION -->
-      <div class="flex items-center justify-center mb-8">
-        <div class="relative">
-          <h2 class="text-xl md:text-2xl text-[#39FF14] text-center px-6 py-2 border-2 border-[#39FF14] bg-[#111] pixel-border">
-            POPULER SEKARANG
-          </h2>
-          <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#000] rotate-45 border-r-2 border-b-2 border-[#39FF14]"></div>
-        </div>
-      </div>
-
-      <!-- GRID PRODUK POPULER -->
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        
-        <!-- ITEM 1: Free Fire -->
-        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
-          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
-            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Free Fire</h3>
-          </div>
-          <div class="p-4 flex flex-col items-center">
-            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-qQivqMlXcniOIplM5F92wxlf9h7WBA658w&s" alt="Free Fire" class="w-full h-full object-cover">
+        <!-- JUDUL SECTION -->
+        <div class="flex items-center justify-center mb-8">
+            <div class="relative">
+                <h2 class="text-xl md:text-2xl text-[#39FF14] text-center px-6 py-2 border-2 border-[#39FF14] bg-[#111] pixel-border section-title">
+                    POPULER SEKARANG
+                </h2>
+                <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#000] rotate-45 border-r-2 border-b-2 border-[#39FF14]"></div>
             </div>
-            <p class="text-[#39FF14] text-xs text-center mb-3">Garena</p>
-            <a href="/topup/free-fire" class="w-full">
-              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
-                BELI SEKARANG
-              </button>
-            </a>
-          </div>
         </div>
 
-        <!-- ITEM 2: Mobile Legend -->
-        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
-          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
-            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Mobile Legend</h3>
-          </div>
-          <div class="p-4 flex flex-col items-center">
-            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
-              <img src="https://play-lh.googleusercontent.com/r54MhnxVyVOhlNQm5QDkwJqwTbiBDojbQ0ZhC1iGGkZo1Z0upUQuzF8rqVbw-Q91PL2ADXz0SzkK1mrO4xwqug" alt="Mobile Legends" class="w-full h-full object-cover">
+        <!-- GRID PRODUK POPULER YANG DIPERBAIKI -->
+        <div class="populer-grid">
+            
+            <!-- ITEM 1: Free Fire -->
+            <div class="populer-card">
+                <img src="https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/79ff7ef17a35b49c407968e6fe0b5b9f.jpg" 
+                     alt="Free Fire" 
+                     class="populer-image">
+                <div class="populer-info">
+                    <div class="populer-name">Free Fire</div>
+                    <div class="populer-developer">Garena</div>
+                </div>
+                <a href="/topup/free-fire" class="absolute inset-0 z-10"></a>
             </div>
-            <p class="text-[#39FF14] text-xs text-center mb-3">Moonton</p>
-            <a href="/topup/mobile-legends" class="w-full">
-              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
-                BELI SEKARANG
-              </button>
-            </a>
-          </div>
-        </div>
 
-        <!-- ITEM 3: Magic Chess -->
-        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
-          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
-            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Magic Chess</h3>
-          </div>
-          <div class="p-4 flex flex-col items-center">
-            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
-              <img src="https://play-lh.googleusercontent.com/0YFChom7BdMkIgshcKHweiP7LriiGg7j7CS5mS4JWCSZkmFD5hRZnOsEGf93u5TgpDccD6NmM7SgBgV7txXWNw=w240-h480-rw" alt="Magic Chess" class="w-full h-full object-cover">
+            <!-- ITEM 2: Mobile Legends -->
+            <div class="populer-card">
+                <img src="https://preview.redd.it/layla-the-beacon-nexus-sea-is-now-legend-skin-get-ready-and-v0-mq4juaz5z3sf1.jpeg?width=1080&crop=smart&auto=webp&s=e135e835f27e41365dc1697faad86b052306eea1" 
+                     alt="Mobile Legends" 
+                     class="populer-image">
+                <div class="populer-info">
+                    <div class="populer-name">Mobile Legends</div>
+                    <div class="populer-developer">Moonton</div>
+                </div>
+                <a href="/topup/mobile-legends" class="absolute inset-0 z-10"></a>
             </div>
-            <p class="text-[#39FF14] text-xs text-center mb-3">Moonton</p>
-            <a href="/topup/magic-chess" class="w-full">
-              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
-                BELI SEKARANG
-              </button>
-            </a>
-          </div>
-        </div>
 
-        <!-- ITEM 4: Genshin Impact -->
-        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
-          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
-            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Genshin Impact</h3>
-          </div>
-          <div class="p-4 flex flex-col items-center">
-            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
-              <img src="https://play-lh.googleusercontent.com/YQqyKaXX-63krqsfIzUEJWUWLINxcb5tbS6QVySdxbS7eZV7YB2dUjUvX27xA0TIGtfxQ5v-tQjwlT5tTB-O=w240-h480-rw" alt="Genshin Impact" class="w-full h-full object-cover">
+            <!-- ITEM 3: ROBLOX -->
+            <div class="populer-card">
+                <img src="https://wstatic-prod-boc.krafton.com/common/events/20250109/QLsoMp9L.jpg" 
+                     alt="PUBG Mobile" 
+                     class="populer-image">
+                <div class="populer-info">
+                    <div class="populer-name">PUBG Mobile</div>
+                    <div class="populer-developer">Tencent Games</div>
+                </div>
+                <a href="/topup/roblox" class="absolute inset-0 z-10"></a>
             </div>
-            <p class="text-[#39FF14] text-xs text-center mb-3">Mihoyo</p>
-            <a href="/topup/genshin-impact" class="w-full">
-              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
-                BELI SEKARANG
-              </button>
-            </a>
-          </div>
-        </div>
 
-        <!-- ITEM 5: PUBG -->
-        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
-          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
-            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">PUBG</h3>
-          </div>
-          <div class="p-4 flex flex-col items-center">
-            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
-              <img src="https://play-lh.googleusercontent.com/vkziTNqdZU0su1t-AdjiCyre0SSnHTQJmznppAfbGTtj98yzttsChqcvUOihEkXDsoNZ" alt="PUBG" class="w-full h-full object-cover">
+            <!-- ITEM 4: PUBG Mobile -->
+            <div class="populer-card">
+                <img src="https://club.jollymax.com/wp-content/uploads/2025/02/tmb-HOK.webp" 
+                     alt="Honor Of Kings" 
+                     class="populer-image">
+                <div class="populer-info">
+                    <div class="populer-name">Honor Of Kings</div>
+                    <div class="populer-developer">Tencent Games</div>
+                </div>
+                <a href="/topup/pubg" class="absolute inset-0 z-10"></a>
             </div>
-            <p class="text-[#39FF14] text-xs text-center mb-3">Tencent Games</p>
-            <a href="/topup/pubg" class="w-full">
-              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
-                BELI SEKARANG
-              </button>
-            </a>
-          </div>
-        </div>
 
-        <!-- ITEM 6: Honor Of Kings -->
-        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
-          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
-            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Honor Of Kings</h3>
-          </div>
-          <div class="p-4 flex flex-col items-center">
-            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
-              <img src="https://play-lh.googleusercontent.com/JzcfRXNLE--3KDOPziAKzhAHEruqsV1XwN7tz-928zs-wUWN3tx62WAygmv5_eI-I-Kf" alt="Honor Of Kings" class="w-full h-full object-cover">
+            <!-- ITEM 5: Honor Of Kings -->
+            <div class="populer-card">
+                <img src="https://valorantstrike.com/wp-content/uploads/2020/07/Valorant-Wallpaper-Boys-Dark-Display.jpg" 
+                     alt="Valorant" 
+                     class="populer-image">
+                <div class="populer-info">
+                    <div class="populer-name">Valorant</div>
+                    <div class="populer-developer">Riot Games</div>
+                </div>
+                <a href="/topup/honor-of-kings" class="absolute inset-0 z-10"></a>
             </div>
-            <p class="text-[#39FF14] text-xs text-center mb-3">TiMi Studio Group</p>
-            <a href="/topup/honor-of-kings" class="w-full">
-              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
-                BELI SEKARANG
-              </button>
-            </a>
-          </div>
-        </div>
 
-        <!-- ITEM 7: Zenless Zone Zero -->
-        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
-          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
-            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Zenless Zone Zero</h3>
-          </div>
-          <div class="p-4 flex flex-col items-center">
-            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
-              <img src="https://play-lh.googleusercontent.com/8jEmEvTsNIRW1vLlrDXXCcDlKkQrNb8NzccOXrln4G_DOUZpcBPbN9ssjuwBWz7_yZQ" alt="Zenless Zone Zero" class="w-full h-full object-cover">
+            <!-- ITEM 6: Call Of Duty -->
+            <div class="populer-card">
+                <img src="https://assets-a1.kompasiana.com/items/album/2025/01/11/call-of-duty-mobile-season-1-2025-6782476f34777c016c65a0e3.jpg" 
+                     alt="Call Of Duty" 
+                     class="populer-image">
+                <div class="populer-info">
+                    <div class="populer-name">Call Of Duty</div>
+                    <div class="populer-developer">Activision</div>
+                </div>
+                <a href="/joki/mobile-legends" class="absolute inset-0 z-10"></a>
             </div>
-            <p class="text-[#39FF14] text-xs text-center mb-3">Mihoyo</p>
-            <a href="/topup/zenless-zone-zero" class="w-full">
-              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
-                BELI SEKARANG
-              </button>
-            </a>
-          </div>
-        </div>
 
-        <!-- ITEM 8: Valorant -->
-        <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
-          <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
-            <h3 class="text-xs md:text-sm text-[#FFD700] text-center truncate">Valorant</h3>
-          </div>
-          <div class="p-4 flex flex-col items-center">
-            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
-              <img src="https://img.tapimg.net/market/images/d8421f75e13907471e802d0fdf33d2a0.jpg" alt="Valorant" class="w-full h-full object-cover">
+            <!-- ITEM 7: Jasa Mabar Push -->
+            <div class="populer-card">
+                <img src="https://www.blood-strike.com/m/gw/20230721092756/data/share.jpg" 
+                     alt="Blood Strike" 
+                     class="populer-image">
+                <div class="populer-info">
+                    <div class="populer-name">blood strike</div>
+                    <div class="populer-developer">NetEase Games</div>
+                </div>
+                <a href="/jasa/mabar-push" class="absolute inset-0 z-10"></a>
             </div>
-            <p class="text-[#39FF14] text-xs text-center mb-3">Riot Games</p>
-            <a href="/topup/valorant" class="w-full">
-              <button class="w-full bg-[#39FF14] text-black text-xs py-2 hover:bg-[#FFD700] transition-colors">
-                BELI SEKARANG
-              </button>
-            </a>
-          </div>
-        </div>
 
-      </div>
+            <!-- ITEM 8: Jasa Mabar Casual -->
+            <div class="populer-card">
+                <img src="https://media.contentapi.ea.com/content/dam/ea/fc/fc-24/common/news-fc-mobile/fc-mobile-feat-image.png.adapt.crop16x9.575p.png" 
+                     alt="Fc Mobile" 
+                     class="populer-image">
+                <div class="populer-info">
+                    <div class="populer-name">Fc Mobile </div>
+                    <div class="populer-developer">EA Sports</div>
+                </div>
+                <a href="/jasa/mabar-casual" class="absolute inset-0 z-10"></a>
+            </div>
+
+        </div>
     </div>
-  </section>
+</section>
 
 <img src="img/Frame 6.png" alt="" style="margin-left: 1%;">
 
-  <!-- SECTION KATEGORI MENU (tetap sama) -->
+  <!-- SECTION KATEGORI MENU (dengan perubahan teks tombol) -->
   <section class="w-full bg-[#000] py-8 md:py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
@@ -768,8 +966,8 @@
         </button>
       </div>
 
-      <!-- GRID GAME -->
-      <div id="gameGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6">
+      <!-- GRID GAME ICON YANG DIPERBAIKI - TANPA BORDER -->
+      <div id="gameGrid" class="game-icon-grid">
         <!-- Game items akan dimuat di sini -->
       </div>
 
@@ -857,14 +1055,14 @@
       <div>
         <h3 class="text-[#FFD700] text-sm mb-4 border-b-2 border-[#39FF14] pb-2">GAME POPULER</h3>
         <div class="grid grid-cols-2 gap-2">
-          <a href="#" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Free Fire</a>
-          <a href="#" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Mobile Legends</a>
-          <a href="#" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">PUBG Mobile</a>
-          <a href="#" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Genshin Impact</a>
-          <a href="#" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Valorant</a>
-          <a href="#" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Honor of Kings</a>
-          <a href="#" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Call of Duty</a>
-          <a href="#" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Clash of Clans</a>
+          <a href="/topup/free-fire" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Free Fire</a>
+          <a href="/topup/mobile-legends" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Mobile Legends</a>
+          <a href="/topup/pubg" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">PUBG Mobile</a>
+          <a href="/topup/genshin-impact" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Genshin Impact</a>
+          <a href="/topup/valorant" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Valorant</a>
+          <a href="/topup/honor-of-kings" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Honor of Kings</a>
+          <a href="/topup/call-of-duty" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Call of Duty</a>
+          <a href="/topup/clash-of-clans" class="text-[#39FF14] text-xs hover:text-[#FFD700] transition-colors">Clash of Clans</a>
         </div>
       </div>
 
@@ -1148,56 +1346,56 @@
   setInterval(() => {
     index = (index + 1) % totalSlides;
     updateSlider();
-  }, 5000);
+  }, 9000);
 
   // ===== SEARCH FUNCTIONALITY =====
   const allProducts = [
     // Top Up Games - 24 game sesuai daftar
-    { name: 'Free Fire', provider: 'Garena', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-qQivqMlXcniOIplM5F92wxlf9h7WBA658w&s', category: 'topup-games' },
-    { name: 'Genshin Impact', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/YQqyKaXX-63krqsfIzUEJWUWLINxcb5tbS6QVySdxbS7eZV7YB2dUjUvX27xA0TIGtfxQ5v-tQjwlT5tTB-O=w240-h480-rw', category: 'topup-games' },
-    { name: 'PUBG Mobile', provider: 'Tencent', image: 'https://play-lh.googleusercontent.com/vkziTNqdZU0su1t-AdjiCyre0SSnHTQJmznppAfbGTtj98yzttsChqcvUOihEkXDsoNZ', category: 'topup-games' },
-    { name: 'Mobile Legends', provider: 'Moonton', image: 'https://play-lh.googleusercontent.com/r54MhnxVyVOhlNQm5QDkwJqwTbiBDojbQ0ZhC1iGGkZo1Z0upUQuzF8rqVbw-Q91PL2ADXz0SzkK1mrO4xwqug', category: 'topup-games' },
-    { name: 'Arena of Valor', provider: 'Garena', image: 'https://i.pinimg.com/736x/ac/38/80/ac3880d5ac049f9221fb0d33f15ed2ad.jpg', category: 'topup-games' },
-    { name: 'Call of Duty', provider: 'Activision', image: 'https://play-lh.googleusercontent.com/uPRFWFbiASqohiTMTKrD5gErGrKxq_1DgH0npRQcvUEDDLMLTECh3xXl0STPBZZseA=w240-h480-rw', category: 'topup-games' },
-    { name: 'Super SUS', provider: 'PI Productions Pte. Ltd.', image: 'https://play-lh.googleusercontent.com/_Y564Top27K7DCHIQGR4cRCjPb3hBl1IyP0czy-k6ab3_CQb6GTOi2aPifRllNF_jfM', category: 'topup-games' },
-    { name: 'Point Blank', provider: 'Zepetto', image: 'https://play-lh.googleusercontent.com/IGOlY-TMU0cGW_I8EFKBkLACxPLu1TQqbqaqx7NUsGMyjNWIO1NdhwdBrq-71pUAHw', category: 'topup-games' },
-    { name: 'Life After', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/ioxcHbqwvSBUNFYXqZtjZnFnZIItRiBSuWwYYPr9D_VR1qGNJ_TCJZHl1K9rpB6LZpWgalhc1UFyynLfbR5ihg=w240-h480-rw', category: 'topup-games' },
-    { name: 'Valorant', provider: 'Riot Games', image: 'https://img.tapimg.net/market/images/d8421f75e13907471e802d0fdf33d2a0.jpg', category: 'topup-games' },
-    { name: 'Blood Strike', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/ZkCEMtWoM-WJPw9YwsXTZlZqAueouZaPa-hJwxEiRE3_Xar4_VmKy8K3qTymLsjVW5MTbn3WIvREVuj1IFZ99tA=w240-h480-rw', category: 'topup-games' },
-    { name: 'FC Mobile', provider: 'EA Sports', image: 'https://play-lh.googleusercontent.com/yQHb1bk88ENXLZ2_ZO-st7cuG78pva5yRAge2CjhBPoBoEng1ouxyx30vK4s4Z7553Kohd9pPVm1GC2Phs8slA', category: 'topup-games' },
-    { name: 'Arena Breakout', provider: 'MoreFun Studios', image: 'https://play-lh.googleusercontent.com/vL-xYJhmXTiaQewThy9DMHkk_zdtSHqKcRDp8iYip6C-OB764enYRA1CrmHSRoW1rsAEkyJT5a8By3ADMbd5', category: 'topup-games' },
-    { name: 'Honor of Kings', provider: 'TiMi Studio', image: 'https://play-lh.googleusercontent.com/JzcfRXNLE--3KDOPziAKzhAHEruqsV1XwN7tz-928zs-wUWN3tx62WAygmv5_eI-I-Kf', category: 'topup-games' },
-    { name: 'Magic Chess', provider: 'Moonton', image: 'https://play-lh.googleusercontent.com/0YFChom7BdMkIgshcKHweiP7LriiGg7j7CS5mS4JWCSZkmFD5hRZnOsEGf93u5TgpDccD6NmM7SgBgV7txXWNw=w240-h480-rw', category: 'topup-games' },
-    { name: 'AFK Journey', provider: 'Lilith Games', image: 'https://play-lh.googleusercontent.com/Gtr6sMekjBdbMakdPtl7kr2fZKxtOs0Jm-pu4t1PioThmnG9azrAH4157CNM_xa5hnY', category: 'topup-games' },
-    { name: 'Zenless Zone Zero', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/8jEmEvTsNIRW1vLlrDXXCcDlKkQrNb8NzccOXrln4G_DOUZpcBPbN9ssjuwBWz7_yZQ', category: 'topup-games' },
-    { name: 'Honkai Impact', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/prnhqavcLgfVo9AJoCt0vBDwfiMXXFtwwjJYGuKiyWm1R2sqz2judwhnb2cl8XVvVGU', category: 'topup-games' },
-    { name: 'Goddess Victory Nikke', provider: 'Shift Up', image: 'https://play-lh.googleusercontent.com/mR5NzJva7i3xcUZVlk-JlcMIUy04Zx8vUhM5sn94cpX1CA91XjXIrUnxhQGNxNcquEA=w240-h480-rw', category: 'topup-games' },
-    { name: 'Ace Racer', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/tmTk1vNc6Nkl8wctgd_oXcp1Dl_xTYL4f1ECntGCmMNSQCfGUtvhSoNHCF9N9ATi8T4g=w240-h480-rw', category: 'topup-games' },
-    { name: 'Zepeto', provider: 'Naver Z', image: 'https://play-lh.googleusercontent.com/EwN12x-sr1KVCpHYyG4kFE2NMH5ZdXStj5e5eHAFfyxNTcXRoUs4DxyJyvkBeeqY76k', category: 'topup-games' },
-    { name: 'Pixel Gun', provider: 'Pixel Gun 3D', image: 'https://play-lh.googleusercontent.com/PENcy8xrS7JJzOvqOj6n9vt9gfzctEYOW9mjmTKjw-h3UttaDobPa4lIl4wEywR5spBqnRi7OrRkDrEPVby1eg', category: 'topup-games' },
-    { name: 'Tom n Jerry Chase', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/Oq7vcfpGDuz_XaztGSM3a-kwFe59RL88N4xvao1Rr7tjEZyhNA_hHZOYQT9FjgFteA', category: 'topup-games' },
-    { name: 'Metal Slug Awake', provider: 'SNK', image: 'https://static.wikia.nocookie.net/metalslug/images/f/f1/MetalSlugAwakeningIcon.png/revision/latest?cb=20250701173550', category: 'topup-games' },
+    { name: 'Free Fire', provider: 'Garena', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-qQivqMlXcniOIplM5F92wxlf9h7WBA658w&s', category: 'topup-games', link: '/topup/free-fire' },
+    { name: 'Genshin Impact', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/YQqyKaXX-63krqsfIzUEJWUWLINxcb5tbS6QVySdxbS7eZV7YB2dUjUvX27xA0TIGtfxQ5v-tQjwlT5tTB-O=w240-h480-rw', category: 'topup-games', link: '/topup/genshin-impact' },
+    { name: 'PUBG Mobile', provider: 'Tencent', image: 'https://play-lh.googleusercontent.com/vkziTNqdZU0su1t-AdjiCyre0SSnHTQJmznppAfbGTtj98yzttsChqcvUOihEkXDsoNZ', category: 'topup-games', link: '/topup/pubg' },
+    { name: 'Mobile Legends', provider: 'Moonton', image: 'https://play-lh.googleusercontent.com/r54MhnxVyVOhlNQm5QDkwJqwTbiBDojbQ0ZhC1iGGkZo1Z0upUQuzF8rqVbw-Q91PL2ADXz0SzkK1mrO4xwqug', category: 'topup-games', link: '/topup/mobile-legends' },
+    { name: 'Arena of Valor', provider: 'Garena', image: 'https://i.pinimg.com/736x/ac/38/80/ac3880d5ac049f9221fb0d33f15ed2ad.jpg', category: 'topup-games', link: '/topup/arena-of-valor' },
+    { name: 'Call of Duty', provider: 'Activision', image: 'https://play-lh.googleusercontent.com/uPRFWFbiASqohiTMTKrD5gErGrKxq_1DgH0npRQcvUEDDLMLTECh3xXl0STPBZZseA=w240-h480-rw', category: 'topup-games', link: '/topup/call-of-duty' },
+    { name: 'Super SUS', provider: 'PI Productions Pte. Ltd.', image: 'https://play-lh.googleusercontent.com/_Y564Top27K7DCHIQGR4cRCjPb3hBl1IyP0czy-k6ab3_CQb6GTOi2aPifRllNF_jfM', category: 'topup-games', link: '/topup/super-sus' },
+    { name: 'Point Blank', provider: 'Zepetto', image: 'https://play-lh.googleusercontent.com/IGOlY-TMU0cGW_I8EFKBkLACxPLu1TQqbqaqx7NUsGMyjNWIO1NdhwdBrq-71pUAHw', category: 'topup-games', link: '/topup/point-blank' },
+    { name: 'Life After', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/ioxcHbqwvSBUNFYXqZtjZnFnZIItRiBSuWwYYPr9D_VR1qGNJ_TCJZHl1K9rpB6LZpWgalhc1UFyynLfbR5ihg=w240-h480-rw', category: 'topup-games', link: '/topup/life-after' },
+    { name: 'Valorant', provider: 'Riot Games', image: 'https://img.tapimg.net/market/images/d8421f75e13907471e802d0fdf33d2a0.jpg', category: 'topup-games', link: '/topup/valorant' },
+    { name: 'Blood Strike', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/ZkCEMtWoM-WJPw9YwsXTZlZqAueouZaPa-hJwxEiRE3_Xar4_VmKy8K3qTymLsjVW5MTbn3WIvREVuj1IFZ99tA=w240-h480-rw', category: 'topup-games', link: '/topup/blood-strike' },
+    { name: 'FC Mobile', provider: 'EA Sports', image: 'https://play-lh.googleusercontent.com/yQHb1bk88ENXLZ2_ZO-st7cuG78pva5yRAge2CjhBPoBoEng1ouxyx30vK4s4Z7553Kohd9pPVm1GC2Phs8slA', category: 'topup-games', link: '/topup/fc-mobile' },
+    { name: 'Arena Breakout', provider: 'MoreFun Studios', image: 'https://play-lh.googleusercontent.com/vL-xYJhmXTiaQewThy9DMHkk_zdtSHqKcRDp8iYip6C-OB764enYRA1CrmHSRoW1rsAEkyJT5a8By3ADMbd5', category: 'topup-games', link: '/topup/arena-breakout' },
+    { name: 'Honor of Kings', provider: 'TiMi Studio', image: 'https://play-lh.googleusercontent.com/JzcfRXNLE--3KDOPziAKzhAHEruqsV1XwN7tz-928zs-wUWN3tx62WAygmv5_eI-I-Kf', category: 'topup-games', link: '/topup/honor-of-kings' },
+    { name: 'Magic Chess', provider: 'Moonton', image: 'https://play-lh.googleusercontent.com/0YFChom7BdMkIgshcKHweiP7LriiGg7j7CS5mS4JWCSZkmFD5hRZnOsEGf93u5TgpDccD6NmM7SgBgV7txXWNw=w240-h480-rw', category: 'topup-games', link: '/topup/magic-chess' },
+    { name: 'AFK Journey', provider: 'Lilith Games', image: 'https://play-lh.googleusercontent.com/Gtr6sMekjBdbMakdPtl7kr2fZKxtOs0Jm-pu4t1PioThmnG9azrAH4157CNM_xa5hnY', category: 'topup-games', link: '/topup/afk-journey' },
+    { name: 'Zenless Zone Zero', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/8jEmEvTsNIRW1vLlrDXXCcDlKkQrNb8NzccOXrln4G_DOUZpcBPbN9ssjuwBWz7_yZQ', category: 'topup-games', link: '/topup/zenless-zone-zero' },
+    { name: 'Honkai Impact', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/prnhqavcLgfVo9AJoCt0vBDwfiMXXFtwwjJYGuKiyWm1R2sqz2judwhnb2cl8XVvVGU', category: 'topup-games', link: '/topup/honkai-impact' },
+    { name: 'Goddess Victory Nikke', provider: 'Shift Up', image: 'https://play-lh.googleusercontent.com/mR5NzJva7i3xcUZVlk-JlcMIUy04Zx8vUhM5sn94cpX1CA91XjXIrUnxhQGNxNcquEA=w240-h480-rw', category: 'topup-games', link: '/topup/goddess-victory-nikke' },
+    { name: 'Ace Racer', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/tmTk1vNc6Nkl8wctgd_oXcp1Dl_xTYL4f1ECntGCmMNSQCfGUtvhSoNHCF9N9ATi8T4g=w240-h480-rw', category: 'topup-games', link: '/topup/ace-racer' },
+    { name: 'Zepeto', provider: 'Naver Z', image: 'https://play-lh.googleusercontent.com/EwN12x-sr1KVCpHYyG4kFE2NMH5ZdXStj5e5eHAFfyxNTcXRoUs4DxyJyvkBeeqY76k', category: 'topup-games', link: '/topup/zepeto' },
+    { name: 'Pixel Gun', provider: 'Pixel Gun 3D', image: 'https://play-lh.googleusercontent.com/PENcy8xrS7JJzOvqOj6n9vt9gfzctEYOW9mjmTKjw-h3UttaDobPa4lIl4wEywR5spBqnRi7OrRkDrEPVby1eg', category: 'topup-games', link: '/topup/pixel-gun' },
+    { name: 'Tom n Jerry Chase', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/Oq7vcfpGDuz_XaztGSM3a-kwFe59RL88N4xvao1Rr7tjEZyhNA_hHZOYQT9FjgFteA', category: 'topup-games', link: '/topup/tom-n-jerry-chase' },
+    { name: 'Metal Slug Awake', provider: 'SNK', image: 'https://static.wikia.nocookie.net/metalslug/images/f/f1/MetalSlugAwakeningIcon.png/revision/latest?cb=20250701173550', category: 'topup-games', link: '/topup/metal-slug-awake' },
 
     // Apps Premium
-    { name: 'YouTube Premium', provider: 'Google', image: '', category: 'apps-premium' },
-    { name: 'Spotify', provider: 'Spotify', image: '', category: 'apps-premium' },
-    { name: 'Netflix', provider: 'Netflix', image: '', category: 'apps-premium' },
-    { name: 'Disney+ Hotstar', provider: 'Disney', image: '', category: 'apps-premium' },
-    { name: 'VIU Premium', provider: 'VIU', image: '', category: 'apps-premium' },
-    { name: 'Canva Pro', provider: 'Canva', image: '', category: 'apps-premium' },
+    { name: 'YouTube Premium', provider: 'Google', image: '', category: 'apps-premium', link: '/premium/youtube' },
+    { name: 'Spotify', provider: 'Spotify', image: '', category: 'apps-premium', link: '/premium/spotify' },
+    { name: 'Netflix', provider: 'Netflix', image: '', category: 'apps-premium', link: '/premium/netflix' },
+    { name: 'Disney+ Hotstar', provider: 'Disney', image: '', category: 'apps-premium', link: '/premium/disney-hotstar' },
+    { name: 'VIU Premium', provider: 'VIU', image: '', category: 'apps-premium', link: '/premium/viu' },
+    { name: 'Canva Pro', provider: 'Canva', image: '', category: 'apps-premium', link: '/premium/canva' },
 
     // Kebutuhan Sosmed
-    { name: 'Instagram Followers', provider: 'Meta', image: '', category: 'sosmed' },
-    { name: 'TikTok Followers', provider: 'TikTok', image: '', category: 'sosmed' },
-    { name: 'YouTube Subscribers', provider: 'Google', image: '', category: 'sosmed' },
-    { name: 'Twitter Followers', provider: 'Twitter', image: '', category: 'sosmed' },
-    { name: 'Facebook Likes', provider: 'Meta', image: '', category: 'sosmed' }
+    { name: 'Instagram Followers', provider: 'Meta', image: '', category: 'sosmed', link: '/sosmed/instagram-followers' },
+    { name: 'TikTok Followers', provider: 'TikTok', image: '', category: 'sosmed', link: '/sosmed/tiktok-followers' },
+    { name: 'YouTube Subscribers', provider: 'Google', image: '', category: 'sosmed', link: '/sosmed/youtube-subscribers' },
+    { name: 'Twitter Followers', provider: 'Twitter', image: '', category: 'sosmed', link: '/sosmed/twitter-followers' },
+    { name: 'Facebook Likes', provider: 'Meta', image: '', category: 'sosmed', link: '/sosmed/facebook-likes' }
   ];
 
   // Fungsi untuk membuat item hasil pencarian
   function createSearchResultItem(product) {
     return `
-      <div class="flex items-center space-x-3 p-2 bg-[#222] border border-[#39FF14] hover:bg-[#0F380F] cursor-pointer transition-colors">
+      <a href="${product.link}" class="flex items-center space-x-3 p-2 bg-[#222] border border-[#39FF14] hover:bg-[#0F380F] cursor-pointer transition-colors">
         <div class="w-8 h-8 bg-[#333] border border-[#39FF14] flex items-center justify-center overflow-hidden flex-shrink-0">
           ${product.image ? 
             `<img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">` : 
@@ -1212,7 +1410,7 @@
           ${product.category === 'topup-games' ? 'GAME' : 
             product.category === 'apps-premium' ? 'APP' : 'SOSMED'}
         </span>
-      </div>
+      </a>
     `;
   }
 
@@ -1299,107 +1497,95 @@
     });
   }
 
-  // Event listener untuk item hasil pencarian
-  document.addEventListener('click', function(e) {
-    if (e.target.closest('#navbarSearchResultsList > div, #mobileSearchResultsList > div')) {
-      const productItem = e.target.closest('div');
-      const productName = productItem.querySelector('h4').textContent;
-      console.log('Produk dipilih:', productName);
-      // Redirect ke halaman produk atau lakukan aksi lainnya
-      hideSearchResults('navbar');
-      hideSearchResults('mobile');
-    }
-  });
-
   // ===== CATEGORY & TOGGLE MORE FUNCTIONALITY =====
   const gameData = {
     'topup-games': [
-      { name: 'Free Fire', provider: 'Garena', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-qQivqMlXcniOIplM5F92wxlf9h7WBA658w&s' },
-      { name: 'Genshin Impact', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/YQqyKaXX-63krqsfIzUEJWUWLINxcb5tbS6QVySdxbS7eZV7YB2dUjUvX27xA0TIGtfxQ5v-tQjwlT5tTB-O=w240-h480-rw' },
-      { name: 'PUBG Mobile', provider: 'Tencent', image: 'https://play-lh.googleusercontent.com/vkziTNqdZU0su1t-AdjiCyre0SSnHTQJmznppAfbGTtj98yzttsChqcvUOihEkXDsoNZ' },
-      { name: 'Mobile Legends', provider: 'Moonton', image: 'https://play-lh.googleusercontent.com/r54MhnxVyVOhlNQm5QDkwJqwTbiBDojbQ0ZhC1iGGkZo1Z0upUQuzF8rqVbw-Q91PL2ADXz0SzkK1mrO4xwqug' },
-      { name: 'Arena of Valor', provider: 'Garena', image: 'https://i.pinimg.com/736x/ac/38/80/ac3880d5ac049f9221fb0d33f15ed2ad.jpg' },
-      { name: 'Call of Duty', provider: 'Activision', image: 'https://play-lh.googleusercontent.com/uPRFWFbiASqohiTMTKrD5gErGrKxq_1DgH0npRQcvUEDDLMLTECh3xXl0STPBZZseA=w240-h480-rw' },
-      { name: 'Super SUS', provider: 'PI Productions Pte. Ltd.', image: 'https://play-lh.googleusercontent.com/_Y564Top27K7DCHIQGR4cRCjPb3hBl1IyP0czy-k6ab3_CQb6GTOi2aPifRllNF_jfM' },
-      { name: 'Point Blank', provider: 'Zepetto', image: 'https://play-lh.googleusercontent.com/IGOlY-TMU0cGW_I8EFKBkLACxPLu1TQqbqaqx7NUsGMyjNWIO1NdhwdBrq-71pUAHw' },
-      { name: 'Life After', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/ioxcHbqwvSBUNFYXqZtjZnFnZIItRiBSuWwYYPr9D_VR1qGNJ_TCJZHl1K9rpB6LZpWgalhc1UFyynLfbR5ihg=w240-h480-rw' },
-      { name: 'Valorant', provider: 'Riot Games', image: 'https://img.tapimg.net/market/images/d8421f75e13907471e802d0fdf33d2a0.jpg' },
-      { name: 'Blood Strike', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/ZkCEMtWoM-WJPw9YwsXTZlZqAueouZaPa-hJwxEiRE3_Xar4_VmKy8K3qTymLsjVW5MTbn3WIvREVuj1IFZ99tA=w240-h480-rw' },
-      { name: 'FC Mobile', provider: 'EA Sports', image: 'https://play-lh.googleusercontent.com/yQHb1bk88ENXLZ2_ZO-st7cuG78pva5yRAge2CjhBPoBoEng1ouxyx30vK4s4Z7553Kohd9pPVm1GC2Phs8slA' }
+      { name: 'Free Fire', provider: 'Garena', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-qQivqMlXcniOIplM5F92wxlf9h7WBA658w&s', link: '/topup/free-fire' },
+      { name: 'Genshin Impact', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/YQqyKaXX-63krqsfIzUEJWUWLINxcb5tbS6QVySdxbS7eZV7YB2dUjUvX27xA0TIGtfxQ5v-tQjwlT5tTB-O=w240-h480-rw', link: '/topup/genshin-impact' },
+      { name: 'PUBG Mobile', provider: 'Tencent', image: 'https://play-lh.googleusercontent.com/vkziTNqdZU0su1t-AdjiCyre0SSnHTQJmznppAfbGTtj98yzttsChqcvUOihEkXDsoNZ', link: '/topup/pubg' },
+      { name: 'Mobile Legends', provider: 'Moonton', image: 'https://play-lh.googleusercontent.com/r54MhnxVyVOhlNQm5QDkwJqwTbiBDojbQ0ZhC1iGGkZo1Z0upUQuzF8rqVbw-Q91PL2ADXz0SzkK1mrO4xwqug', link: '/topup/mobile-legends' },
+      { name: 'Arena of Valor', provider: 'Garena', image: 'https://i.pinimg.com/736x/ac/38/80/ac3880d5ac049f9221fb0d33f15ed2ad.jpg', link: '/topup/arena-of-valor' },
+      { name: 'Call of Duty', provider: 'Activision', image: 'https://play-lh.googleusercontent.com/uPRFWFbiASqohiTMTKrD5gErGrKxq_1DgH0npRQcvUEDDLMLTECh3xXl0STPBZZseA=w240-h480-rw', link: '/topup/call-of-duty' },
+      { name: 'Super SUS', provider: 'PI Productions Pte. Ltd.', image: 'https://play-lh.googleusercontent.com/_Y564Top27K7DCHIQGR4cRCjPb3hBl1IyP0czy-k6ab3_CQb6GTOi2aPifRllNF_jfM', link: '/topup/super-sus' },
+      { name: 'Point Blank', provider: 'Zepetto', image: 'https://play-lh.googleusercontent.com/IGOlY-TMU0cGW_I8EFKBkLACxPLu1TQqbqaqx7NUsGMyjNWIO1NdhwdBrq-71pUAHw', link: '/topup/point-blank' },
+      { name: 'Life After', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/ioxcHbqwvSBUNFYXqZtjZnFnZIItRiBSuWwYYPr9D_VR1qGNJ_TCJZHl1K9rpB6LZpWgalhc1UFyynLfbR5ihg=w240-h480-rw', link: '/topup/life-after' },
+      { name: 'Valorant', provider: 'Riot Games', image: 'https://img.tapimg.net/market/images/d8421f75e13907471e802d0fdf33d2a0.jpg', link: '/topup/valorant' },
+      { name: 'Blood Strike', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/ZkCEMtWoM-WJPw9YwsXTZlZqAueouZaPa-hJwxEiRE3_Xar4_VmKy8K3qTymLsjVW5MTbn3WIvREVuj1IFZ99tA=w240-h480-rw', link: '/topup/blood-strike' },
+      { name: 'FC Mobile', provider: 'EA Sports', image: 'https://play-lh.googleusercontent.com/yQHb1bk88ENXLZ2_ZO-st7cuG78pva5yRAge2CjhBPoBoEng1ouxyx30vK4s4Z7553Kohd9pPVm1GC2Phs8slA', link: '/topup/fc-mobile' }
     ],
     'apps-premium': [
-      { name: 'YouTube Premium', provider: 'Google', image: '' },
-      { name: 'Spotify', provider: 'Spotify', image: '' },
-      { name: 'Netflix', provider: 'Netflix', image: '' },
-      { name: 'Disney+ Hotstar', provider: 'Disney', image: '' },
-      { name: 'VIU Premium', provider: 'VIU', image: '' },
-      { name: 'Canva Pro', provider: 'Canva', image: '' },
-      { name: 'Adobe Creative Cloud', provider: 'Adobe', image: '' },
-      { name: 'Microsoft 365', provider: 'Microsoft', image: '' },
-      { name: 'PlayStation Plus', provider: 'Sony', image: '' },
-      { name: 'Xbox Game Pass', provider: 'Microsoft', image: '' },
-      { name: 'Nintendo Switch Online', provider: 'Nintendo', image: '' },
-      { name: 'Crunchyroll Premium', provider: 'Crunchyroll', image: '' }
+      { name: 'YouTube Premium', provider: 'Google', image: '', link: '/premium/youtube' },
+      { name: 'Spotify', provider: 'Spotify', image: '', link: '/premium/spotify' },
+      { name: 'Netflix', provider: 'Netflix', image: '', link: '/premium/netflix' },
+      { name: 'Disney+ Hotstar', provider: 'Disney', image: '', link: '/premium/disney-hotstar' },
+      { name: 'VIU Premium', provider: 'VIU', image: '', link: '/premium/viu' },
+      { name: 'Canva Pro', provider: 'Canva', image: '', link: '/premium/canva' },
+      { name: 'Adobe Creative Cloud', provider: 'Adobe', image: '', link: '/premium/adobe' },
+      { name: 'Microsoft 365', provider: 'Microsoft', image: '', link: '/premium/microsoft' },
+      { name: 'PlayStation Plus', provider: 'Sony', image: '', link: '/premium/playstation' },
+      { name: 'Xbox Game Pass', provider: 'Microsoft', image: '', link: '/premium/xbox' },
+      { name: 'Nintendo Switch Online', provider: 'Nintendo', image: '', link: '/premium/nintendo' },
+      { name: 'Crunchyroll Premium', provider: 'Crunchyroll', image: '', link: '/premium/crunchyroll' }
     ],
     'sosmed': [
-      { name: 'Instagram Followers', provider: 'Meta', image: '' },
-      { name: 'TikTok Followers', provider: 'TikTok', image: '' },
-      { name: 'YouTube Subscribers', provider: 'Google', image: '' },
-      { name: 'Twitter Followers', provider: 'Twitter', image: '' },
-      { name: 'Facebook Likes', provider: 'Meta', image: '' },
-      { name: 'Instagram Likes', provider: 'Meta', image: '' },
-      { name: 'TikTok Likes', provider: 'TikTok', image: '' },
-      { name: 'YouTube Views', provider: 'Google', image: '' },
-      { name: 'Spotify Plays', provider: 'Spotify', image: '' },
-      { name: 'SoundCloud Plays', provider: 'SoundCloud', image: '' },
-      { name: 'Twitch Followers', provider: 'Twitch', image: '' },
-      { name: 'Discord Members', provider: 'Discord', image: '' }
+      { name: 'Instagram Followers', provider: 'Meta', image: '', link: '/sosmed/instagram-followers' },
+      { name: 'TikTok Followers', provider: 'TikTok', image: '', link: '/sosmed/tiktok-followers' },
+      { name: 'YouTube Subscribers', provider: 'Google', image: '', link: '/sosmed/youtube-subscribers' },
+      { name: 'Twitter Followers', provider: 'Twitter', image: '', link: '/sosmed/twitter-followers' },
+      { name: 'Facebook Likes', provider: 'Meta', image: '', link: '/sosmed/facebook-likes' },
+      { name: 'Instagram Likes', provider: 'Meta', image: '', link: '/sosmed/instagram-likes' },
+      { name: 'TikTok Likes', provider: 'TikTok', image: '', link: '/sosmed/tiktok-likes' },
+      { name: 'YouTube Views', provider: 'Google', image: '', link: '/sosmed/youtube-views' },
+      { name: 'Spotify Plays', provider: 'Spotify', image: '', link: '/sosmed/spotify-plays' },
+      { name: 'SoundCloud Plays', provider: 'SoundCloud', image: '', link: '/sosmed/soundcloud-plays' },
+      { name: 'Twitch Followers', provider: 'Twitch', image: '', link: '/sosmed/twitch-followers' },
+      { name: 'Discord Members', provider: 'Discord', image: '', link: '/sosmed/discord-members' }
     ]
   };
 
   // Data tambahan untuk toggle more
   const additionalGames = {
     'topup-games': [
-      { name: 'Arena Breakout', provider: 'MoreFun Studios', image: 'https://play-lh.googleusercontent.com/vL-xYJhmXTiaQewThy9DMHkk_zdtSHqKcRDp8iYip6C-OB764enYRA1CrmHSRoW1rsAEkyJT5a8By3ADMbd5' },
-      { name: 'Honor of Kings', provider: 'TiMi Studio', image: 'https://play-lh.googleusercontent.com/JzcfRXNLE--3KDOPziAKzhAHEruqsV1XwN7tz-928zs-wUWN3tx62WAygmv5_eI-I-Kf' },
-      { name: 'Magic Chess', provider: 'Moonton', image: 'https://play-lh.googleusercontent.com/0YFChom7BdMkIgshcKHweiP7LriiGg7j7CS5mS4JWCSZkmFD5hRZnOsEGf93u5TgpDccD6NmM7SgBgV7txXWNw=w240-h480-rw' },
-      { name: 'AFK Journey', provider: 'Lilith Games', image: 'https://play-lh.googleusercontent.com/Gtr6sMekjBdbMakdPtl7kr2fZKxtOs0Jm-pu4t1PioThmnG9azrAH4157CNM_xa5hnY' },
-      { name: 'Zenless Zone Zero', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/8jEmEvTsNIRW1vLlrDXXCcDlKkQrNb8NzccOXrln4G_DOUZpcBPbN9ssjuwBWz7_yZQ' },
-      { name: 'Honkai Impact', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/prnhqavcLgfVo9AJoCt0vBDwfiMXXFtwwjJYGuKiyWm1R2sqz2judwhnb2cl8XVvVGU' },
-      { name: 'Goddess Victory Nikke', provider: 'Shift Up', image: 'https://play-lh.googleusercontent.com/mR5NzJva7i3xcUZVlk-JlcMIUy04Zx8vUhM5sn94cpX1CA91XjXIrUnxhQGNxNcquEA=w240-h480-rw' },
-      { name: 'Ace Racer', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/tmTk1vNc6Nkl8wctgd_oXcp1Dl_xTYL4f1ECntGCmMNSQCfGUtvhSoNHCF9N9ATi8T4g=w240-h480-rw' },
-      { name: 'Zepeto', provider: 'Naver Z', image: 'https://play-lh.googleusercontent.com/EwN12x-sr1KVCpHYyG4kFE2NMH5ZdXStj5e5eHAFfyxNTcXRoUs4DxyJyvkBeeqY76k' },
-      { name: 'Pixel Gun', provider: 'Pixel Gun 3D', image: 'https://play-lh.googleusercontent.com/PENcy8xrS7JJzOvqOj6n9vt9gfzctEYOW9mjmTKjw-h3UttaDobPa4lIl4wEywR5spBqnRi7OrRkDrEPVby1eg' },
-      { name: 'Tom n Jerry Chase', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/Oq7vcfpGDuz_XaztGSM3a-kwFe59RL88N4xvao1Rr7tjEZyhNA_hHZOYQT9FjgFteA' },
-      { name: 'Metal Slug Awake', provider: 'SNK', image: 'https://play-lh.googleusercontent.com/1LYLv2tKwmUoIgzMiT6WgtLGSoa13tSvYcqA6xbMPp_ivw-ygzvo-6JN_GsoOPsqodZP' }
+      { name: 'Arena Breakout', provider: 'MoreFun Studios', image: 'https://play-lh.googleusercontent.com/vL-xYJhmXTiaQewThy9DMHkk_zdtSHqKcRDp8iYip6C-OB764enYRA1CrmHSRoW1rsAEkyJT5a8By3ADMbd5', link: '/topup/arena-breakout' },
+      { name: 'Honor of Kings', provider: 'TiMi Studio', image: 'https://play-lh.googleusercontent.com/JzcfRXNLE--3KDOPziAKzhAHEruqsV1XwN7tz-928zs-wUWN3tx62WAygmv5_eI-I-Kf', link: '/topup/honor-of-kings' },
+      { name: 'Magic Chess', provider: 'Moonton', image: 'https://play-lh.googleusercontent.com/0YFChom7BdMkIgshcKHweiP7LriiGg7j7CS5mS4JWCSZkmFD5hRZnOsEGf93u5TgpDccD6NmM7SgBgV7txXWNw=w240-h480-rw', link: '/topup/magic-chess' },
+      { name: 'AFK Journey', provider: 'Lilith Games', image: 'https://play-lh.googleusercontent.com/Gtr6sMekjBdbMakdPtl7kr2fZKxtOs0Jm-pu4t1PioThmnG9azrAH4157CNM_xa5hnY', link: '/topup/afk-journey' },
+      { name: 'Zenless Zone Zero', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/8jEmEvTsNIRW1vLlrDXXCcDlKkQrNb8NzccOXrln4G_DOUZpcBPbN9ssjuwBWz7_yZQ', link: '/topup/zenless-zone-zero' },
+      { name: 'Honkai Impact', provider: 'Mihoyo', image: 'https://play-lh.googleusercontent.com/prnhqavcLgfVo9AJoCt0vBDwfiMXXFtwwjJYGuKiyWm1R2sqz2judwhnb2cl8XVvVGU', link: '/topup/honkai-impact' },
+      { name: 'Goddess Victory Nikke', provider: 'Shift Up', image: 'https://play-lh.googleusercontent.com/mR5NzJva7i3xcUZVlk-JlcMIUy04Zx8vUhM5sn94cpX1CA91XjXIrUnxhQGNxNcquEA=w240-h480-rw', link: '/topup/goddess-victory-nikke' },
+      { name: 'Ace Racer', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/tmTk1vNc6Nkl8wctgd_oXcp1Dl_xTYL4f1ECntGCmMNSQCfGUtvhSoNHCF9N9ATi8T4g=w240-h480-rw', link: '/topup/ace-racer' },
+      { name: 'Zepeto', provider: 'Naver Z', image: 'https://play-lh.googleusercontent.com/EwN12x-sr1KVCpHYyG4kFE2NMH5ZdXStj5e5eHAFfyxNTcXRoUs4DxyJyvkBeeqY76k', link: '/topup/zepeto' },
+      { name: 'Pixel Gun', provider: 'Pixel Gun 3D', image: 'https://play-lh.googleusercontent.com/PENcy8xrS7JJzOvqOj6n9vt9gfzctEYOW9mjmTKjw-h3UttaDobPa4lIl4wEywR5spBqnRi7OrRkDrEPVby1eg', link: '/topup/pixel-gun' },
+      { name: 'Tom n Jerry Chase', provider: 'NetEase Games', image: 'https://play-lh.googleusercontent.com/Oq7vcfpGDuz_XaztGSM3a-kwFe59RL88N4xvao1Rr7tjEZyhNA_hHZOYQT9FjgFteA', link: '/topup/tom-n-jerry-chase' },
+      { name: 'Metal Slug Awake', provider: 'SNK', image: 'https://play-lh.googleusercontent.com/1LYLv2tKwmUoIgzMiT6WgtLGSoa13tSvYcqA6xbMPp_ivw-ygzvo-6JN_GsoOPsqodZP', link: '/topup/metal-slug-awake' }
     ],
     'apps-premium': [
-      { name: 'Amazon Prime', provider: 'Amazon', image: '' },
-      { name: 'HBO Max', provider: 'Warner Bros', image: '' },
-      { name: 'Apple Music', provider: 'Apple', image: '' },
-      { name: 'Apple TV+', provider: 'Apple', image: '' },
-      { name: 'Google One', provider: 'Google', image: '' },
-      { name: 'iCloud+', provider: 'Apple', image: '' },
-      { name: 'Dropbox Plus', provider: 'Dropbox', image: '' },
-      { name: 'LastPass Premium', provider: 'LastPass', image: '' },
-      { name: 'NordVPN', provider: 'NordVPN', image: '' },
-      { name: 'ExpressVPN', provider: 'ExpressVPN', image: '' },
-      { name: 'Grammarly Premium', provider: 'Grammarly', image: '' },
-      { name: 'Notion Premium', provider: 'Notion', image: '' }
+      { name: 'Amazon Prime', provider: 'Amazon', image: '', link: '/premium/amazon-prime' },
+      { name: 'HBO Max', provider: 'Warner Bros', image: '', link: '/premium/hbo-max' },
+      { name: 'Apple Music', provider: 'Apple', image: '', link: '/premium/apple-music' },
+      { name: 'Apple TV+', provider: 'Apple', image: '', link: '/premium/apple-tv' },
+      { name: 'Google One', provider: 'Google', image: '', link: '/premium/google-one' },
+      { name: 'iCloud+', provider: 'Apple', image: '', link: '/premium/icloud' },
+      { name: 'Dropbox Plus', provider: 'Dropbox', image: '', link: '/premium/dropbox' },
+      { name: 'LastPass Premium', provider: 'LastPass', image: '', link: '/premium/lastpass' },
+      { name: 'NordVPN', provider: 'NordVPN', image: '', link: '/premium/nordvpn' },
+      { name: 'ExpressVPN', provider: 'ExpressVPN', image: '', link: '/premium/expressvpn' },
+      { name: 'Grammarly Premium', provider: 'Grammarly', image: '', link: '/premium/grammarly' },
+      { name: 'Notion Premium', provider: 'Notion', image: '', link: '/premium/notion' }
     ],
     'sosmed': [
-      { name: 'Instagram Story Views', provider: 'Meta', image: '' },
-      { name: 'TikTok Views', provider: 'TikTok', image: '' },
-      { name: 'YouTube Comments', provider: 'Google', image: '' },
-      { name: 'Twitter Retweets', provider: 'Twitter', image: '' },
-      { name: 'Facebook Shares', provider: 'Meta', image: '' },
-      { name: 'LinkedIn Connections', provider: 'LinkedIn', image: '' },
-      { name: 'Pinterest Followers', provider: 'Pinterest', image: '' },
-      { name: 'Snapchat Followers', provider: 'Snapchat', image: '' },
-      { name: 'Telegram Members', provider: 'Telegram', image: '' },
-      { name: 'Reddit Karma', provider: 'Reddit', image: '' },
-      { name: 'Quora Followers', provider: 'Quora', image: '' },
-      { name: 'Clubhouse Followers', provider: 'Clubhouse', image: '' }
+      { name: 'Instagram Story Views', provider: 'Meta', image: '', link: '/sosmed/instagram-story-views' },
+      { name: 'TikTok Views', provider: 'TikTok', image: '', link: '/sosmed/tiktok-views' },
+      { name: 'YouTube Comments', provider: 'Google', image: '', link: '/sosmed/youtube-comments' },
+      { name: 'Twitter Retweets', provider: 'Twitter', image: '', link: '/sosmed/twitter-retweets' },
+      { name: 'Facebook Shares', provider: 'Meta', image: '', link: '/sosmed/facebook-shares' },
+      { name: 'LinkedIn Connections', provider: 'LinkedIn', image: '', link: '/sosmed/linkedin-connections' },
+      { name: 'Pinterest Followers', provider: 'Pinterest', image: '', link: '/sosmed/pinterest-followers' },
+      { name: 'Snapchat Followers', provider: 'Snapchat', image: '', link: '/sosmed/snapchat-followers' },
+      { name: 'Telegram Members', provider: 'Telegram', image: '', link: '/sosmed/telegram-members' },
+      { name: 'Reddit Karma', provider: 'Reddit', image: '', link: '/sosmed/reddit-karma' },
+      { name: 'Quora Followers', provider: 'Quora', image: '', link: '/sosmed/quora-followers' },
+      { name: 'Clubhouse Followers', provider: 'Clubhouse', image: '', link: '/sosmed/clubhouse-followers' }
     ]
   };
 
@@ -1407,24 +1593,15 @@
   let isShowingMore = false;
   const initialItemsPerPage = 12;
 
-  // Fungsi untuk membuat item game
-  function createGameItem(game) {
+  // Fungsi untuk membuat item game icon
+  function createGameIconItem(game) {
     return `
-      <div class="bg-[#111] border-2 border-[#39FF14] pixel-border hover:shadow-[0_0_15px_#39FF14] transition-all duration-300 fade-in">
-        <div class="p-3 border-b-2 border-[#39FF14] bg-[#0F380F]">
-          <h3 class="text-xs text-[#FFD700] text-center truncate">${game.name}</h3>
-        </div>
-        <div class="p-4 flex flex-col items-center">
-          <div class="w-12 h-12 md:w-16 md:h-16 mb-2 bg-[#222] border border-[#39FF14] flex items-center justify-center overflow-hidden">
-            ${game.image ? 
-              `<img src="${game.image}" alt="${game.name}" class="w-full h-full object-cover">` : 
-              `<span class="text-[#39FF14] text-xs text-center">${game.name.substring(0, 3).toUpperCase()}</span>`
-            }
-          </div>
-          <p class="text-[#39FF14] text-[10px] text-center mb-2">${game.provider}</p>
-          <button class="w-full bg-[#39FF14] text-black text-[10px] py-1 hover:bg-[#FFD700] transition-colors">
-            BELI
-          </button>
+      <div class="game-icon-item fade-in">
+        <a href="${game.link}" class="game-link"></a>
+        <img src="${game.image}" alt="${game.name}" class="game-icon">
+        <div class="game-info">
+          <div class="game-name">${game.name}</div>
+          <div class="game-developer">${game.provider}</div>
         </div>
       </div>
     `;
@@ -1447,7 +1624,7 @@
     
     // Tampilkan item
     gamesToShow.forEach(game => {
-      gameGrid.innerHTML += createGameItem(game);
+      gameGrid.innerHTML += createGameIconItem(game);
     });
     
     // Update teks tombol
