@@ -334,11 +334,11 @@
       text-decoration: none;
     }
 
-    /* New Payment Section Styles */
+    /* PERBAIKAN UTAMA: Metode Pembayaran yang Lebih Rapi */
     .payment-section {
       border: 2px solid #4db6ac;
       border-radius: 0;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       overflow: hidden;
     }
     
@@ -347,7 +347,7 @@
       padding: 12px 16px;
       cursor: pointer;
       display: flex;
-      justify-content: between;
+      justify-content: space-between;
       align-items: center;
       transition: all 0.3s ease;
     }
@@ -373,15 +373,15 @@
     
     .payment-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
       padding: 12px;
     }
     
     .payment-method {
       background: #114250;
       border: 2px solid #4db6ac;
-      padding: 8px;
+      padding: 12px;
       text-align: center;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -389,7 +389,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 80px;
+      min-height: 90px;
+      border-radius: 4px;
     }
     
     .payment-method:hover {
@@ -400,23 +401,30 @@
     .payment-method.selected {
       background: #00796b;
       border-color: #80cbc4;
-      box-shadow: 0 0 8px rgba(77, 182, 172, 0.5);
+      box-shadow: 0 0 12px rgba(77, 182, 172, 0.5);
     }
     
     .payment-icon {
-      width: 32px;
-      height: 32px;
-      margin-bottom: 4px;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
     }
     
     .payment-name {
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-weight: bold;
       color: #e0f7fa;
+      margin-bottom: 4px;
+    }
+    
+    .payment-desc {
+      font-size: 0.65rem;
+      color: #b2dfdb;
+      font-style: italic;
     }
 
     /* Error message */
@@ -437,6 +445,141 @@
       .sidebar-mobile {
         order: 1;
       }
+    }
+
+    /* Payment method icons */
+    .payment-icon img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    /* PERBAIKAN: Metode pembayaran yang lebih konsisten - HANYA LOGO */
+    .payment-method-new {
+      background: #0a2e36;
+      border: 2px solid #4db6ac;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      height: 64px;
+    }
+    
+    .payment-method-new:hover {
+      background: #114250;
+      transform: translateY(-2px);
+    }
+    
+    .payment-method-new.selected {
+      background: #00796b;
+      border-color: #80cbc4;
+      box-shadow: 0 0 12px rgba(77, 182, 172, 0.5);
+    }
+    
+    .payment-method-new .payment-icon-new {
+      width: 200px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .payment-method-new .payment-icon-new img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Divider */
+    .payment-divider {
+      height: 1px;
+      background: #4db6ac;
+      margin: 12px 0;
+      opacity: 0.5;
+    }
+
+    /* PERBAIKAN BARU: Layout grid yang lebih baik untuk metode pembayaran */
+    .payment-grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      padding: 12px;
+    }
+
+    /* PERBAIKAN: Responsive layout untuk metode pembayaran */
+    @media (max-width: 768px) {
+      .payment-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 8px;
+      }
+      
+      .payment-method-new {
+        padding: 10px;
+        height: 60px;
+      }
+      
+      .payment-method-new .payment-icon-new {
+        width: 180px;
+        height: 35px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .payment-grid-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .payment-method-new {
+        height: 56px;
+      }
+      
+      .payment-method-new .payment-icon-new {
+        width: 160px;
+        height: 32px;
+      }
+    }
+
+    /* PERBAIKAN UTAMA: Tab untuk kategori diamond */
+    .category-tabs {
+      display: flex;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #4db6ac;
+    }
+    
+    .category-tab {
+      padding: 10px 16px;
+      cursor: pointer;
+      background: #0a2e36;
+      border: 2px solid #4db6ac;
+      border-bottom: none;
+      margin-right: 4px;
+      transition: all 0.3s ease;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: bold;
+    }
+    
+    .category-tab:hover {
+      background: #114250;
+    }
+    
+    .category-tab.active {
+      background: #00796b;
+      border-color: #80cbc4;
+    }
+    
+    .category-content {
+      display: none;
+    }
+    
+    .category-content.active {
+      display: block;
     }
   </style>
 </head>
@@ -507,7 +650,7 @@
           </div>
         </div>
 
-        <!-- 2. Pilih Nominal -->
+        <!-- 2. Pilih Nominal - DIUBAH DENGAN TAB KATEGORI -->
         <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
           <div class="flex items-center gap-2 mb-3 sm:mb-4">
             <div class="number-badge w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-white font-bold text-xs sm:text-sm">2</div>
@@ -515,12 +658,42 @@
           </div>
           <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">KLIK SALAH SATU PAKET DIAMOND YANG INGIN DIBELI</p>
 
-          <div id="itemsGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-grid-mobile">
-            <!-- Item cards akan diisi oleh JavaScript -->
+          <!-- Tab Kategori -->
+          <div class="category-tabs">
+            <div class="category-tab active" data-category="categoryA">Diamond</div>
+            <div class="category-tab" data-category="categoryB">Weekly</div>
+            <div class="category-tab" data-category="categoryC">First TopUp</div>
+          </div>
+
+          <!-- Kategori A -->
+          <div id="categoryA" class="category-content active">
+            <div id="itemsGridA" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-grid-mobile">
+              <!-- Item cards untuk kategori A akan diisi oleh JavaScript -->
+            </div>
+          </div>
+
+          <!-- Kategori B -->
+          <div id="categoryB" class="category-content">
+            <div id="itemsGridB" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-grid-mobile">
+              <!-- Item cards untuk kategori B akan diisi oleh JavaScript -->
+            </div>
+          </div>
+
+          <!-- Kategori C -->
+          <div id="categoryC" class="category-content">
+            <div id="itemsGridC" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-grid-mobile">
+              <!-- Item cards untuk kategori C akan diisi oleh JavaScript -->
+            </div>
+            <div class="mt-4 p-3 bg-amber-900 border border-amber-700">
+              <p class="text-xs text-amber-200 pixel-font responsive-text text-overflow-safe">
+                <i class="fas fa-exclamation-triangle mr-1"></i>
+                Khusus Top Up Pertama Kali per Akun Dimanapun Top Up nya (kalo uda pernah beli jangan ya pasti error nanti)✨
+              </p>
+            </div>
           </div>
         </div>
 
-        <!-- 3. Pilih Pembayaran - DIUBAH SESUAI GAMBAR -->
+        <!-- 3. Pilih Pembayaran -->
         <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
           <div class="flex items-center gap-2 mb-3 sm:mb-4">
             <div class="number-badge w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-white font-bold text-xs sm:text-sm">3</div>
@@ -528,48 +701,80 @@
           </div>
           <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">PILIH METODE PEMBAYARAN YANG DIINGINKAN</p>
 
-          <!-- E-Wallet Section -->
+          <!-- E-Wallet + QRIS Section -->
           <div class="payment-section">
             <div class="payment-header" onclick="togglePaymentSection('ewallet')">
               <div class="flex items-center gap-3">
                 <div class="w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center pixel-border-thin">
                   <i class="fas fa-wallet text-white text-sm"></i>
                 </div>
-                <h3 class="font-semibold pixel-font responsive-text">E-WALLET</h3>
+                <h3 class="font-semibold pixel-font responsive-text">E-WALLET + QRIS</h3>
               </div>
               <i class="fas fa-chevron-down ml-auto transition-transform" id="ewallet-arrow"></i>
             </div>
             <div class="payment-content" id="ewallet-content">
-              <div class="payment-grid">
-                <div class="payment-method" data-method="DANA">
-                  <div class="payment-icon">
-                    <i class="fas fa-mobile-alt text-blue-400"></i>
+              <div class="payment-grid-container">
+                <!-- DANA -->
+                <div class="payment-method-new" data-method="DANA">
+                  <div class="payment-icon-new">
+                    <img src="../img/qris-dana 1.png" alt="DANA">
                   </div>
-                  <div class="payment-name pixel-font">DANA</div>
                 </div>
-                <div class="payment-method" data-method="OVO">
-                  <div class="payment-icon">
-                    <i class="fas fa-bolt text-purple-400"></i>
+                
+                <!-- OVO -->
+                <div class="payment-method-new" data-method="OVO">
+                  <div class="payment-icon-new">
+                    <img src="../img/qris-ovo 1.png" alt="OVO">
                   </div>
-                  <div class="payment-name pixel-font">OVO</div>
                 </div>
-                <div class="payment-method" data-method="GOPAY">
-                  <div class="payment-icon">
-                    <i class="fas fa-qrcode text-green-400"></i>
+                
+                <!-- MANDIRI -->
+                <div class="payment-method-new" data-method="MANDIRI">
+                  <div class="payment-icon-new">
+                    <img src="../img/qris-mandiri 1.png" alt="MANDIRI">
                   </div>
-                  <div class="payment-name pixel-font">GOPAY</div>
                 </div>
-                <div class="payment-method" data-method="LINKAJA">
-                  <div class="payment-icon">
-                    <i class="fas fa-comment text-red-400"></i>
+                
+                <!-- SHOPEEPAY -->
+                <div class="payment-method-new" data-method="SHOPEEPAY">
+                  <div class="payment-icon-new">
+                    <img src="../img/qris-shopee 1.png" alt="SHOPEEPAY">
                   </div>
-                  <div class="payment-name pixel-font">LINKAJA</div>
                 </div>
-                <div class="payment-method" data-method="SHOPEEPAY">
-                  <div class="payment-icon">
-                    <i class="fas fa-shopping-bag text-orange-400"></i>
+                
+                <!-- GOPAY -->
+                <div class="payment-method-new" data-method="GOPAY">
+                  <div class="payment-icon-new">
+                    <img src="../img/qris-gopay 1.png" alt="GOPAY">
                   </div>
-                  <div class="payment-name pixel-font">SHOPEEPAY</div>
+                </div>
+                
+                <!-- LINKAJA -->
+                <div class="payment-method-new" data-method="LINKAJA">
+                  <div class="payment-icon-new">
+                    <img src="../img/qris-linkaja 1.png" alt="LINKAJA">
+                  </div>
+                </div>
+                
+                <!-- BRI -->
+                <div class="payment-method-new" data-method="BRI">
+                  <div class="payment-icon-new">
+                    <img src="../img/qris-bri 1.png" alt="BRI">
+                  </div>
+                </div>
+                
+                <!-- BNI -->
+                <div class="payment-method-new" data-method="BNI">
+                  <div class="payment-icon-new">
+                    <img src="../img/qris-bni 1.png" alt="BNI">
+                  </div>
+                </div>
+                
+                <!-- BCA -->
+                <div class="payment-method-new" data-method="BCA">
+                  <div class="payment-icon-new">
+                    <img src="../img/qris-bca 1.png" alt="BCA">
+                  </div>
                 </div>
               </div>
             </div>
@@ -587,42 +792,75 @@
               <i class="fas fa-chevron-down ml-auto transition-transform" id="bank-arrow"></i>
             </div>
             <div class="payment-content" id="bank-content">
-              <div class="payment-grid">
-                <div class="payment-method" data-method="BCA">
-                  <div class="payment-icon">
-                    <i class="fas fa-landmark text-blue-600"></i>
+              <div class="payment-grid-container">
+                <!-- BRIVA -->
+                <div class="payment-method-new" data-method="BRIVA">
+                  <div class="payment-icon-new">
+                    <img src="../img/bri-va 1.png" alt="BRIVA">
                   </div>
-                  <div class="payment-name pixel-font">BCA</div>
                 </div>
-                <div class="payment-method" data-method="BRI">
-                  <div class="payment-icon">
-                    <i class="fas fa-university text-yellow-600"></i>
+                
+                <!-- Bank Syariah Indonesia -->
+                <div class="payment-method-new" data-method="BSI">
+                  <div class="payment-icon-new">
+                    <img src="../img/bsi-va 1.png" alt="Bank Syariah Indonesia">
                   </div>
-                  <div class="payment-name pixel-font">BRI</div>
                 </div>
-                <div class="payment-method" data-method="BNI">
-                  <div class="payment-icon">
-                    <i class="fas fa-building text-red-600"></i>
+                
+                <!-- DANAMON -->
+                <div class="payment-method-new" data-method="DANAMON">
+                  <div class="payment-icon-new">
+                    <img src="../img/danamon-va 1.png" alt="DANAMON">
                   </div>
-                  <div class="payment-name pixel-font">BNI</div>
                 </div>
-                <div class="payment-method" data-method="MANDIRI">
-                  <div class="payment-icon">
-                    <i class="fas fa-bank text-green-600"></i>
+                
+                <!-- Bank Neo Commerce -->
+                <div class="payment-method-new" data-method="BNC">
+                  <div class="payment-icon-new">
+                    <img src="../img/bnc-va 1.png" alt="Bank Neo Commerce">
                   </div>
-                  <div class="payment-name pixel-font">MANDIRI</div>
                 </div>
-                <div class="payment-method" data-method="CIMB">
-                  <div class="payment-icon">
-                    <i class="fas fa-credit-card text-orange-600"></i>
+                
+                <!-- Maybank -->
+                <div class="payment-method-new" data-method="MAYBANK">
+                  <div class="payment-icon-new">
+                    <img src="../img/maybank-va 1.png" alt="Maybank">
                   </div>
-                  <div class="payment-name pixel-font">CIMB</div>
                 </div>
-                <div class="payment-method" data-method="MAYBANK">
-                  <div class="payment-icon">
-                    <i class="fas fa-money-check text-purple-600"></i>
+                
+                <!-- BNI -->
+                <div class="payment-method-new" data-method="BNI">
+                  <div class="payment-icon-new">
+                    <img src="../img/bni-va 1.png" alt="BNI">
                   </div>
-                  <div class="payment-name pixel-font">MAYBANK</div>
+                </div>
+                
+                <!-- CIMB NIAGA -->
+                <div class="payment-method-new" data-method="CIMBNIAGA">
+                  <div class="payment-icon-new">
+                    <img src="../img/cimb-va 1.png" alt="CIMB NIAGA">
+                  </div>
+                </div>
+                
+                <!-- Sinarmas -->
+                <div class="payment-method-new" data-method="SINARMAS">
+                  <div class="payment-icon-new">
+                    <img src="../img/sinarmas-va 1.png" alt="Sinarmas">
+                  </div>
+                </div>
+                
+                <!-- Mandiri -->
+                <div class="payment-method-new" data-method="MANDIRI">
+                  <div class="payment-icon-new">
+                    <img src="../img/mandiri-va 1.png" alt="Mandiri">
+                  </div>
+                </div>
+                
+                <!-- Permata -->
+                <div class="payment-method-new" data-method="PERMATA">
+                  <div class="payment-icon-new">
+                    <img src="../img/permata-va 1.png" alt="Permata">
+                  </div>
                 </div>
               </div>
             </div>
@@ -640,24 +878,33 @@
               <i class="fas fa-chevron-down ml-auto transition-transform" id="convenience-arrow"></i>
             </div>
             <div class="payment-content" id="convenience-content">
-              <div class="payment-grid">
-                <div class="payment-method" data-method="INDOMARET">
-                  <div class="payment-icon">
-                    <i class="fas fa-shopping-cart text-green-500"></i>
+              <div class="payment-grid-container">
+                <!-- ALFAMART -->
+                <div class="payment-method-new" data-method="ALFAMART">
+                  <div class="payment-icon-new">
+                    <img src="../img/alfamart.png" alt="ALFAMART">
                   </div>
-                  <div class="payment-name pixel-font">INDOMARET</div>
                 </div>
-                <div class="payment-method" data-method="ALFAMART">
-                  <div class="payment-icon">
-                    <i class="fas fa-store-alt text-blue-500"></i>
+                
+                <!-- ALFAMIDI -->
+                <div class="payment-method-new" data-method="ALFAMIDI">
+                  <div class="payment-icon-new">
+                    <img src="../img/alfamidifinal-ezgif.com-optijpeg.jpg" alt="ALFAMIDI">
                   </div>
-                  <div class="payment-name pixel-font">ALFAMART</div>
                 </div>
-                <div class="payment-method" data-method="LAWSON">
-                  <div class="payment-icon">
-                    <i class="fas fa-utensils text-red-500"></i>
+                
+                <!-- INDOMARET -->
+                <div class="payment-method-new" data-method="INDOMARET">
+                  <div class="payment-icon-new">
+                    <img src="../img/indomart.png" alt="INDOMARET">
                   </div>
-                  <div class="payment-name pixel-font">LAWSON</div>
+                </div>
+                
+                <!-- LAWSON -->
+                <div class="payment-method-new" data-method="LAWSON">
+                  <div class="payment-icon-new">
+                    <img src="../img/lawsonfinal-ezgif.com-optijpeg.jpg" alt="LAWSON">
+                  </div>
                 </div>
               </div>
             </div>
@@ -909,20 +1156,80 @@
   </div>
 
   <script>
-    // Data produk
-    const products = [
-      { name: "Weekly Diamond Pass", price: "RP 29.576", diamonds: "Weekly Pass" },
-      { name: "Diamond 86", price: "RP 29.000", diamonds: "86 Diamonds" },
-      { name: "Diamond 172", price: "RP 59.000", diamonds: "172 Diamonds" },
-      { name: "Diamond 257", price: "RP 79.000", diamonds: "257 Diamonds" },
-      { name: "Diamond 344", price: "RP 99.000", diamonds: "344 Diamonds" },
-      { name: "Diamond 429", price: "RP 119.000", diamonds: "429 Diamonds" },
-      { name: "Diamond 514", price: "RP 139.000", diamonds: "514 Diamonds" },
-      { name: "Diamond 706", price: "RP 189.000", diamonds: "706 Diamonds" },
-      { name: "Diamond 963", price: "RP 249.000", diamonds: "963 Diamonds" },
-      { name: "Twilight Pass", price: "RP 153.076", diamonds: "Twilight Pass" },
-      { name: "Starlight Pass", price: "RP 147.880", diamonds: "Starlight Pass" },
-      { name: "Diamond 1412", price: "RP 369.000", diamonds: "1412 Diamonds" }
+    // Data produk untuk kategori A
+    const productsA = [
+      { name: "Weekly Diamond Pass", price: "RP 29.400", diamonds: "Weekly Pass" },
+      { name: "Twilight Pass", price: "RP 147.754", diamonds: "Twilight Pass" },
+      { name: "3 Diamond", price: "RP 1.500", diamonds: "3 Diamonds" },
+      { name: "5 Diamond", price: "RP 1.500", diamonds: "5 Diamonds" },
+      { name: "12 Diamond", price: "RP 3.555", diamonds: "12 Diamonds" },
+      { name: "14 Diamond (13+1)", price: "RP 4.100", diamonds: "14 Diamonds" },
+      { name: "19 Diamond (17+2)", price: "RP 5.500", diamonds: "19 Diamonds" },
+      { name: "28 Diamond (26+2)", price: "RP 8.500", diamonds: "28 Diamonds" },
+      { name: "36 Diamond (33+3)", price: "RP 10.200", diamonds: "36 Diamonds" },
+      { name: "45 Diamond (41+4)", price: "RP 13.500", diamonds: "45 Diamonds" },
+      { name: "50 Diamond (46+4)", price: "RP 14.800", diamonds: "50 Diamonds" },
+      { name: "59 Diamond (53+6)", price: "RP 16.593", diamonds: "59 Diamonds" },
+      { name: "67 Diamond (62+5)", price: "RP 18.989", diamonds: "67 Diamonds" },
+      { name: "70 Diamond (64+7)", price: "RP 19.989", diamonds: "70 Diamonds" },
+      { name: "85 Diamond (77+8)", price: "RP 23.849", diamonds: "85 Diamonds" },
+      { name: "100 Diamond (92+8)", price: "RP 28.200", diamonds: "100 Diamonds" },
+      { name: "112 Diamond (102+10)", price: "RP 31.424", diamonds: "112 Diamonds" },
+      { name: "140 Diamond (127+13)", price: "RP 39.330", diamonds: "140 Diamonds" },
+      { name: "145 Diamond (131+14)", price: "RP 41.625", diamonds: "145 Diamonds" },
+      { name: "170 Diamond (154+16)", price: "RP 45.623", diamonds: "170 Diamonds" },
+      { name: "185 Diamond (169+16)", price: "RP 50.066", diamonds: "185 Diamonds" },
+      { name: "222 Diamond (200+22)", price: "RP 60.023", diamonds: "222 Diamonds" },
+      { name: "240 Diamond (217+23)", price: "RP 63.859", diamonds: "240 Diamonds" },
+      { name: "257 Diamond (234+23)", price: "RP 68.664", diamonds: "257 Diamonds" },
+      { name: "284 Diamond (254+30)", price: "RP 75.229", diamonds: "284 Diamonds" },
+      { name: "296 Diamond (256+40)", price: "RP 79.053", diamonds: "296 Diamonds" },
+      { name: "344 Diamond (312+32)", price: "RP 90.612", diamonds: "344 Diamonds" },
+      { name: "355 Diamond (317+38)", price: "RP 92.242", diamonds: "355 Diamonds" },
+      { name: "408 Diamond (367+41)", price: "RP 109.400", diamonds: "408 Diamonds" },
+      { name: "429 Diamond (390+39)", price: "RP 113.040", diamonds: "429 Diamonds" },
+      { name: "460 Diamond (414+46)", price: "RP 121.508", diamonds: "460 Diamonds" },
+      { name: "514 Diamond (468+46)", price: "RP 133.794", diamonds: "514 Diamonds" },
+      { name: "568 Diamond (503+65)", price: "RP 144.043", diamonds: "568 Diamonds" },
+      { name: "600 Diamond (546+55)", price: "RP 153.750", diamonds: "600 Diamonds" },
+      { name: "706 Diamond (625+81)", price: "RP 181.089", diamonds: "706 Diamonds" },
+      { name: "875 Diamond (774+101)", price: "RP 220.746", diamonds: "875 Diamonds" },
+      { name: "963 Diamond (859+104)", price: "RP 240.457", diamonds: "963 Diamonds" },
+      { name: "1.050 Diamond (937+113)", price: "RP 271.009", diamonds: "1050 Diamonds" },
+      { name: "1.136 Diamond (990+146)", price: "RP 283.731", diamonds: "1136 Diamonds" },
+      { name: "1.159 Diamond ML (1012+147)", price: "RP 288.000", diamonds: "1159 Diamonds" },
+      { name: "1.220 Diamond (1093+127)", price: "RP 306.061", diamonds: "1220 Diamonds" },
+      { name: "1.412 Diamond (1250+162)", price: "RP 355.412", diamonds: "1412 Diamonds" },
+      { name: "2.010 Diamond (1780+230)", price: "RP 476.470", diamonds: "2010 Diamonds" },
+      { name: "2.195 Diamond (1860+335)", price: "RP 523.751", diamonds: "2195 Diamonds" },
+      { name: "2.901 Diamond (2485+416)", price: "RP 700.448", diamonds: "2901 Diamonds" },
+      { name: "3.688 Diamond (3099+589)", price: "RP 895.750", diamonds: "3688 Diamonds" },
+      { name: "4.394 Diamond (3724+670)", price: "RP 1.050.947", diamonds: "4394 Diamonds" },
+      { name: "5.532 Diamond (4649+883)", price: "RP 1.316.436", diamonds: "5532 Diamonds" },
+      { name: "7.720 Diamond (6509+1218)", price: "RP 1.835.101", diamonds: "7720 Diamonds" },
+      { name: "9.288 Diamond (7740+1548)", price: "RP 2.206.878", diamonds: "9288 Diamonds" },
+      { name: "10.050 Diamond (8540+8540)", price: "RP 2.383.000", diamonds: "10050 Diamonds" },
+      { name: "12.976 Diamond (10877+2099)", price: "RP 3.075.000", diamonds: "12976 Diamonds" },
+      { name: "16.080 Diamond (13664+2416)", price: "RP 3.805.000", diamonds: "16080 Diamonds" },
+      { name: "27.864 Diamond (23232+4632)", price: "RP 6.555.027", diamonds: "27864 Diamonds" }
+    ];
+
+    // Data produk untuk kategori B
+    const productsB = [
+      { name: "Weekly Diamond Pass", price: "RP 29.400", diamonds: "Weekly Pass" },
+      { name: "Twilight Pass", price: "RP 147.754", diamonds: "Twilight Pass" },
+      { name: "Weekly 2x (440 Diamond)", price: "RP 58.467", diamonds: "440 Diamonds" },
+      { name: "Weekly 3x (660 Diamond)", price: "RP 86.154", diamonds: "660 Diamonds" },
+      { name: "Weekly 4x (880 Diamond)", price: "RP 114.839", diamonds: "880 Diamonds" },
+      { name: "Weekly 5x (1100 Diamond)", price: "RP 142.526", diamonds: "1100 Diamonds" }
+    ];
+
+    // Data produk untuk kategori C
+    const productsC = [
+      { name: "First TopUp 50 Diamond + Bonus Diamond", price: "RP 16.000", diamonds: "50+ Diamond" },
+      { name: "First TopUp 150 Diamond + Bonus Diamond", price: "RP 47.000", diamonds: "150+ Diamond" },
+      { name: "First TopUp 250 Diamond + Bonus Diamond", price: "RP 76.844", diamonds: "250+ Diamond" },
+      { name: "First TopUp 500 Diamond + Bonus Diamond", price: "RP 156.470", diamonds: "500+ Diamond" }
     ];
 
     // Admin WhatsApp
@@ -932,6 +1239,7 @@
     let selectedItem = null;
     let selectedPayment = null;
     let promoApplied = false;
+    let currentCategory = "categoryA";
 
     // Validasi input hanya angka
     function validateNumberInput(input, errorElement) {
@@ -971,47 +1279,84 @@
       }
     }
 
-    // Inisialisasi produk
-    function initializeProducts() {
-      const itemsGrid = document.getElementById('itemsGrid');
+    // Fungsi untuk mengganti kategori
+    function switchCategory(category) {
+      // Update tab aktif
+      document.querySelectorAll('.category-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelector(`.category-tab[data-category="${category}"]`).classList.add('active');
       
-      products.forEach((product, index) => {
-        const itemCard = document.createElement('div');
-        itemCard.className = 'item-card p-3 sm:p-4 flex flex-col justify-between pixel-shadow';
-        itemCard.dataset.name = product.name;
-        itemCard.dataset.price = product.price;
-        itemCard.dataset.diamonds = product.diamonds;
-        
-        itemCard.innerHTML = `
-          <div>
-            <div class="font-semibold text-sm sm:text-lg pixel-font responsive-text item-text-mobile text-overflow-safe">${product.diamonds}</div>
-            <div class="text-gray-400 text-xs sm:text-sm mt-1 pixel-font responsive-text item-text-mobile text-overflow-safe">${product.name}</div>
-          </div>
-          <div class="mt-2 sm:mt-4">
-            <div class="text-base sm:text-lg font-bold text-green-400 pixel-font responsive-text price-text-mobile">${product.price}</div>
-          </div>
-        `;
-        
-        itemCard.addEventListener('click', () => {
-          // Hapus seleksi sebelumnya
-          document.querySelectorAll('.item-card').forEach(card => {
-            card.classList.remove('selected', 'glow');
-          });
-          
-          // Tandai yang dipilih
-          itemCard.classList.add('selected', 'glow');
-          selectedItem = itemCard;
-          
-          updateSummary();
+      // Update konten aktif
+      document.querySelectorAll('.category-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      document.getElementById(category).classList.add('active');
+      
+      currentCategory = category;
+    }
+
+    // Inisialisasi produk berdasarkan kategori
+    function initializeProducts() {
+      // Kategori A
+      const itemsGridA = document.getElementById('itemsGridA');
+      productsA.forEach((product, index) => {
+        const itemCard = createItemCard(product);
+        itemsGridA.appendChild(itemCard);
+      });
+
+      // Kategori B
+      const itemsGridB = document.getElementById('itemsGridB');
+      productsB.forEach((product, index) => {
+        const itemCard = createItemCard(product);
+        itemsGridB.appendChild(itemCard);
+      });
+
+      // Kategori C
+      const itemsGridC = document.getElementById('itemsGridC');
+      productsC.forEach((product, index) => {
+        const itemCard = createItemCard(product);
+        itemsGridC.appendChild(itemCard);
+      });
+    }
+
+    // Fungsi untuk membuat item card
+    function createItemCard(product) {
+      const itemCard = document.createElement('div');
+      itemCard.className = 'item-card p-3 sm:p-4 flex flex-col justify-between pixel-shadow';
+      itemCard.dataset.name = product.name;
+      itemCard.dataset.price = product.price;
+      itemCard.dataset.diamonds = product.diamonds;
+      
+      itemCard.innerHTML = `
+        <div>
+          <div class="font-semibold text-sm sm:text-lg pixel-font responsive-text item-text-mobile text-overflow-safe">${product.diamonds}</div>
+          <div class="text-gray-400 text-xs sm:text-sm mt-1 pixel-font responsive-text item-text-mobile text-overflow-safe">${product.name}</div>
+        </div>
+        <div class="mt-2 sm:mt-4">
+          <div class="text-base sm:text-lg font-bold text-green-400 pixel-font responsive-text price-text-mobile">${product.price}</div>
+        </div>
+      `;
+      
+      itemCard.addEventListener('click', () => {
+        // Hapus seleksi sebelumnya
+        document.querySelectorAll('.item-card').forEach(card => {
+          card.classList.remove('selected', 'glow');
         });
         
-        itemsGrid.appendChild(itemCard);
+        // Tandai yang dipilih
+        itemCard.classList.add('selected', 'glow');
+        selectedItem = itemCard;
+        
+        updateSummary();
       });
+      
+      return itemCard;
     }
 
     // Inisialisasi metode pembayaran
     function initializePaymentOptions() {
-      const paymentMethods = document.querySelectorAll('.payment-method');
+      const paymentMethods = document.querySelectorAll('.payment-method-new');
       
       paymentMethods.forEach(method => {
         method.addEventListener('click', () => {
@@ -1194,6 +1539,14 @@
       initializeProducts();
       initializePaymentOptions();
       updateSummary();
+      
+      // Event listener untuk tab kategori
+      document.querySelectorAll('.category-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          const category = tab.dataset.category;
+          switchCategory(category);
+        });
+      });
     });
   </script>
 </body>
