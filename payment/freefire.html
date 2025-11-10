@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Fire - Top Up Diamond</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0a2e36 0%, #114250 100%);
+      color: #e0f7fa;
+      image-rendering: pixelated;
+    }
+    
+    .pixel-font {
+      font-family: 'Press Start 2P', cursive;
+    }
+    
+    .pixel-border {
+      border-style: solid;
+      border-width: 4px;
+      border-color: #4db6ac #00695c #004d40 #4db6ac;
+      image-rendering: pixelated;
+    }
+    
+    .pixel-border-thin {
+      border-style: solid;
+      border-width: 2px;
+      border-color: #4db6ac #00695c #004d40 #4db6ac;
+      image-rendering: pixelated;
+    }
+    
+    .card {
+      background: #0a2e36;
+      border-style: solid;
+      border-width: 4px;
+      border-color: #4db6ac #00695c #004d40 #4db6ac;
+      transition: all 0.2s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 0px rgba(0, 0, 0, 0.3);
+    }
+    
+    .item-card {
+      background: #0a2e36;
+      border-style: solid;
+      border-width: 2px;
+      border-color: #4db6ac #00695c #004d40 #4db6ac;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .item-card:hover {
+      background: #114250;
+      transform: translateY(-2px);
+    }
+    
+    .item-card.selected {
+      background: #00796b;
+      border-color: #4db6ac #004d40 #00251a #4db6ac;
+      box-shadow: 0 0 12px rgba(77, 182, 172, 0.5);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(to bottom, #26a69a, #00796b);
+      border-style: solid;
+      border-width: 4px;
+      border-color: #4db6ac #00695c #004d40 #4db6ac;
+      font-weight: bold;
+      transition: all 0.2s ease;
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(to bottom, #00796b, #004d40);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 0px rgba(0, 0, 0, 0.3);
+    }
+    
+    .btn-success {
+      background: linear-gradient(to bottom, #66bb6a, #388e3c);
+      border-style: solid;
+      border-width: 4px;
+      border-color: #81c784 #4caf50 #2e7d32 #81c784;
+      font-weight: bold;
+      transition: all 0.2s ease;
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .btn-success:hover {
+      background: linear-gradient(to bottom, #388e3c, #1b5e20);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 0px rgba(0, 0, 0, 0.3);
+    }
+    
+    .input-field {
+      background: #0a2e36;
+      border-style: solid;
+      border-width: 2px;
+      border-color: #4db6ac #00695c #004d40 #4db6ac;
+      transition: all 0.2s ease;
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .input-field:focus {
+      border-color: #80cbc4 #004d40 #00251a #80cbc4;
+      box-shadow: 0 0 8px rgba(77, 182, 172, 0.5);
+    }
+
+    .input-field.error {
+      border-color: #f44336 #d32f2f #b71c1c #f44336;
+      box-shadow: 0 0 8px rgba(244, 67, 54, 0.5);
+    }
+    
+    .payment-option {
+      background: #0a2e36;
+      border-style: solid;
+      border-width: 2px;
+      border-color: #4db6ac #00695c #004d40 #4db6ac;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .payment-option:hover {
+      background: #114250;
+    }
+    
+    .payment-option.selected {
+      background: #00796b;
+      border-color: #4db6ac #004d40 #00251a #4db6ac;
+    }
+    
+    .modal {
+      background: rgba(10, 46, 54, 0.9);
+      backdrop-filter: blur(4px);
+    }
+    
+    .modal-content {
+      background: #0a2e36;
+      border-style: solid;
+      border-width: 4px;
+      border-color: #4db6ac #00695c #004d40 #4db6ac;
+      box-shadow: 0 12px 0px rgba(0, 0, 0, 0.4);
+    }
+    
+    .pixel-shadow {
+      box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+    }
+    
+    .pixel-shadow:hover {
+      box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3);
+    }
+    
+    .rating-stars {
+      color: #ffd54f;
+    }
+    
+    /* Fixed sidebar tanpa scroll */
+    .sidebar-container {
+      position: sticky;
+      top: 20px;
+      height: fit-content;
+    }
+    
+    /* Pixel-perfect adjustments */
+    .container {
+      max-width: 1200px;
+    }
+    
+    /* Typography pixel-perfect */
+    h1, h2, h3, h4, h5, h6 {
+      letter-spacing: -0.025em;
+    }
+    
+    /* Spacing pixel-perfect */
+    .pixel-spacing > * + * {
+      margin-top: 12px;
+    }
+    
+    /* Number badge */
+    .number-badge {
+      background: linear-gradient(to bottom, #26a69a, #00796b);
+      border-style: solid;
+      border-width: 2px;
+      border-color: #4db6ac #00695c #004d40 #4db6ac;
+      font-family: 'Press Start 2P', cursive;
+    }
+    
+    /* Header gradient */
+    .header-gradient {
+      background: linear-gradient(135deg, #00796b 0%, #004d40 100%);
+      border-style: solid;
+      border-width: 4px;
+      border-color: #4db6ac #00695c #004d40 #4db6ac;
+    }
+    
+    /* Glow effect */
+    .glow {
+      box-shadow: 0 0 10px rgba(77, 182, 172, 0.7);
+    }
+    
+    /* PERBAIKAN UTAMA: Responsive text untuk mobile */
+    @media (max-width: 768px) {
+      .responsive-text {
+        font-size: 0.55rem !important;
+        line-height: 1.3 !important;
+      }
+      
+      .item-text-mobile {
+        font-size: 0.5rem !important;
+        line-height: 1.2 !important;
+      }
+      
+      .price-text-mobile {
+        font-size: 0.65rem !important;
+      }
+      
+      .item-card {
+        min-height: 85px;
+        padding: 8px !important;
+      }
+      
+      /* Perbaikan grid untuk mobile */
+      .items-grid-mobile {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      
+      /* Perbaikan padding untuk card di mobile */
+      .card-mobile {
+        padding: 12px !important;
+      }
+      
+      /* Perbaikan input field di mobile */
+      .input-field-mobile {
+        padding: 12px !important;
+        font-size: 0.8rem;
+      }
+    }
+    
+    /* PERBAIKAN: Media query khusus untuk tampilan sangat kecil */
+    @media (max-width: 480px) {
+      .responsive-text {
+        font-size: 0.5rem !important;
+        line-height: 1.2 !important;
+      }
+      
+      .item-text-mobile {
+        font-size: 0.45rem !important;
+        line-height: 1.1 !important;
+      }
+      
+      .price-text-mobile {
+        font-size: 0.6rem !important;
+      }
+      
+      .item-card {
+        min-height: 75px;
+        padding: 6px !important;
+      }
+      
+      .items-grid-mobile {
+        gap: 6px;
+      }
+      
+      .card-mobile {
+        padding: 10px !important;
+      }
+      
+      .input-field-mobile {
+        padding: 10px !important;
+        font-size: 0.75rem;
+      }
+    }
+    
+    /* Promo button responsive */
+    @media (max-width: 640px) {
+      .promo-container {
+        flex-direction: column;
+      }
+      .promo-button {
+        width: 100%;
+        margin-top: 8px;
+      }
+    }
+    
+    /* PERBAIKAN: Media query untuk tablet */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .items-grid-tablet {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    /* PERBAIKAN: Text overflow handling */
+    .text-overflow-safe {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    /* Tombol Kembali */
+    .btn-home {
+      background: linear-gradient(to bottom, #6a1b9a, #4a148c);
+      border-style: solid;
+      border-width: 3px;
+      border-color: #ab47bc #7b1fa2 #4a148c #ab47bc;
+      font-weight: bold;
+      transition: all 0.2s ease;
+      font-family: 'Orbitron', sans-serif;
+      color: white;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .btn-home:hover {
+      background: linear-gradient(to bottom, #4a148c, #38006b);
+      transform: translateY(-2px);
+      box-shadow: 0 3px 0px rgba(0, 0, 0, 0.3);
+      color: white;
+      text-decoration: none;
+    }
+
+    /* PERBAIKAN UTAMA: Metode Pembayaran yang Lebih Rapi */
+    .payment-section {
+      border: 2px solid #4db6ac;
+      border-radius: 0;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    
+    .payment-header {
+      background: #0a2e36;
+      padding: 12px 16px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .payment-header:hover {
+      background: #114250;
+    }
+    
+    .payment-header.active {
+      background: #00796b;
+    }
+    
+    .payment-content {
+      background: #0a2e36;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    .payment-content.open {
+      max-height: 500px;
+    }
+    
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+      padding: 12px;
+    }
+    
+    .payment-method {
+      background: #114250;
+      border: 2px solid #4db6ac;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 90px;
+      border-radius: 4px;
+    }
+    
+    .payment-method:hover {
+      background: #00796b;
+      transform: translateY(-2px);
+    }
+    
+    .payment-method.selected {
+      background: #00796b;
+      border-color: #80cbc4;
+      box-shadow: 0 0 12px rgba(77, 182, 172, 0.5);
+    }
+    
+    .payment-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    .payment-name {
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #e0f7fa;
+      margin-bottom: 4px;
+    }
+    
+    .payment-desc {
+      font-size: 0.65rem;
+      color: #b2dfdb;
+      font-style: italic;
+    }
+
+    /* Error message */
+    .error-message {
+      color: #f44336;
+      font-size: 0.7rem;
+      margin-top: 4px;
+      display: none;
+    }
+
+    /* Mobile responsive untuk tombol kembali */
+    @media (max-width: 768px) {
+      .mobile-button-container {
+        order: 2;
+        margin-top: 16px;
+      }
+      
+      .sidebar-mobile {
+        order: 1;
+      }
+    }
+
+    /* Payment method icons */
+    .payment-icon img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    /* PERBAIKAN: Metode pembayaran yang lebih konsisten - HANYA LOGO */
+    .payment-method-new {
+      background: #0a2e36;
+      border: 2px solid #4db6ac;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      height: 64px;
+    }
+    
+    .payment-method-new:hover {
+      background: #114250;
+      transform: translateY(-2px);
+    }
+    
+    .payment-method-new.selected {
+      background: #00796b;
+      border-color: #80cbc4;
+      box-shadow: 0 0 12px rgba(77, 182, 172, 0.5);
+    }
+    
+    .payment-method-new .payment-icon-new {
+      width: 200px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .payment-method-new .payment-icon-new img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Divider */
+    .payment-divider {
+      height: 1px;
+      background: #4db6ac;
+      margin: 12px 0;
+      opacity: 0.5;
+    }
+
+    /* PERBAIKAN BARU: Layout grid yang lebih baik untuk metode pembayaran */
+    .payment-grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      padding: 12px;
+    }
+
+    /* PERBAIKAN: Responsive layout untuk metode pembayaran */
+    @media (max-width: 768px) {
+      .payment-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 8px;
+      }
+      
+      .payment-method-new {
+        padding: 10px;
+        height: 60px;
+      }
+      
+      .payment-method-new .payment-icon-new {
+        width: 180px;
+        height: 35px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .payment-grid-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .payment-method-new {
+        height: 56px;
+      }
+      
+      .payment-method-new .payment-icon-new {
+        width: 160px;
+        height: 32px;
+      }
+    }
+
+    /* PERBAIKAN UTAMA: Tab untuk kategori diamond */
+    .category-tabs {
+      display: flex;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #4db6ac;
+    }
+    
+    .category-tab {
+      padding: 10px 16px;
+      cursor: pointer;
+      background: #0a2e36;
+      border: 2px solid #4db6ac;
+      border-bottom: none;
+      margin-right: 4px;
+      transition: all 0.3s ease;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: bold;
+    }
+    
+    .category-tab:hover {
+      background: #114250;
+    }
+    
+    .category-tab.active {
+      background: #00796b;
+      border-color: #80cbc4;
+    }
+    
+    .category-content {
+      display: none;
+    }
+    
+    .category-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div class="container mx-auto px-3 sm:px-4 py-6 sm:py-8 max-w-6xl">
+    <!-- Header -->
+    <header class="mb-6 sm:mb-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+        <div class="flex items-center gap-3 sm:gap-4">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 header-gradient flex items-center justify-center text-white text-xl sm:text-2xl font-bold pixel-shadow">
+            <img src="https://play-lh.googleusercontent.com/0oO5sAnebL6lG4K-WyGD6mO4Q2Y3n2k9k1Z3j4q5r6t7y8u9i0o1p2q3r4s5t6u7v8=w240-h480-rw" alt="FF Logo" class="w-12 h-12 sm:w-16 sm:h-16 object-contain">
+          </div>
+          <div>
+            <h1 class="text-xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent pixel-font">FREE FIRE</h1>
+            <p class="text-gray-300 pixel-font responsive-text text-overflow-safe">TOP UP DIAMOND - AMAN & CEPAT</p>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-3 sm:gap-4">
+          <div class="text-center">
+            <div class="flex items-center justify-center gap-1 sm:gap-2">
+              <div class="rating-stars text-sm sm:text-lg">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="text-lg sm:text-2xl font-bold text-white">4.99</div>
+            </div>
+            <p class="text-xs text-gray-400 mt-1 pixel-font responsive-text">500+ REVIEWS</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+      <!-- Form Utama -->
+      <div class="lg:col-span-2 space-y-6">
+        <!-- 1. Data Akun -->
+        <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
+          <div class="flex items-center gap-2 mb-3 sm:mb-4">
+            <div class="number-badge w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-white font-bold text-xs sm:text-sm">1</div>
+            <h2 class="text-lg sm:text-xl font-bold pixel-font responsive-text">DATA AKUN GAME</h2>
+          </div>
+          <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">MASUKKAN ID GAME FREE FIRE ANDA</p>
+          
+          <div class="grid grid-cols-1 gap-3 sm:gap-4">
+            <div>
+              <label class="block text-gray-300 mb-2 pixel-font responsive-text">ID GAME</label>
+              <input id="inputId" type="text" placeholder="CONTOH: 123456789" class="input-field w-full p-3 sm:p-4 focus:outline-none input-field-mobile" maxlength="15">
+              <div id="idError" class="error-message pixel-font responsive-text">
+                <i class="fas fa-exclamation-circle mr-1"></i>ID GAME HANYA BOLEH BERISI ANGKA
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-3 sm:mt-4 flex items-center gap-2 text-xs sm:text-sm text-amber-400 pixel-font responsive-text text-overflow-safe">
+            <i class="fas fa-exclamation-circle text-xs"></i>
+            <span>PASTIKAN ID SUDAH BENAR UNTUK MENGHINDARI KESALAHAN PENGIRIMAN</span>
+          </div>
+        </div>
+
+        <!-- 2. Pilih Nominal -->
+        <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
+          <div class="flex items-center gap-2 mb-3 sm:mb-4">
+            <div class="number-badge w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-white font-bold text-xs sm:text-sm">2</div>
+            <h2 class="text-lg sm:text-xl font-bold pixel-font responsive-text">PILIH NOMINAL</h2>
+          </div>
+          <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">KLIK SALAH SATU PAKET YANG INGIN DIBELI</p>
+
+          <!-- Tab Kategori -->
+          <div class="category-tabs">
+            <div class="category-tab active" data-category="categoryA">Diamond</div>
+            <div class="category-tab" data-category="categoryB">Membership</div>
+            <div class="category-tab" data-category="categoryC">Level Up Pass</div>
+          </div>
+
+          <!-- Kategori A: Diamond -->
+          <div id="categoryA" class="category-content active">
+            <div id="itemsGridA" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-grid-mobile"></div>
+          </div>
+
+          <!-- Kategori B: Membership -->
+          <div id="categoryB" class="category-content">
+            <div id="itemsGridB" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-grid-mobile"></div>
+          </div>
+
+          <!-- Kategori C: Level Up Pass -->
+          <div id="categoryC" class="category-content">
+            <div id="itemsGridC" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-grid-mobile"></div>
+          </div>
+        </div>
+
+        <!-- 3. Pilih Pembayaran -->
+        <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
+          <div class="flex items-center gap-2 mb-3 sm:mb-4">
+            <div class="number-badge w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-white font-bold text-xs sm:text-sm">3</div>
+            <h2 class="text-lg sm:text-xl font-bold pixel-font responsive-text">METODE PEMBAYARAN</h2>
+          </div>
+          <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">PILIH METODE PEMBAYARAN YANG DIINGINKAN</p>
+
+          <!-- E-Wallet + QRIS -->
+          <div class="payment-section">
+            <div class="payment-header" onclick="togglePaymentSection('ewallet')">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center pixel-border-thin">
+                  <i class="fas fa-wallet text-white text-sm"></i>
+                </div>
+                <h3 class="font-semibold pixel-font responsive-text">E-WALLET + QRIS</h3>
+              </div>
+              <i class="fas fa-chevron-down ml-auto transition-transform" id="ewallet-arrow"></i>
+            </div>
+            <div class="payment-content" id="ewallet-content">
+              <div class="payment-grid-container">
+                <div class="payment-method-new" data-method="DANA"><div class="payment-icon-new"><img src="../img/qris-dana 1.png" alt="DANA"></div></div>
+                <div class="payment-method-new" data-method="OVO"><div class="payment-icon-new"><img src="../img/qris-ovo 1.png" alt="OVO"></div></div>
+                <div class="payment-method-new" data-method="MANDIRI"><div class="payment-icon-new"><img src="../img/qris-mandiri 1.png" alt="MANDIRI"></div></div>
+                <div class="payment-method-new" data-method="SHOPEEPAY"><div class="payment-icon-new"><img src="../img/qris-shopee 1.png" alt="SHOPEEPAY"></div></div>
+                <div class="payment-method-new" data-method="GOPAY"><div class="payment-icon-new"><img src="../img/qris-gopay 1.png" alt="GOPAY"></div></div>
+                <div class="payment-method-new" data-method="LINKAJA"><div class="payment-icon-new"><img src="../img/qris-linkaja 1.png" alt="LINKAJA"></div></div>
+                <div class="payment-method-new" data-method="BRI"><div class="payment-icon-new"><img src="../img/qris-bri 1.png" alt="BRI"></div></div>
+                <div class="payment-method-new" data-method="BNI"><div class="payment-icon-new"><img src="../img/qris-bni 1.png" alt="BNI"></div></div>
+                <div class="payment-method-new" data-method="BCA"><div class="payment-icon-new"><img src="../img/qris-bca 1.png" alt="BCA"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Virtual Account -->
+          <div class="payment-section">
+            <div class="payment-header" onclick="togglePaymentSection('bank')">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-pink-700 flex items-center justify-center pixel-border-thin">
+                  <i class="fas fa-university text-white text-sm"></i>
+                </div>
+                <h3 class="font-semibold pixel-font responsive-text">VIRTUAL ACCOUNT</h3>
+              </div>
+              <i class="fas fa-chevron-down ml-auto transition-transform" id="bank-arrow"></i>
+            </div>
+            <div class="payment-content" id="bank-content">
+              <div class="payment-grid-container">
+                <div class="payment-method-new" data-method="BRIVA"><div class="payment-icon-new"><img src="../img/bri-va 1.png" alt="BRIVA"></div></div>
+                <div class="payment-method-new" data-method="BSI"><div class="payment-icon-new"><img src="../img/bsi-va 1.png" alt="BSI"></div></div>
+                <div class="payment-method-new" data-method="DANAMON"><div class="payment-icon-new"><img src="../img/danamon-va 1.png" alt="DANAMON"></div></div>
+                <div class="payment-method-new" data-method="BNC"><div class="payment-icon-new"><img src="../img/bnc-va 1.png" alt="BNC"></div></div>
+                <div class="payment-method-new" data-method="MAYBANK"><div class="payment-icon-new"><img src="../img/maybank-va 1.png" alt="MAYBANK"></div></div>
+                <div class="payment-method-new" data-method="BNI"><div class="payment-icon-new"><img src="../img/bni-va 1.png" alt="BNI"></div></div>
+                <div class="payment-method-new" data-method="CIMBNIAGA"><div class="payment-icon-new"><img src="../img/cimb-va 1.png" alt="CIMB"></div></div>
+                <div class="payment-method-new" data-method="SINARMAS"><div class="payment-icon-new"><img src="../img/sinarmas-va 1.png" alt="SINARMAS"></div></div>
+                <div class="payment-method-new" data-method="MANDIRI"><div class="payment-icon-new"><img src="../img/mandiri-va 1.png" alt="MANDIRI"></div></div>
+                <div class="payment-method-new" data-method="PERMATA"><div class="payment-icon-new"><img src="../img/permata-va 1.png" alt="PERMATA"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Convenience Store -->
+          <div class="payment-section">
+            <div class="payment-header" onclick="togglePaymentSection('convenience')">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center pixel-border-thin">
+                  <i class="fas fa-store text-white text-sm"></i>
+                </div>
+                <h3 class="font-semibold pixel-font responsive-text">CONVENIENCE STORE</h3>
+              </div>
+              <i class="fas fa-chevron-down ml-auto transition-transform" id="convenience-arrow"></i>
+            </div>
+            <div class="payment-content" id="convenience-content">
+              <div class="payment-grid-container">
+                <div class="payment-method-new" data-method="ALFAMART"><div class="payment-icon-new"><img src="../img/alfamart.png" alt="ALFAMART"></div></div>
+                <div class="payment-method-new" data-method="ALFAMIDI"><div class="payment-icon-new"><img src="../img/alfamidifinal-ezgif.com-optijpeg.jpg" alt="ALFAMIDI"></div></div>
+                <div class="payment-method-new" data-method="INDOMARET"><div class="payment-icon-new"><img src="../img/indomart.png" alt="INDOMARET"></div></div>
+                <div class="payment-method-new" data-method="LAWSON"><div class="payment-icon-new"><img src="../img/lawsonfinal-ezgif.com-optijpeg.jpg" alt="LAWSON"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Detail Kontak -->
+        <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
+          <div class="flex items-center gap-2 mb-3 sm:mb-4">
+            <div class="number-badge w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-white font-bold text-xs sm:text-sm">4</div>
+            <h2 class="text-lg sm:text-xl font-bold pixel-font responsive-text">DETAIL KONTAK</h2>
+          </div>
+          <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">NOMOR WHATSAPP UNTUK KONFIRMASI DAN BANTUAN</p>
+
+          <div class="grid grid-cols-1 gap-3 sm:gap-4">
+            <div>
+              <label class="block text-gray-300 mb-2 pixel-font responsive-text">NOMOR WHATSAPP</label>
+              <div class="flex">
+                <span class="input-field px-3 sm:px-4 py-3 sm:py-4 border-r-0 flex items-center pixel-font text-xs sm:text-sm">+62</span>
+                <input id="inputWA" type="tel" placeholder="81234567890" class="input-field w-full p-3 sm:p-4 border-l-0 focus:outline-none input-field-mobile" maxlength="13">
+                <div id="waError" class="error-message pixel-font responsive-text">
+                  <i class="fas fa-exclamation-circle mr-1"></i>NOMOR WHATSAPP HANYA BOLEH BERISI ANGKA
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-3 sm:mt-4 flex items-center gap-2 text-xs sm:text-sm text-red-400 pixel-font responsive-text text-overflow-safe">
+            <i class="fas fa-info-circle text-xs"></i>
+            <span>PASTIKAN NOMOR AKTIF UNTUK MENERIMA NOTIFIKASI PESANAN</span>
+          </div>
+        </div>
+
+        <!-- 5. Kode Promo -->
+        <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
+          <div class="flex items-center gap-2 mb-3 sm:mb-4">
+            <div class="number-badge w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-white font-bold text-xs sm:text-sm">5</div>
+            <h2 class="text-lg sm:text-xl font-bold pixel-font responsive-text">KODE PROMO</h2>
+          </div>
+          <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">MASUKKAN KODE PROMO JIKA ADA</p>
+
+          <div class="flex gap-3 promo-container">
+            <input id="inputPromo" type="text" placeholder="MASUKKAN KODE PROMO" class="input-field flex-1 p-3 sm:p-4 focus:outline-none input-field-mobile">
+            <button id="applyPromo" class="btn-primary px-4 sm:px-6 pixel-border promo-button text-xs sm:text-sm">GUNAKAN</button>
+          </div>
+          <p id="promoMsg" class="mt-3 text-xs sm:text-sm hidden pixel-font responsive-text text-overflow-safe"></p>
+        </div>
+
+        <!-- 6. Tombol Kembali -->
+        <div class="hidden lg:flex justify-start mt-2">
+          <a href="/" class="btn-home px-6 py-3 pixel-border flex items-center gap-3 text-sm no-underline">
+            <i class="fas fa-arrow-left"></i>
+            <span class="pixel-font">KEMBALI KE HALAMAN AWAL</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sidebar Kanan -->
+      <div class="space-y-6 sidebar-container sidebar-mobile">
+        <!-- Ringkasan Pesanan -->
+        <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
+          <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-center pixel-font responsive-text">RINGKASAN PESANAN</h3>
+          
+          <div id="noItem" class="text-center py-6 sm:py-8">
+            <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 bg-gray-700 flex items-center justify-center pixel-border-thin">
+              <i class="fas fa-shopping-cart text-gray-400 text-lg sm:text-xl"></i>
+            </div>
+            <div class="text-gray-400 pixel-font responsive-text text-overflow-safe">BELUM ADA ITEM YANG DIPILIH</div>
+          </div>
+          
+          <div id="orderSummary" class="hidden pixel-spacing">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-400 pixel-font responsive-text">PRODUK:</span>
+              <span id="sumItem" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-400 pixel-font responsive-text">HARGA:</span>
+              <span id="sumPrice" class="font-semibold text-base sm:text-lg text-green-400 pixel-font responsive-text">-</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-400 pixel-font responsive-text">METODE:</span>
+              <span id="sumPay" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-400 pixel-font responsive-text">ID GAME:</span>
+              <span id="sumId" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-400 pixel-font responsive-text">WHATSAPP:</span>
+              <span id="sumWA" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-400 pixel-font responsive-text">PROMO:</span>
+              <span id="sumPromo" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
+            </div>
+            
+            <div class="border-t border-red-900 pt-3 sm:pt-4 mt-2">
+              <div class="flex justify-between items-center text-base sm:text-lg">
+                <span class="font-bold pixel-font responsive-text">TOTAL:</span>
+                <span id="sumTotal" class="font-bold text-lg sm:text-xl text-red-400 pixel-font responsive-text">RP 0</span>
+              </div>
+            </div>
+          </div>
+          
+          <button id="openConfirm" class="btn-primary w-full py-3 sm:py-4 text-base sm:text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed pixel-border mt-4 sm:mt-6 text-xs sm:text-sm">
+            <i class="fas fa-paper-plane mr-2"></i>PESAN SEKARANG
+          </button>
+          
+          <div class="mt-3 sm:mt-4 text-center text-xs sm:text-sm text-gray-400 pixel-font responsive-text text-overflow-safe">
+            <div>PROSES CEPAT & AMAN</div>
+          </div>
+        </div>
+
+        <!-- Bantuan -->
+        <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
+          <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 pixel-font responsive-text">BUTUH BANTUAN?</h3>
+          <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">TIM SUPPORT KAMI SIAP 24/7</p>
+          
+          <div class="pixel-spacing">
+            <a href="https://wa.me/6281936627176" target="_blank" class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-gray-700 hover:bg-gray-600 transition pixel-border-thin">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 bg-green-500 flex items-center justify-center pixel-border-thin">
+                <i class="fab fa-whatsapp text-white text-sm sm:text-base"></i>
+              </div>
+              <div>
+                <p class="font-semibold pixel-font responsive-text text-overflow-safe">WHATSAPP ADMIN</p>
+                <p class="text-xs sm:text-sm text-gray-400 pixel-font responsive-text">081936627176</p>
+              </div>
+            </a>
+            
+            <div class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-gray-700 pixel-border-thin">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 bg-red-500 flex items-center justify-center pixel-border-thin">
+                <i class="fas fa-clock text-white text-sm sm:text-base"></i>
+              </div>
+              <div>
+                <p class="font-semibold pixel-font responsive-text text-overflow-safe">WAKTU PROSES</p>
+                <p class="text-xs sm:text-sm text-gray-400 pixel-font responsive-text">1-10 MENIT</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Testimoni -->
+        <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
+          <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 pixel-font responsive-text">TESTIMONI PELANGGAN</h3>
+          <div class="pixel-spacing">
+            <div class="bg-gray-700 p-3 sm:p-4 pixel-border-thin">
+              <div class="flex items-center gap-2 mb-2">
+                <div class="rating-stars text-xs sm:text-sm">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span class="text-xs sm:text-sm text-gray-400 pixel-font responsive-text">2 JAM LALU</span>
+              </div>
+              <p class="text-xs sm:text-sm pixel-font responsive-text text-overflow-safe">"DIAMOND LANGSUNG MASUK, CEPET BANGET!"</p>
+              <p class="text-xs text-gray-400 mt-2 pixel-font responsive-text">- ANDI, SURABAYA</p>
+            </div>
+            
+            <div class="bg-gray-700 p-3 sm:p-4 pixel-border-thin">
+              <div class="flex items-center gap-2 mb-2">
+                <div class="rating-stars text-xs sm:text-sm">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span class="text-xs sm:text-sm text-gray-400 pixel-font responsive-text">1 HARI LALU</span>
+              </div>
+              <p class="text-xs sm:text-sm pixel-font responsive-text text-overflow-safe">"ADMIN RAMAH, PROSES CEPAT, RECOMMENDED!"</p>
+              <p class="text-xs text-gray-400 mt-2 pixel-font responsive-text">- DEWI, JAKARTA</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tombol Kembali Mobile -->
+        <div class="lg:hidden mobile-button-container">
+          <a href="/" class="btn-home w-full px-6 py-3 pixel-border flex items-center justify-center gap-3 text-sm no-underline">
+            <i class="fas fa-arrow-left"></i>
+            <span class="pixel-font">KEMBALI KE HALAMAN AWAL</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Konfirmasi -->
+  <div id="modal" class="modal fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4">
+    <div class="modal-content w-full max-w-2xl p-4 sm:p-6">
+      <div class="flex items-center justify-between mb-4 sm:mb-6">
+        <h3 class="text-lg sm:text-2xl font-bold pixel-font responsive-text">KONFIRMASI PESANAN</h3>
+        <button id="closeModal" class="text-gray-400 hover:text-white text-lg sm:text-xl">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="pixel-spacing mb-4 sm:mb-6">
+        <div class="flex justify-between">
+          <span class="text-gray-400 pixel-font responsive-text">ITEM:</span>
+          <span id="mItem" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-400 pixel-font responsive-text">HARGA:</span>
+          <span id="mPrice" class="font-semibold text-green-400 pixel-font responsive-text">-</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-400 pixel-font responsive-text">METODE:</span>
+          <span id="mPay" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-400 pixel-font responsive-text">ID GAME:</span>
+          <span id="mId" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-400 pixel-font responsive-text">WHATSAPP:</span>
+          <span id="mWA" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-400 pixel-font responsive-text">PROMO:</span>
+          <span id="mPromo" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
+        </div>
+        
+        <div class="border-t border-red-900 pt-3 sm:pt-4 mt-2">
+          <div class="flex justify-between text-lg sm:text-xl">
+            <span class="font-bold pixel-font responsive-text">TOTAL:</span>
+            <span id="mTotal" class="font-bold text-red-400 pixel-font responsive-text">RP 0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-2 sm:gap-3 justify-end">
+        <button id="cancelBtn" class="px-4 sm:px-6 py-2 sm:py-3 bg-gray-700 hover:bg-gray-600 transition pixel-border-thin pixel-font responsive-text text-xs sm:text-sm">BATAL</button>
+        <button id="sendBtn" class="btn-success px-4 sm:px-6 py-2 sm:py-3 flex items-center gap-1 sm:gap-2 pixel-border pixel-font responsive-text text-xs sm:text-sm">
+          <i class="fab fa-whatsapp"></i> KIRIM KE WHATSAPP
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // === DATA PRODUK FREE FIRE ===
+    const productsA = [
+      { name: "5 Diamond", price: "RP 888", diamonds: "5 Diamonds" },
+      { name: "10 Diamond", price: "RP 1.765", diamonds: "10 Diamonds" },
+      { name: "20 Diamond", price: "RP 3.600", diamonds: "20 Diamonds" },
+      { name: "25 Diamond", price: "RP 4.300", diamonds: "25 Diamonds" },
+      { name: "30 Diamond", price: "RP 5.100", diamonds: "30 Diamonds" },
+      { name: "50 Diamond", price: "RP 7.000", diamonds: "50 Diamonds" },
+      { name: "55 Diamond", price: "RP 7.700", diamonds: "55 Diamonds" },
+      { name: "60 Diamond", price: "RP 8.200", diamonds: "60 Diamonds" },
+      { name: "70 Diamond", price: "RP 9.500", diamonds: "70 Diamonds" },
+      { name: "75 Diamond", price: "RP 10.500", diamonds: "75 Diamonds" },
+      { name: "80 Diamond", price: "RP 11.200", diamonds: "80 Diamonds" },
+      { name: "100 Diamond", price: "RP 13.500", diamonds: "100 Diamonds" },
+      { name: "120 Diamond", price: "RP 16.500", diamonds: "120 Diamonds" },
+      { name: "140 Diamond", price: "RP 19.200", diamonds: "140 Diamonds" },
+      { name: "145 Diamond", price: "RP 20.000", diamonds: "145 Diamonds" },
+      { name: "150 Diamond", price: "RP 20.500", diamonds: "150 Diamonds" },
+      { name: "160 Diamond", price: "RP 22.400", diamonds: "160 Diamonds" },
+      { name: "190 Diamond", price: "RP 25.500", diamonds: "190 Diamonds" },
+      { name: "210 Diamond", price: "RP 27.500", diamonds: "210 Diamonds" },
+      { name: "250 Diamond", price: "RP 32.500", diamonds: "250 Diamonds" },
+      { name: "280 Diamond", price: "RP 36.500", diamonds: "280 Diamonds" },
+      { name: "355 Diamond", price: "RP 44.500", diamonds: "355 Diamonds" },
+      { name: "375 Diamond", price: "RP 49.500", diamonds: "375 Diamonds" },
+      { name: "400 Diamond", price: "RP 50.000", diamonds: "400 Diamonds" },
+      { name: "425 Diamond", price: "RP 54.500", diamonds: "425 Diamonds" },
+      { name: "475 Diamond", price: "RP 57.500", diamonds: "475 Diamonds" },
+      { name: "500 Diamond", price: "RP 60.500", diamonds: "500 Diamonds" },
+      { name: "635 Diamond", price: "RP 77.500", diamonds: "635 Diamonds" },
+      { name: "720 Diamond", price: "RP 86.500", diamonds: "720 Diamonds" },
+      { name: "800 Diamond", price: "RP 95.500", diamonds: "800 Diamonds" },
+      { name: "1.000 Diamond", price: "RP 119.500", diamonds: "1.000 Diamonds" },
+      { name: "1.450 Diamond", price: "RP 180.692", diamonds: "1.450 Diamonds" },
+      { name: "1.800 Diamond", price: "RP 210.500", diamonds: "1.800 Diamonds" },
+      { name: "2.000 Diamond", price: "RP 246.911", diamonds: "2.000 Diamonds" },
+      { name: "2.140 Diamond", price: "RP 249.927", diamonds: "2.140 Diamonds" },
+      { name: "2.720 Diamond", price: "RP 314.736", diamonds: "2.720 Diamonds" },
+      { name: "4.000 Diamond", price: "RP 459.944", diamonds: "4.000 Diamonds" },
+      { name: "7.290 Diamond", price: "RP 818.295", diamonds: "7.290 Diamonds" }
+    ];
+
+    const productsB = [
+      { name: "Membership Mingguan", price: "RP 27.500", diamonds: "Weekly Membership" },
+      { name: "Boyah Pass", price: "RP 43.500", diamonds: "Boyah Pass" },
+      { name: "Membership Bulanan", price: "RP 80.500", diamonds: "Monthly Membership" }
+    ];
+
+    const productsC = [
+      { name: "Level 6", price: "RP 6.500", diamonds: "Level 6" },
+      { name: "Level 10", price: "RP 11.500", diamonds: "Level 10" },
+      { name: "Level 15", price: "RP 11.600", diamonds: "Level 15" },
+      { name: "Level 20", price: "RP 11.700", diamonds: "Level 20" },
+      { name: "Level 25", price: "RP 11.800", diamonds: "Level 25" },
+      { name: "Level 30", price: "RP 15.900", diamonds: "Level 30" }
+    ];
+
+    const ADMIN_WHATSAPP = "6281936627176";
+    let selectedItem = null;
+    let selectedPayment = null;
+    let promoApplied = false;
+    let currentCategory = "categoryA";
+
+    function validateNumberInput(input, errorElement) {
+      const value = input.value;
+      const numericValue = value.replace(/[^0-9]/g, '');
+      if (value !== numericValue) {
+        input.classList.add('error');
+        errorElement.style.display = 'block';
+        input.value = numericValue;
+        return false;
+      } else {
+        input.classList.remove('error');
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+
+    function togglePaymentSection(section) {
+      const content = document.getElementById(`${section}-content`);
+      const arrow = document.getElementById(`${section}-arrow`);
+      const header = event.currentTarget;
+      if (content.classList.contains('open')) {
+        content.classList.remove('open');
+        arrow.style.transform = 'rotate(0deg)';
+        header.classList.remove('active');
+      } else {
+        content.classList.add('open');
+        arrow.style.transform = 'rotate(180deg)';
+        header.classList.add('active');
+      }
+    }
+
+    function switchCategory(category) {
+      document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelector(`.category-tab[data-category="${category}"]`).classList.add('active');
+      document.querySelectorAll('.category-content').forEach(content => content.classList.remove('active'));
+      document.getElementById(category).classList.add('active');
+      currentCategory = category;
+    }
+
+    function createItemCard(product) {
+      const itemCard = document.createElement('div');
+      itemCard.className = 'item-card p-3 sm:p-4 flex flex-col justify-between pixel-shadow';
+      itemCard.dataset.name = product.name;
+      itemCard.dataset.price = product.price;
+      itemCard.dataset.diamonds = product.diamonds;
+      
+      itemCard.innerHTML = `
+        <div>
+          <div class="font-semibold text-sm sm:text-lg pixel-font responsive-text item-text-mobile text-overflow-safe">${product.diamonds}</div>
+          <div class="text-gray-400 text-xs sm:text-sm mt-1 pixel-font responsive-text item-text-mobile text-overflow-safe">${product.name}</div>
+        </div>
+        <div class="mt-2 sm:mt-4">
+          <div class="text-base sm:text-lg font-bold text-green-400 pixel-font responsive-text price-text-mobile">${product.price}</div>
+        </div>
+      `;
+      
+      itemCard.addEventListener('click', () => {
+        document.querySelectorAll('.item-card').forEach(card => card.classList.remove('selected', 'glow'));
+        itemCard.classList.add('selected', 'glow');
+        selectedItem = itemCard;
+        updateSummary();
+      });
+      
+      return itemCard;
+    }
+
+    function initializeProducts() {
+      const itemsGridA = document.getElementById('itemsGridA');
+      const itemsGridB = document.getElementById('itemsGridB');
+      const itemsGridC = document.getElementById('itemsGridC');
+
+      productsA.forEach(p => itemsGridA.appendChild(createItemCard(p)));
+      productsB.forEach(p => itemsGridB.appendChild(createItemCard(p)));
+      productsC.forEach(p => itemsGridC.appendChild(createItemCard(p)));
+    }
+
+    function initializePaymentOptions() {
+      document.querySelectorAll('.payment-method-new').forEach(method => {
+        method.addEventListener('click', () => {
+          document.querySelectorAll('.payment-method-new').forEach(m => m.classList.remove('selected'));
+          method.classList.add('selected');
+          selectedPayment = method.dataset.method;
+          updateSummary();
+        });
+      });
+    }
+
+    function updateSummary() {
+      const noItem = document.getElementById('noItem');
+      const orderSummary = document.getElementById('orderSummary');
+      const openConfirm = document.getElementById('openConfirm');
+
+      if (!selectedItem) {
+        noItem.classList.remove('hidden');
+        orderSummary.classList.add('hidden');
+      } else {
+        noItem.classList.add('hidden');
+        orderSummary.classList.remove('hidden');
+        document.getElementById('sumItem').textContent = selectedItem.dataset.diamonds;
+        document.getElementById('sumPrice').textContent = selectedItem.dataset.price;
+        document.getElementById('sumTotal').textContent = selectedItem.dataset.price;
+      }
+
+      document.getElementById('sumPay').textContent = selectedPayment || "-";
+      document.getElementById('sumId').textContent = document.getElementById('inputId').value || "-";
+      document.getElementById('sumWA').textContent = document.getElementById('inputWA').value ? "+62" + document.getElementById('inputWA').value : "-";
+      document.getElementById('sumPromo').textContent = document.getElementById('inputPromo').value || "-";
+
+      const idValid = document.getElementById('inputId').value.trim() !== "" && !document.getElementById('inputId').classList.contains('error');
+      const waValid = document.getElementById('inputWA').value.trim().length >= 8 && !document.getElementById('inputWA').classList.contains('error');
+      const valid = idValid && selectedItem && selectedPayment && waValid;
+
+      openConfirm.disabled = !valid;
+    }
+
+    document.getElementById('inputId').addEventListener('input', function() { validateNumberInput(this, document.getElementById('idError')); updateSummary(); });
+    document.getElementById('inputWA').addEventListener('input', function() { validateNumberInput(this, document.getElementById('waError')); updateSummary(); });
+
+    document.getElementById('applyPromo').addEventListener('click', () => {
+      const promoCode = document.getElementById('inputPromo').value.trim();
+      const promoMsg = document.getElementById('promoMsg');
+      if (!promoCode) {
+        promoMsg.textContent = "MASUKKAN KODE PROMO TERLEBIH DAHULU";
+        promoMsg.className = "mt-3 text-xs sm:text-sm text-yellow-400 pixel-font responsive-text";
+        promoMsg.classList.remove('hidden');
+        return;
+      }
+      if (promoCode.toUpperCase() === "DISKON10") {
+        promoMsg.textContent = "KODE PROMO BERHASIL! DISKON 10%";
+        promoMsg.className = "mt-3 text-xs sm:text-sm text-green-400 pixel-font responsive-text";
+        promoMsg.classList.remove('hidden');
+        promoApplied = true;
+        if (selectedItem) {
+          const price = parseInt(selectedItem.dataset.price.replace(/\D/g, ''));
+          const discounted = price * 0.9;
+          const formatted = "RP " + discounted.toLocaleString('id-ID');
+          document.getElementById('sumPrice').textContent = formatted;
+          document.getElementById('sumTotal').textContent = formatted;
+        }
+      } else {
+        promoMsg.textContent = "KODE PROMO TIDAK VALID";
+        promoMsg.className = "mt-3 text-xs sm:text-sm text-red-400 pixel-font responsive-text";
+        promoMsg.classList.remove('hidden');
+        promoApplied = false;
+      }
+    });
+
+    document.getElementById('openConfirm').addEventListener('click', () => {
+      if (document.getElementById('openConfirm').disabled) return;
+      document.getElementById('mItem').textContent = selectedItem.dataset.diamonds;
+      document.getElementById('mPrice').textContent = document.getElementById('sumPrice').textContent;
+      document.getElementById('mPay').textContent = selectedPayment;
+      document.getElementById('mId').textContent = document.getElementById('inputId').value;
+      document.getElementById('mWA').textContent = "+62" + document.getElementById('inputWA').value;
+      document.getElementById('mPromo').textContent = document.getElementById('inputPromo').value || "-";
+      document.getElementById('mTotal').textContent = document.getElementById('sumTotal').textContent;
+      document.getElementById('modal').classList.remove('hidden');
+      document.getElementById('modal').classList.add('flex');
+    });
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('flex');
+      document.getElementById('modal').classList.add('hidden');
+    }
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    document.getElementById('cancelBtn').addEventListener('click', closeModal);
+
+    document.getElementById('sendBtn').addEventListener('click', () => {
+      const message = [
+        "HALO ADMIN, SAYA INGIN TOP UP FREE FIRE",
+        "",
+        `DETAIL PESANAN:`,
+        `• ITEM: ${selectedItem.dataset.diamonds}`,
+        `• HARGA: ${document.getElementById('sumPrice').textContent}`,
+        `• METODE: ${selectedPayment}`,
+        "",
+        `DATA AKUN:`,
+        `• ID: ${document.getElementById('inputId').value}`,
+        "",
+        `KONTAK:`,
+        `• WA: +62${document.getElementById('inputWA').value}`,
+        `• PROMO: ${document.getElementById('inputPromo').value || "-"}`,
+        "",
+        "TERIMA KASIH!"
+      ].join("%0A");
+      window.open(`https://wa.me/${ADMIN_WHATSAPP}?text=${message}`, "_blank");
+      closeModal();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeProducts();
+      initializePaymentOptions();
+      updateSummary();
+      document.querySelectorAll('.category-tab').forEach(tab => {
+        tab.addEventListener('click', () => switchCategory(tab.dataset.category));
+      });
+    });
+  </script>
+</body>
+</html>
