@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Fire - Top Up Diamond</title>
+  <title>Valorant - Top Up Points</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -590,11 +590,11 @@
       <div class="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
         <div class="flex items-center gap-3 sm:gap-4">
           <div class="w-16 h-16 sm:w-20 sm:h-20 header-gradient flex items-center justify-center text-white text-xl sm:text-2xl font-bold pixel-shadow">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-qQivqMlXcniOIplM5F92wxlf9h7WBA658w&s" alt="FF Logo" class="w-12 h-12 sm:w-16 sm:h-16 object-contain">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Valorant_logo_-_pink_color_version.svg/1200px-Valorant_logo_-_pink_color_version.svg.png" alt="Valorant Logo" class="w-12 h-12 sm:w-16 sm:h-16 object-contain">
           </div>
           <div>
-            <h1 class="text-xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent pixel-font">FREE FIRE</h1>
-            <p class="text-gray-300 pixel-font responsive-text text-overflow-safe">TOP UP DIAMOND - AMAN & CEPAT</p>
+            <h1 class="text-xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent pixel-font">VALORANT</h1>
+            <p class="text-gray-300 pixel-font responsive-text text-overflow-safe">TOP UP POINTS - AMAN & CEPAT</p>
           </div>
         </div>
         
@@ -625,7 +625,7 @@
             <div class="number-badge w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-white font-bold text-xs sm:text-sm">1</div>
             <h2 class="text-lg sm:text-xl font-bold pixel-font responsive-text">DATA AKUN GAME</h2>
           </div>
-          <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">MASUKKAN ID GAME FREE FIRE ANDA</p>
+          <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">MASUKKAN ID GAME DAN TAG VALORANT ANDA</p>
           
           <div class="grid grid-cols-1 gap-3 sm:gap-4">
             <div>
@@ -635,11 +635,22 @@
                 <i class="fas fa-exclamation-circle mr-1"></i>ID GAME HANYA BOLEH BERISI ANGKA
               </div>
             </div>
+            <div>
+              <label class="block text-gray-300 mb-2 pixel-font responsive-text">TAG</label>
+              <div class="flex items-center">
+                <span class="input-field px-3 sm:px-4 py-3 sm:py-4 border-r-0 flex items-center pixel-font text-xs sm:text-sm">#</span>
+                <input id="inputTag" type="text" placeholder="CONTOH: 1234" class="input-field w-full p-3 sm:p-4 border-l-0 focus:outline-none input-field-mobile" maxlength="5">
+              </div>
+              <div class="text-xs text-gray-400 mt-1 pixel-font responsive-text">ID#Tag? Lihat Petunjuk. Masukan tanpa simbol "#"</div>
+              <div id="tagError" class="error-message pixel-font responsive-text">
+                <i class="fas fa-exclamation-circle mr-1"></i>TAG HANYA BOLEH BERISI ANGKA
+              </div>
+            </div>
           </div>
           
           <div class="mt-3 sm:mt-4 flex items-center gap-2 text-xs sm:text-sm text-amber-400 pixel-font responsive-text text-overflow-safe">
             <i class="fas fa-exclamation-circle text-xs"></i>
-            <span>PASTIKAN ID SUDAH BENAR UNTUK MENGHINDARI KESALAHAN PENGIRIMAN</span>
+            <span>PASTIKAN ID DAN TAG SUDAH BENAR UNTUK MENGHINDARI KESALAHAN PENGIRIMAN</span>
           </div>
         </div>
 
@@ -653,24 +664,12 @@
 
           <!-- Tab Kategori -->
           <div class="category-tabs">
-            <div class="category-tab active" data-category="categoryA">Diamond</div>
-            <div class="category-tab" data-category="categoryB">Membership</div>
-            <div class="category-tab" data-category="categoryC">Level Up Pass</div>
+            <div class="category-tab active" data-category="categoryA">Valorant Points</div>
           </div>
 
-          <!-- Kategori A: Diamond -->
+          <!-- Kategori A: Valorant Points -->
           <div id="categoryA" class="category-content active">
             <div id="itemsGridA" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-grid-mobile"></div>
-          </div>
-
-          <!-- Kategori B: Membership -->
-          <div id="categoryB" class="category-content">
-            <div id="itemsGridB" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-grid-mobile"></div>
-          </div>
-
-          <!-- Kategori C: Level Up Pass -->
-          <div id="categoryC" class="category-content">
-            <div id="itemsGridC" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-grid-mobile"></div>
           </div>
         </div>
 
@@ -839,6 +838,10 @@
               <span id="sumId" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
             </div>
             <div class="flex justify-between items-center">
+              <span class="text-gray-400 pixel-font responsive-text">TAG:</span>
+              <span id="sumTag" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
+            </div>
+            <div class="flex justify-between items-center">
               <span class="text-gray-400 pixel-font responsive-text">WHATSAPP:</span>
               <span id="sumWA" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
             </div>
@@ -907,7 +910,7 @@
                 </div>
                 <span class="text-xs sm:text-sm text-gray-400 pixel-font responsive-text">2 JAM LALU</span>
               </div>
-              <p class="text-xs sm:text-sm pixel-font responsive-text text-overflow-safe">"DIAMOND LANGSUNG MASUK, CEPET BANGET!"</p>
+              <p class="text-xs sm:text-sm pixel-font responsive-text text-overflow-safe">"POINTS LANGSUNG MASUK, CEPET BANGET!"</p>
               <p class="text-xs text-gray-400 mt-2 pixel-font responsive-text">- ANDI, SURABAYA</p>
             </div>
             
@@ -967,6 +970,10 @@
           <span id="mId" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
         </div>
         <div class="flex justify-between">
+          <span class="text-gray-400 pixel-font responsive-text">TAG:</span>
+          <span id="mTag" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
+        </div>
+        <div class="flex justify-between">
           <span class="text-gray-400 pixel-font responsive-text">WHATSAPP:</span>
           <span id="mWA" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
         </div>
@@ -993,61 +1000,15 @@
   </div>
 
   <script>
-    // === DATA PRODUK FREE FIRE ===
+    // === DATA PRODUK VALORANT ===
     const productsA = [
-      { name: "5 Diamond", price: "RP 888", diamonds: "5 Diamonds" },
-      { name: "10 Diamond", price: "RP 1.765", diamonds: "10 Diamonds" },
-      { name: "20 Diamond", price: "RP 3.600", diamonds: "20 Diamonds" },
-      { name: "25 Diamond", price: "RP 4.300", diamonds: "25 Diamonds" },
-      { name: "30 Diamond", price: "RP 5.100", diamonds: "30 Diamonds" },
-      { name: "50 Diamond", price: "RP 7.000", diamonds: "50 Diamonds" },
-      { name: "55 Diamond", price: "RP 7.700", diamonds: "55 Diamonds" },
-      { name: "60 Diamond", price: "RP 8.200", diamonds: "60 Diamonds" },
-      { name: "70 Diamond", price: "RP 9.500", diamonds: "70 Diamonds" },
-      { name: "75 Diamond", price: "RP 10.500", diamonds: "75 Diamonds" },
-      { name: "80 Diamond", price: "RP 11.200", diamonds: "80 Diamonds" },
-      { name: "100 Diamond", price: "RP 13.500", diamonds: "100 Diamonds" },
-      { name: "120 Diamond", price: "RP 16.500", diamonds: "120 Diamonds" },
-      { name: "140 Diamond", price: "RP 19.200", diamonds: "140 Diamonds" },
-      { name: "145 Diamond", price: "RP 20.000", diamonds: "145 Diamonds" },
-      { name: "150 Diamond", price: "RP 20.500", diamonds: "150 Diamonds" },
-      { name: "160 Diamond", price: "RP 22.400", diamonds: "160 Diamonds" },
-      { name: "190 Diamond", price: "RP 25.500", diamonds: "190 Diamonds" },
-      { name: "210 Diamond", price: "RP 27.500", diamonds: "210 Diamonds" },
-      { name: "250 Diamond", price: "RP 32.500", diamonds: "250 Diamonds" },
-      { name: "280 Diamond", price: "RP 36.500", diamonds: "280 Diamonds" },
-      { name: "355 Diamond", price: "RP 44.500", diamonds: "355 Diamonds" },
-      { name: "375 Diamond", price: "RP 49.500", diamonds: "375 Diamonds" },
-      { name: "400 Diamond", price: "RP 50.000", diamonds: "400 Diamonds" },
-      { name: "425 Diamond", price: "RP 54.500", diamonds: "425 Diamonds" },
-      { name: "475 Diamond", price: "RP 57.500", diamonds: "475 Diamonds" },
-      { name: "500 Diamond", price: "RP 60.500", diamonds: "500 Diamonds" },
-      { name: "635 Diamond", price: "RP 77.500", diamonds: "635 Diamonds" },
-      { name: "720 Diamond", price: "RP 86.500", diamonds: "720 Diamonds" },
-      { name: "800 Diamond", price: "RP 95.500", diamonds: "800 Diamonds" },
-      { name: "1.000 Diamond", price: "RP 119.500", diamonds: "1.000 Diamonds" },
-      { name: "1.450 Diamond", price: "RP 180.692", diamonds: "1.450 Diamonds" },
-      { name: "1.800 Diamond", price: "RP 210.500", diamonds: "1.800 Diamonds" },
-      { name: "2.000 Diamond", price: "RP 246.911", diamonds: "2.000 Diamonds" },
-      { name: "2.140 Diamond", price: "RP 249.927", diamonds: "2.140 Diamonds" },
-      { name: "2.720 Diamond", price: "RP 314.736", diamonds: "2.720 Diamonds" },
-      { name: "4.000 Diamond", price: "RP 459.944", diamonds: "4.000 Diamonds" },
-      { name: "7.290 Diamond", price: "RP 818.295", diamonds: "7.290 Diamonds" }
-    ];
-
-    const productsB = [
-      { name: "Membership Mingguan", price: "RP 27.500", diamonds: "Weekly Membership" },
-      { name: "Boyah Pass", price: "RP 43.500", diamonds: "Boyah Pass" },
-      { name: "Membership Bulanan", price: "RP 80.500", diamonds: "Monthly Membership" }
-    ];
-
-    const productsC = [
-      { name: "Level 6", price: "RP 6.500", diamonds: "Level 6" },
-      { name: "Level 10", price: "RP 11.500", diamonds: "Level 10" },
-      { name: "Level 15", price: "RP 11.600", diamonds: "Level 15" },
-      { name: "Level 20", price: "RP 11.700", diamonds: "Level 20" },
-      { name: "Level 25", price: "RP 11.800", diamonds: "Level 25" },
-      { name: "Level 30", price: "RP 15.900", diamonds: "Level 30" }
+      { name: "475 Points", price: "RP 55.707", points: "475 Points" },
+      { name: "1.000 Points", price: "RP 110.500", points: "1.000 Points" },
+      { name: "2.050 Points", price: "RP 215.852", points: "2.050 Points" },
+      { name: "3.650 Points", price: "RP 371.800", points: "3.650 Points" },
+      { name: "5.350 Points", price: "RP 532.800", points: "5.350 Points" },
+      { name: "5.700 Points", price: "RP 581.702", points: "5.700 Points" },
+      { name: "11.000 Points", price: "RP 1.039.905", points: "11.000 Points" }
     ];
 
     const ADMIN_WHATSAPP = "6281936627176";
@@ -1099,11 +1060,11 @@
       itemCard.className = 'item-card p-3 sm:p-4 flex flex-col justify-between pixel-shadow';
       itemCard.dataset.name = product.name;
       itemCard.dataset.price = product.price;
-      itemCard.dataset.diamonds = product.diamonds;
+      itemCard.dataset.points = product.points;
       
       itemCard.innerHTML = `
         <div>
-          <div class="font-semibold text-sm sm:text-lg pixel-font responsive-text item-text-mobile text-overflow-safe">${product.diamonds}</div>
+          <div class="font-semibold text-sm sm:text-lg pixel-font responsive-text item-text-mobile text-overflow-safe">${product.points}</div>
           <div class="text-gray-400 text-xs sm:text-sm mt-1 pixel-font responsive-text item-text-mobile text-overflow-safe">${product.name}</div>
         </div>
         <div class="mt-2 sm:mt-4">
@@ -1123,12 +1084,8 @@
 
     function initializeProducts() {
       const itemsGridA = document.getElementById('itemsGridA');
-      const itemsGridB = document.getElementById('itemsGridB');
-      const itemsGridC = document.getElementById('itemsGridC');
 
       productsA.forEach(p => itemsGridA.appendChild(createItemCard(p)));
-      productsB.forEach(p => itemsGridB.appendChild(createItemCard(p)));
-      productsC.forEach(p => itemsGridC.appendChild(createItemCard(p)));
     }
 
     function initializePaymentOptions() {
@@ -1153,24 +1110,27 @@
       } else {
         noItem.classList.add('hidden');
         orderSummary.classList.remove('hidden');
-        document.getElementById('sumItem').textContent = selectedItem.dataset.diamonds;
+        document.getElementById('sumItem').textContent = selectedItem.dataset.points;
         document.getElementById('sumPrice').textContent = selectedItem.dataset.price;
         document.getElementById('sumTotal').textContent = selectedItem.dataset.price;
       }
 
       document.getElementById('sumPay').textContent = selectedPayment || "-";
       document.getElementById('sumId').textContent = document.getElementById('inputId').value || "-";
+      document.getElementById('sumTag').textContent = document.getElementById('inputTag').value ? "#" + document.getElementById('inputTag').value : "-";
       document.getElementById('sumWA').textContent = document.getElementById('inputWA').value ? "+62" + document.getElementById('inputWA').value : "-";
       document.getElementById('sumPromo').textContent = document.getElementById('inputPromo').value || "-";
 
       const idValid = document.getElementById('inputId').value.trim() !== "" && !document.getElementById('inputId').classList.contains('error');
+      const tagValid = document.getElementById('inputTag').value.trim() !== "" && !document.getElementById('inputTag').classList.contains('error');
       const waValid = document.getElementById('inputWA').value.trim().length >= 8 && !document.getElementById('inputWA').classList.contains('error');
-      const valid = idValid && selectedItem && selectedPayment && waValid;
+      const valid = idValid && tagValid && selectedItem && selectedPayment && waValid;
 
       openConfirm.disabled = !valid;
     }
 
     document.getElementById('inputId').addEventListener('input', function() { validateNumberInput(this, document.getElementById('idError')); updateSummary(); });
+    document.getElementById('inputTag').addEventListener('input', function() { validateNumberInput(this, document.getElementById('tagError')); updateSummary(); });
     document.getElementById('inputWA').addEventListener('input', function() { validateNumberInput(this, document.getElementById('waError')); updateSummary(); });
 
     document.getElementById('applyPromo').addEventListener('click', () => {
@@ -1204,10 +1164,11 @@
 
     document.getElementById('openConfirm').addEventListener('click', () => {
       if (document.getElementById('openConfirm').disabled) return;
-      document.getElementById('mItem').textContent = selectedItem.dataset.diamonds;
+      document.getElementById('mItem').textContent = selectedItem.dataset.points;
       document.getElementById('mPrice').textContent = document.getElementById('sumPrice').textContent;
       document.getElementById('mPay').textContent = selectedPayment;
       document.getElementById('mId').textContent = document.getElementById('inputId').value;
+      document.getElementById('mTag').textContent = "#" + document.getElementById('inputTag').value;
       document.getElementById('mWA').textContent = "+62" + document.getElementById('inputWA').value;
       document.getElementById('mPromo').textContent = document.getElementById('inputPromo').value || "-";
       document.getElementById('mTotal').textContent = document.getElementById('sumTotal').textContent;
@@ -1224,15 +1185,16 @@
 
     document.getElementById('sendBtn').addEventListener('click', () => {
       const message = [
-        "HALO ADMIN, SAYA INGIN TOP UP FREE FIRE",
+        "HALO ADMIN, SAYA INGIN TOP UP VALORANT POINTS",
         "",
         `DETAIL PESANAN:`,
-        `• ITEM: ${selectedItem.dataset.diamonds}`,
+        `• ITEM: ${selectedItem.dataset.points}`,
         `• HARGA: ${document.getElementById('sumPrice').textContent}`,
         `• METODE: ${selectedPayment}`,
         "",
         `DATA AKUN:`,
         `• ID: ${document.getElementById('inputId').value}`,
+        `• TAG: #${document.getElementById('inputTag').value}`,
         "",
         `KONTAK:`,
         `• WA: +62${document.getElementById('inputWA').value}`,

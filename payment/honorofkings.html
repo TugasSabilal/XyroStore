@@ -3,38 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Fire - Top Up Diamond</title>
+  <title>Honor of Kings - Top Up Token</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
-    
+   
     body {
       font-family: 'Orbitron', sans-serif;
       background: linear-gradient(135deg, #0a2e36 0%, #114250 100%);
       color: #e0f7fa;
       image-rendering: pixelated;
     }
-    
+   
     .pixel-font {
       font-family: 'Press Start 2P', cursive;
     }
-    
+   
     .pixel-border {
       border-style: solid;
       border-width: 4px;
       border-color: #4db6ac #00695c #004d40 #4db6ac;
       image-rendering: pixelated;
     }
-    
+   
     .pixel-border-thin {
       border-style: solid;
       border-width: 2px;
       border-color: #4db6ac #00695c #004d40 #4db6ac;
       image-rendering: pixelated;
     }
-    
+   
     .card {
       background: #0a2e36;
       border-style: solid;
@@ -42,12 +42,12 @@
       border-color: #4db6ac #00695c #004d40 #4db6ac;
       transition: all 0.2s ease;
     }
-    
+   
     .card:hover {
       transform: translateY(-4px);
       box-shadow: 0 8px 0px rgba(0, 0, 0, 0.3);
     }
-    
+   
     .item-card {
       background: #0a2e36;
       border-style: solid;
@@ -60,18 +60,18 @@
       flex-direction: column;
       justify-content: space-between;
     }
-    
+   
     .item-card:hover {
       background: #114250;
       transform: translateY(-2px);
     }
-    
+   
     .item-card.selected {
       background: #00796b;
       border-color: #4db6ac #004d40 #00251a #4db6ac;
       box-shadow: 0 0 12px rgba(77, 182, 172, 0.5);
     }
-    
+   
     .btn-primary {
       background: linear-gradient(to bottom, #26a69a, #00796b);
       border-style: solid;
@@ -81,13 +81,13 @@
       transition: all 0.2s ease;
       font-family: 'Orbitron', sans-serif;
     }
-    
+   
     .btn-primary:hover {
       background: linear-gradient(to bottom, #00796b, #004d40);
       transform: translateY(-2px);
       box-shadow: 0 4px 0px rgba(0, 0, 0, 0.3);
     }
-    
+   
     .btn-success {
       background: linear-gradient(to bottom, #66bb6a, #388e3c);
       border-style: solid;
@@ -97,13 +97,13 @@
       transition: all 0.2s ease;
       font-family: 'Orbitron', sans-serif;
     }
-    
+   
     .btn-success:hover {
       background: linear-gradient(to bottom, #388e3c, #1b5e20);
       transform: translateY(-2px);
       box-shadow: 0 4px 0px rgba(0, 0, 0, 0.3);
     }
-    
+   
     .input-field {
       background: #0a2e36;
       border-style: solid;
@@ -112,40 +112,21 @@
       transition: all 0.2s ease;
       font-family: 'Orbitron', sans-serif;
     }
-    
+   
     .input-field:focus {
       border-color: #80cbc4 #004d40 #00251a #80cbc4;
       box-shadow: 0 0 8px rgba(77, 182, 172, 0.5);
     }
-
     .input-field.error {
       border-color: #f44336 #d32f2f #b71c1c #f44336;
       box-shadow: 0 0 8px rgba(244, 67, 54, 0.5);
     }
-    
-    .payment-option {
-      background: #0a2e36;
-      border-style: solid;
-      border-width: 2px;
-      border-color: #4db6ac #00695c #004d40 #4db6ac;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-    
-    .payment-option:hover {
-      background: #114250;
-    }
-    
-    .payment-option.selected {
-      background: #00796b;
-      border-color: #4db6ac #004d40 #00251a #4db6ac;
-    }
-    
+   
     .modal {
       background: rgba(10, 46, 54, 0.9);
       backdrop-filter: blur(4px);
     }
-    
+   
     .modal-content {
       background: #0a2e36;
       border-style: solid;
@@ -153,42 +134,37 @@
       border-color: #4db6ac #00695c #004d40 #4db6ac;
       box-shadow: 0 12px 0px rgba(0, 0, 0, 0.4);
     }
-    
+   
     .pixel-shadow {
       box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
     }
-    
+   
     .pixel-shadow:hover {
       box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3);
     }
-    
+   
     .rating-stars {
       color: #ffd54f;
     }
-    
-    /* Fixed sidebar tanpa scroll */
+   
     .sidebar-container {
       position: sticky;
       top: 20px;
       height: fit-content;
     }
-    
-    /* Pixel-perfect adjustments */
+   
     .container {
       max-width: 1200px;
     }
-    
-    /* Typography pixel-perfect */
+   
     h1, h2, h3, h4, h5, h6 {
       letter-spacing: -0.025em;
     }
-    
-    /* Spacing pixel-perfect */
+   
     .pixel-spacing > * + * {
       margin-top: 12px;
     }
-    
-    /* Number badge */
+   
     .number-badge {
       background: linear-gradient(to bottom, #26a69a, #00796b);
       border-style: solid;
@@ -196,95 +172,75 @@
       border-color: #4db6ac #00695c #004d40 #4db6ac;
       font-family: 'Press Start 2P', cursive;
     }
-    
-    /* Header gradient */
+   
     .header-gradient {
       background: linear-gradient(135deg, #00796b 0%, #004d40 100%);
       border-style: solid;
       border-width: 4px;
       border-color: #4db6ac #00695c #004d40 #4db6ac;
     }
-    
-    /* Glow effect */
+   
     .glow {
       box-shadow: 0 0 10px rgba(77, 182, 172, 0.7);
     }
-    
-    /* PERBAIKAN UTAMA: Responsive text untuk mobile */
+   
     @media (max-width: 768px) {
       .responsive-text {
         font-size: 0.55rem !important;
         line-height: 1.3 !important;
       }
-      
       .item-text-mobile {
         font-size: 0.5rem !important;
         line-height: 1.2 !important;
       }
-      
       .price-text-mobile {
         font-size: 0.65rem !important;
       }
-      
       .item-card {
         min-height: 85px;
         padding: 8px !important;
       }
-      
-      /* Perbaikan grid untuk mobile */
       .items-grid-mobile {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
       }
-      
-      /* Perbaikan padding untuk card di mobile */
       .card-mobile {
         padding: 12px !important;
       }
-      
-      /* Perbaikan input field di mobile */
       .input-field-mobile {
         padding: 12px !important;
         font-size: 0.8rem;
       }
     }
-    
-    /* PERBAIKAN: Media query khusus untuk tampilan sangat kecil */
+   
     @media (max-width: 480px) {
       .responsive-text {
         font-size: 0.5rem !important;
         line-height: 1.2 !important;
       }
-      
       .item-text-mobile {
         font-size: 0.45rem !important;
         line-height: 1.1 !important;
       }
-      
       .price-text-mobile {
         font-size: 0.6rem !important;
       }
-      
       .item-card {
         min-height: 75px;
         padding: 6px !important;
       }
-      
       .items-grid-mobile {
         gap: 6px;
       }
-      
       .card-mobile {
         padding: 10px !important;
       }
-      
       .input-field-mobile {
         padding: 10px !important;
         font-size: 0.75rem;
       }
     }
-    
-    /* Promo button responsive */
+   
     @media (max-width: 640px) {
       .promo-container {
         flex-direction: column;
@@ -294,15 +250,13 @@
         margin-top: 8px;
       }
     }
-    
-    /* PERBAIKAN: Media query untuk tablet */
+   
     @media (min-width: 769px) and (max-width: 1024px) {
       .items-grid-tablet {
         grid-template-columns: repeat(3, 1fr);
       }
     }
-    
-    /* PERBAIKAN: Text overflow handling */
+   
     .text-overflow-safe {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -310,8 +264,6 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
     }
-
-    /* Tombol Kembali */
     .btn-home {
       background: linear-gradient(to bottom, #6a1b9a, #4a148c);
       border-style: solid;
@@ -325,7 +277,6 @@
       display: inline-flex;
       align-items: center;
     }
-
     .btn-home:hover {
       background: linear-gradient(to bottom, #4a148c, #38006b);
       transform: translateY(-2px);
@@ -333,15 +284,13 @@
       color: white;
       text-decoration: none;
     }
-
-    /* PERBAIKAN UTAMA: Metode Pembayaran yang Lebih Rapi */
     .payment-section {
       border: 2px solid #4db6ac;
       border-radius: 0;
       margin-bottom: 12px;
       overflow: hidden;
     }
-    
+   
     .payment-header {
       background: #0a2e36;
       padding: 12px 16px;
@@ -351,110 +300,59 @@
       align-items: center;
       transition: all 0.3s ease;
     }
-    
+   
     .payment-header:hover {
       background: #114250;
     }
-    
+   
     .payment-header.active {
       background: #00796b;
     }
-    
+   
     .payment-content {
       background: #0a2e36;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease;
     }
-    
+   
     .payment-content.open {
       max-height: 500px;
     }
-    
-    .payment-grid {
+   
+    .payment-grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
       padding: 12px;
     }
-    
-    .payment-method {
-      background: #114250;
-      border: 2px solid #4db6ac;
-      padding: 12px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 90px;
-      border-radius: 4px;
-    }
-    
-    .payment-method:hover {
-      background: #00796b;
-      transform: translateY(-2px);
-    }
-    
-    .payment-method.selected {
-      background: #00796b;
-      border-color: #80cbc4;
-      box-shadow: 0 0 12px rgba(77, 182, 172, 0.5);
-    }
-    
-    .payment-icon {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-    }
-    
-    .payment-name {
-      font-size: 0.75rem;
-      font-weight: bold;
-      color: #e0f7fa;
-      margin-bottom: 4px;
-    }
-    
-    .payment-desc {
-      font-size: 0.65rem;
-      color: #b2dfdb;
-      font-style: italic;
-    }
-
-    /* Error message */
-    .error-message {
-      color: #f44336;
-      font-size: 0.7rem;
-      margin-top: 4px;
-      display: none;
-    }
-
-    /* Mobile responsive untuk tombol kembali */
     @media (max-width: 768px) {
-      .mobile-button-container {
-        order: 2;
-        margin-top: 16px;
+      .payment-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 8px;
       }
-      
-      .sidebar-mobile {
-        order: 1;
+      .payment-method-new {
+        padding: 10px;
+        height: 60px;
+      }
+      .payment-method-new .payment-icon-new {
+        width: 180px;
+        height: 35px;
       }
     }
-
-    /* Payment method icons */
-    .payment-icon img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
+    @media (max-width: 480px) {
+      .payment-grid-container {
+        grid-template-columns: 1fr;
+      }
+      .payment-method-new {
+        height: 56px;
+      }
+      .payment-method-new .payment-icon-new {
+        width: 160px;
+        height: 32px;
+      }
     }
-
-    /* PERBAIKAN: Metode pembayaran yang lebih konsisten - HANYA LOGO */
     .payment-method-new {
       background: #0a2e36;
       border: 2px solid #4db6ac;
@@ -468,18 +366,18 @@
       border-radius: 4px;
       height: 64px;
     }
-    
+   
     .payment-method-new:hover {
       background: #114250;
       transform: translateY(-2px);
     }
-    
+   
     .payment-method-new.selected {
       background: #00796b;
       border-color: #80cbc4;
       box-shadow: 0 0 12px rgba(77, 182, 172, 0.5);
     }
-    
+   
     .payment-method-new .payment-icon-new {
       width: 200px;
       height: 40px;
@@ -489,70 +387,33 @@
       border-radius: 4px;
       overflow: hidden;
     }
-    
+   
     .payment-method-new .payment-icon-new img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
-
-    /* Divider */
-    .payment-divider {
-      height: 1px;
-      background: #4db6ac;
-      margin: 12px 0;
-      opacity: 0.5;
+    .error-message {
+      color: #f44336;
+      font-size: 0.7rem;
+      margin-top: 4px;
+      display: none;
     }
-
-    /* PERBAIKAN BARU: Layout grid yang lebih baik untuk metode pembayaran */
-    .payment-grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px;
-      padding: 12px;
-    }
-
-    /* PERBAIKAN: Responsive layout untuk metode pembayaran */
     @media (max-width: 768px) {
-      .payment-grid-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-        padding: 8px;
+      .mobile-button-container {
+        order: 2;
+        margin-top: 16px;
       }
-      
-      .payment-method-new {
-        padding: 10px;
-        height: 60px;
-      }
-      
-      .payment-method-new .payment-icon-new {
-        width: 180px;
-        height: 35px;
+      .sidebar-mobile {
+        order: 1;
       }
     }
-
-    @media (max-width: 480px) {
-      .payment-grid-container {
-        grid-template-columns: 1fr;
-      }
-      
-      .payment-method-new {
-        height: 56px;
-      }
-      
-      .payment-method-new .payment-icon-new {
-        width: 160px;
-        height: 32px;
-      }
-    }
-
-    /* PERBAIKAN UTAMA: Tab untuk kategori diamond */
     .category-tabs {
       display: flex;
       margin-bottom: 16px;
       border-bottom: 2px solid #4db6ac;
     }
-    
+   
     .category-tab {
       padding: 10px 16px;
       cursor: pointer;
@@ -564,20 +425,20 @@
       font-family: 'Orbitron', sans-serif;
       font-weight: bold;
     }
-    
+   
     .category-tab:hover {
       background: #114250;
     }
-    
+   
     .category-tab.active {
       background: #00796b;
       border-color: #80cbc4;
     }
-    
+   
     .category-content {
       display: none;
     }
-    
+   
     .category-content.active {
       display: block;
     }
@@ -590,14 +451,14 @@
       <div class="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
         <div class="flex items-center gap-3 sm:gap-4">
           <div class="w-16 h-16 sm:w-20 sm:h-20 header-gradient flex items-center justify-center text-white text-xl sm:text-2xl font-bold pixel-shadow">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-qQivqMlXcniOIplM5F92wxlf9h7WBA658w&s" alt="FF Logo" class="w-12 h-12 sm:w-16 sm:h-16 object-contain">
+            <img src="https://upload.wikimedia.org/wikipedia/en/8/8f/Honor_of_Kings_logo.png" alt="HoK Logo" class="w-12 h-12 sm:w-16 sm:h-16 object-contain">
           </div>
           <div>
-            <h1 class="text-xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent pixel-font">FREE FIRE</h1>
-            <p class="text-gray-300 pixel-font responsive-text text-overflow-safe">TOP UP DIAMOND - AMAN & CEPAT</p>
+            <h1 class="text-xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent pixel-font">HONOR OF KINGS</h1>
+            <p class="text-gray-300 pixel-font responsive-text text-overflow-safe">TOP UP TOKEN - AMAN & CEPAT</p>
           </div>
         </div>
-        
+       
         <div class="flex items-center gap-3 sm:gap-4">
           <div class="text-center">
             <div class="flex items-center justify-center gap-1 sm:gap-2">
@@ -615,7 +476,6 @@
         </div>
       </div>
     </header>
-
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
       <!-- Form Utama -->
       <div class="lg:col-span-2 space-y-6">
@@ -625,8 +485,8 @@
             <div class="number-badge w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-white font-bold text-xs sm:text-sm">1</div>
             <h2 class="text-lg sm:text-xl font-bold pixel-font responsive-text">DATA AKUN GAME</h2>
           </div>
-          <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">MASUKKAN ID GAME FREE FIRE ANDA</p>
-          
+          <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">MASUKKAN ID GAME HONOR OF KINGS ANDA</p>
+         
           <div class="grid grid-cols-1 gap-3 sm:gap-4">
             <div>
               <label class="block text-gray-300 mb-2 pixel-font responsive-text">ID GAME</label>
@@ -636,44 +496,28 @@
               </div>
             </div>
           </div>
-          
+         
           <div class="mt-3 sm:mt-4 flex items-center gap-2 text-xs sm:text-sm text-amber-400 pixel-font responsive-text text-overflow-safe">
             <i class="fas fa-exclamation-circle text-xs"></i>
             <span>PASTIKAN ID SUDAH BENAR UNTUK MENGHINDARI KESALAHAN PENGIRIMAN</span>
           </div>
         </div>
-
         <!-- 2. Pilih Nominal -->
         <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
           <div class="flex items-center gap-2 mb-3 sm:mb-4">
             <div class="number-badge w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-white font-bold text-xs sm:text-sm">2</div>
-            <h2 class="text-lg sm:text-xl font-bold pixel-font responsive-text">PILIH NOMINAL</h2>
+            <h2 class="text-lg sm:text-xl font-bold pixel-font responsive-text">PILIH NOMINAL TOKEN</h2>
           </div>
           <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">KLIK SALAH SATU PAKET YANG INGIN DIBELI</p>
-
           <!-- Tab Kategori -->
           <div class="category-tabs">
-            <div class="category-tab active" data-category="categoryA">Diamond</div>
-            <div class="category-tab" data-category="categoryB">Membership</div>
-            <div class="category-tab" data-category="categoryC">Level Up Pass</div>
+            <div class="category-tab active" data-category="categoryA">Token</div>
           </div>
-
-          <!-- Kategori A: Diamond -->
+          <!-- Kategori A: Token -->
           <div id="categoryA" class="category-content active">
             <div id="itemsGridA" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-grid-mobile"></div>
           </div>
-
-          <!-- Kategori B: Membership -->
-          <div id="categoryB" class="category-content">
-            <div id="itemsGridB" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-grid-mobile"></div>
-          </div>
-
-          <!-- Kategori C: Level Up Pass -->
-          <div id="categoryC" class="category-content">
-            <div id="itemsGridC" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 items-grid-mobile"></div>
-          </div>
         </div>
-
         <!-- 3. Pilih Pembayaran -->
         <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
           <div class="flex items-center gap-2 mb-3 sm:mb-4">
@@ -681,7 +525,6 @@
             <h2 class="text-lg sm:text-xl font-bold pixel-font responsive-text">METODE PEMBAYARAN</h2>
           </div>
           <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">PILIH METODE PEMBAYARAN YANG DIINGINKAN</p>
-
           <!-- E-Wallet + QRIS -->
           <div class="payment-section">
             <div class="payment-header" onclick="togglePaymentSection('ewallet')">
@@ -707,7 +550,6 @@
               </div>
             </div>
           </div>
-
           <!-- Virtual Account -->
           <div class="payment-section">
             <div class="payment-header" onclick="togglePaymentSection('bank')">
@@ -734,7 +576,6 @@
               </div>
             </div>
           </div>
-
           <!-- Convenience Store -->
           <div class="payment-section">
             <div class="payment-header" onclick="togglePaymentSection('convenience')">
@@ -756,7 +597,6 @@
             </div>
           </div>
         </div>
-
         <!-- 4. Detail Kontak -->
         <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
           <div class="flex items-center gap-2 mb-3 sm:mb-4">
@@ -764,7 +604,6 @@
             <h2 class="text-lg sm:text-xl font-bold pixel-font responsive-text">DETAIL KONTAK</h2>
           </div>
           <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">NOMOR WHATSAPP UNTUK KONFIRMASI DAN BANTUAN</p>
-
           <div class="grid grid-cols-1 gap-3 sm:gap-4">
             <div>
               <label class="block text-gray-300 mb-2 pixel-font responsive-text">NOMOR WHATSAPP</label>
@@ -777,13 +616,12 @@
               </div>
             </div>
           </div>
-          
+         
           <div class="mt-3 sm:mt-4 flex items-center gap-2 text-xs sm:text-sm text-red-400 pixel-font responsive-text text-overflow-safe">
             <i class="fas fa-info-circle text-xs"></i>
             <span>PASTIKAN NOMOR AKTIF UNTUK MENERIMA NOTIFIKASI PESANAN</span>
           </div>
         </div>
-
         <!-- 5. Kode Promo -->
         <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
           <div class="flex items-center gap-2 mb-3 sm:mb-4">
@@ -791,14 +629,12 @@
             <h2 class="text-lg sm:text-xl font-bold pixel-font responsive-text">KODE PROMO</h2>
           </div>
           <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">MASUKKAN KODE PROMO JIKA ADA</p>
-
           <div class="flex gap-3 promo-container">
             <input id="inputPromo" type="text" placeholder="MASUKKAN KODE PROMO" class="input-field flex-1 p-3 sm:p-4 focus:outline-none input-field-mobile">
             <button id="applyPromo" class="btn-primary px-4 sm:px-6 pixel-border promo-button text-xs sm:text-sm">GUNAKAN</button>
           </div>
           <p id="promoMsg" class="mt-3 text-xs sm:text-sm hidden pixel-font responsive-text text-overflow-safe"></p>
         </div>
-
         <!-- 6. Tombol Kembali -->
         <div class="hidden lg:flex justify-start mt-2">
           <a href="/" class="btn-home px-6 py-3 pixel-border flex items-center gap-3 text-sm no-underline">
@@ -807,20 +643,19 @@
           </a>
         </div>
       </div>
-
       <!-- Sidebar Kanan -->
       <div class="space-y-6 sidebar-container sidebar-mobile">
         <!-- Ringkasan Pesanan -->
         <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
           <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-center pixel-font responsive-text">RINGKASAN PESANAN</h3>
-          
+         
           <div id="noItem" class="text-center py-6 sm:py-8">
             <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 bg-gray-700 flex items-center justify-center pixel-border-thin">
               <i class="fas fa-shopping-cart text-gray-400 text-lg sm:text-xl"></i>
             </div>
             <div class="text-gray-400 pixel-font responsive-text text-overflow-safe">BELUM ADA ITEM YANG DIPILIH</div>
           </div>
-          
+         
           <div id="orderSummary" class="hidden pixel-spacing">
             <div class="flex justify-between items-center">
               <span class="text-gray-400 pixel-font responsive-text">PRODUK:</span>
@@ -846,7 +681,7 @@
               <span class="text-gray-400 pixel-font responsive-text">PROMO:</span>
               <span id="sumPromo" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
             </div>
-            
+           
             <div class="border-t border-red-900 pt-3 sm:pt-4 mt-2">
               <div class="flex justify-between items-center text-base sm:text-lg">
                 <span class="font-bold pixel-font responsive-text">TOTAL:</span>
@@ -854,21 +689,20 @@
               </div>
             </div>
           </div>
-          
+         
           <button id="openConfirm" class="btn-primary w-full py-3 sm:py-4 text-base sm:text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed pixel-border mt-4 sm:mt-6 text-xs sm:text-sm">
             <i class="fas fa-paper-plane mr-2"></i>PESAN SEKARANG
           </button>
-          
+         
           <div class="mt-3 sm:mt-4 text-center text-xs sm:text-sm text-gray-400 pixel-font responsive-text text-overflow-safe">
             <div>PROSES CEPAT & AMAN</div>
           </div>
         </div>
-
         <!-- Bantuan -->
         <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
           <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 pixel-font responsive-text">BUTUH BANTUAN?</h3>
           <p class="text-gray-400 mb-3 sm:mb-4 pixel-font responsive-text text-overflow-safe">TIM SUPPORT KAMI SIAP 24/7</p>
-          
+         
           <div class="pixel-spacing">
             <a href="https://wa.me/6281936627176" target="_blank" class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-gray-700 hover:bg-gray-600 transition pixel-border-thin">
               <div class="w-8 h-8 sm:w-10 sm:h-10 bg-green-500 flex items-center justify-center pixel-border-thin">
@@ -879,7 +713,7 @@
                 <p class="text-xs sm:text-sm text-gray-400 pixel-font responsive-text">081936627176</p>
               </div>
             </a>
-            
+           
             <div class="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-gray-700 pixel-border-thin">
               <div class="w-8 h-8 sm:w-10 sm:h-10 bg-red-500 flex items-center justify-center pixel-border-thin">
                 <i class="fas fa-clock text-white text-sm sm:text-base"></i>
@@ -891,7 +725,7 @@
             </div>
           </div>
         </div>
-        
+       
         <!-- Testimoni -->
         <div class="card p-4 sm:p-6 pixel-shadow card-mobile">
           <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 pixel-font responsive-text">TESTIMONI PELANGGAN</h3>
@@ -907,10 +741,10 @@
                 </div>
                 <span class="text-xs sm:text-sm text-gray-400 pixel-font responsive-text">2 JAM LALU</span>
               </div>
-              <p class="text-xs sm:text-sm pixel-font responsive-text text-overflow-safe">"DIAMOND LANGSUNG MASUK, CEPET BANGET!"</p>
-              <p class="text-xs text-gray-400 mt-2 pixel-font responsive-text">- ANDI, SURABAYA</p>
+              <p class="text-xs sm:text-sm pixel-font responsive-text text-overflow-safe">"TOKEN LANGSUNG MASUK, CEPET BANGET!"</p>
+              <p class="text-xs text-gray-400 mt-2 pixel-font responsive-text">- RIZKY, BANDUNG</p>
             </div>
-            
+           
             <div class="bg-gray-700 p-3 sm:p-4 pixel-border-thin">
               <div class="flex items-center gap-2 mb-2">
                 <div class="rating-stars text-xs sm:text-sm">
@@ -923,11 +757,10 @@
                 <span class="text-xs sm:text-sm text-gray-400 pixel-font responsive-text">1 HARI LALU</span>
               </div>
               <p class="text-xs sm:text-sm pixel-font responsive-text text-overflow-safe">"ADMIN RAMAH, PROSES CEPAT, RECOMMENDED!"</p>
-              <p class="text-xs text-gray-400 mt-2 pixel-font responsive-text">- DEWI, JAKARTA</p>
+              <p class="text-xs text-gray-400 mt-2 pixel-font responsive-text">- SINTA, JAKARTA</p>
             </div>
           </div>
         </div>
-
         <!-- Tombol Kembali Mobile -->
         <div class="lg:hidden mobile-button-container">
           <a href="/" class="btn-home w-full px-6 py-3 pixel-border flex items-center justify-center gap-3 text-sm no-underline">
@@ -938,7 +771,6 @@
       </div>
     </div>
   </div>
-
   <!-- Modal Konfirmasi -->
   <div id="modal" class="modal fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4">
     <div class="modal-content w-full max-w-2xl p-4 sm:p-6">
@@ -948,7 +780,6 @@
           <i class="fas fa-times"></i>
         </button>
       </div>
-
       <div class="pixel-spacing mb-4 sm:mb-6">
         <div class="flex justify-between">
           <span class="text-gray-400 pixel-font responsive-text">ITEM:</span>
@@ -974,7 +805,7 @@
           <span class="text-gray-400 pixel-font responsive-text">PROMO:</span>
           <span id="mPromo" class="font-semibold pixel-font responsive-text text-overflow-safe">-</span>
         </div>
-        
+       
         <div class="border-t border-red-900 pt-3 sm:pt-4 mt-2">
           <div class="flex justify-between text-lg sm:text-xl">
             <span class="font-bold pixel-font responsive-text">TOTAL:</span>
@@ -982,7 +813,6 @@
           </div>
         </div>
       </div>
-
       <div class="flex gap-2 sm:gap-3 justify-end">
         <button id="cancelBtn" class="px-4 sm:px-6 py-2 sm:py-3 bg-gray-700 hover:bg-gray-600 transition pixel-border-thin pixel-font responsive-text text-xs sm:text-sm">BATAL</button>
         <button id="sendBtn" class="btn-success px-4 sm:px-6 py-2 sm:py-3 flex items-center gap-1 sm:gap-2 pixel-border pixel-font responsive-text text-xs sm:text-sm">
@@ -991,70 +821,25 @@
       </div>
     </div>
   </div>
-
   <script>
-    // === DATA PRODUK FREE FIRE ===
+    // === DATA PRODUK HONOR OF KINGS (TOKEN) ===
     const productsA = [
-      { name: "5 Diamond", price: "RP 888", diamonds: "5 Diamonds" },
-      { name: "10 Diamond", price: "RP 1.765", diamonds: "10 Diamonds" },
-      { name: "20 Diamond", price: "RP 3.600", diamonds: "20 Diamonds" },
-      { name: "25 Diamond", price: "RP 4.300", diamonds: "25 Diamonds" },
-      { name: "30 Diamond", price: "RP 5.100", diamonds: "30 Diamonds" },
-      { name: "50 Diamond", price: "RP 7.000", diamonds: "50 Diamonds" },
-      { name: "55 Diamond", price: "RP 7.700", diamonds: "55 Diamonds" },
-      { name: "60 Diamond", price: "RP 8.200", diamonds: "60 Diamonds" },
-      { name: "70 Diamond", price: "RP 9.500", diamonds: "70 Diamonds" },
-      { name: "75 Diamond", price: "RP 10.500", diamonds: "75 Diamonds" },
-      { name: "80 Diamond", price: "RP 11.200", diamonds: "80 Diamonds" },
-      { name: "100 Diamond", price: "RP 13.500", diamonds: "100 Diamonds" },
-      { name: "120 Diamond", price: "RP 16.500", diamonds: "120 Diamonds" },
-      { name: "140 Diamond", price: "RP 19.200", diamonds: "140 Diamonds" },
-      { name: "145 Diamond", price: "RP 20.000", diamonds: "145 Diamonds" },
-      { name: "150 Diamond", price: "RP 20.500", diamonds: "150 Diamonds" },
-      { name: "160 Diamond", price: "RP 22.400", diamonds: "160 Diamonds" },
-      { name: "190 Diamond", price: "RP 25.500", diamonds: "190 Diamonds" },
-      { name: "210 Diamond", price: "RP 27.500", diamonds: "210 Diamonds" },
-      { name: "250 Diamond", price: "RP 32.500", diamonds: "250 Diamonds" },
-      { name: "280 Diamond", price: "RP 36.500", diamonds: "280 Diamonds" },
-      { name: "355 Diamond", price: "RP 44.500", diamonds: "355 Diamonds" },
-      { name: "375 Diamond", price: "RP 49.500", diamonds: "375 Diamonds" },
-      { name: "400 Diamond", price: "RP 50.000", diamonds: "400 Diamonds" },
-      { name: "425 Diamond", price: "RP 54.500", diamonds: "425 Diamonds" },
-      { name: "475 Diamond", price: "RP 57.500", diamonds: "475 Diamonds" },
-      { name: "500 Diamond", price: "RP 60.500", diamonds: "500 Diamonds" },
-      { name: "635 Diamond", price: "RP 77.500", diamonds: "635 Diamonds" },
-      { name: "720 Diamond", price: "RP 86.500", diamonds: "720 Diamonds" },
-      { name: "800 Diamond", price: "RP 95.500", diamonds: "800 Diamonds" },
-      { name: "1.000 Diamond", price: "RP 119.500", diamonds: "1.000 Diamonds" },
-      { name: "1.450 Diamond", price: "RP 180.692", diamonds: "1.450 Diamonds" },
-      { name: "1.800 Diamond", price: "RP 210.500", diamonds: "1.800 Diamonds" },
-      { name: "2.000 Diamond", price: "RP 246.911", diamonds: "2.000 Diamonds" },
-      { name: "2.140 Diamond", price: "RP 249.927", diamonds: "2.140 Diamonds" },
-      { name: "2.720 Diamond", price: "RP 314.736", diamonds: "2.720 Diamonds" },
-      { name: "4.000 Diamond", price: "RP 459.944", diamonds: "4.000 Diamonds" },
-      { name: "7.290 Diamond", price: "RP 818.295", diamonds: "7.290 Diamonds" }
-    ];
-
-    const productsB = [
-      { name: "Membership Mingguan", price: "RP 27.500", diamonds: "Weekly Membership" },
-      { name: "Boyah Pass", price: "RP 43.500", diamonds: "Boyah Pass" },
-      { name: "Membership Bulanan", price: "RP 80.500", diamonds: "Monthly Membership" }
-    ];
-
-    const productsC = [
-      { name: "Level 6", price: "RP 6.500", diamonds: "Level 6" },
-      { name: "Level 10", price: "RP 11.500", diamonds: "Level 10" },
-      { name: "Level 15", price: "RP 11.600", diamonds: "Level 15" },
-      { name: "Level 20", price: "RP 11.700", diamonds: "Level 20" },
-      { name: "Level 25", price: "RP 11.800", diamonds: "Level 25" },
-      { name: "Level 30", price: "RP 15.900", diamonds: "Level 30" }
+      { name: "16 Tokens", price: "RP 4.226", diamonds: "16 Tokens" },
+      { name: "80 Tokens", price: "RP 16.045", diamonds: "80 Tokens" },
+      { name: "240 Tokens", price: "RP 47.500", diamonds: "240 Tokens" },
+      { name: "400 Tokens", price: "RP 78.227", diamonds: "400 Tokens" },
+      { name: "560 Tokens", price: "RP 106.573", diamonds: "560 Tokens" },
+      { name: "800 Tokens", price: "RP 150.566", diamonds: "800 Tokens" },
+      { name: "1.200 Tokens", price: "RP 225.819", diamonds: "1.200 Tokens" },
+      { name: "2.400 Tokens", price: "RP 444.849", diamonds: "2.400 Tokens" },
+      { name: "4.000 Tokens", price: "RP 738.043", diamonds: "4.000 Tokens" },
+      { name: "8.000 Tokens", price: "RP 1.471.336", diamonds: "8.000 Tokens" }
     ];
 
     const ADMIN_WHATSAPP = "6281936627176";
     let selectedItem = null;
     let selectedPayment = null;
     let promoApplied = false;
-    let currentCategory = "categoryA";
 
     function validateNumberInput(input, errorElement) {
       const value = input.value;
@@ -1086,21 +871,13 @@
       }
     }
 
-    function switchCategory(category) {
-      document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active'));
-      document.querySelector(`.category-tab[data-category="${category}"]`).classList.add('active');
-      document.querySelectorAll('.category-content').forEach(content => content.classList.remove('active'));
-      document.getElementById(category).classList.add('active');
-      currentCategory = category;
-    }
-
     function createItemCard(product) {
       const itemCard = document.createElement('div');
       itemCard.className = 'item-card p-3 sm:p-4 flex flex-col justify-between pixel-shadow';
       itemCard.dataset.name = product.name;
       itemCard.dataset.price = product.price;
       itemCard.dataset.diamonds = product.diamonds;
-      
+     
       itemCard.innerHTML = `
         <div>
           <div class="font-semibold text-sm sm:text-lg pixel-font responsive-text item-text-mobile text-overflow-safe">${product.diamonds}</div>
@@ -1110,25 +887,20 @@
           <div class="text-base sm:text-lg font-bold text-green-400 pixel-font responsive-text price-text-mobile">${product.price}</div>
         </div>
       `;
-      
+     
       itemCard.addEventListener('click', () => {
         document.querySelectorAll('.item-card').forEach(card => card.classList.remove('selected', 'glow'));
         itemCard.classList.add('selected', 'glow');
         selectedItem = itemCard;
         updateSummary();
       });
-      
+     
       return itemCard;
     }
 
     function initializeProducts() {
       const itemsGridA = document.getElementById('itemsGridA');
-      const itemsGridB = document.getElementById('itemsGridB');
-      const itemsGridC = document.getElementById('itemsGridC');
-
       productsA.forEach(p => itemsGridA.appendChild(createItemCard(p)));
-      productsB.forEach(p => itemsGridB.appendChild(createItemCard(p)));
-      productsC.forEach(p => itemsGridC.appendChild(createItemCard(p)));
     }
 
     function initializePaymentOptions() {
@@ -1146,7 +918,6 @@
       const noItem = document.getElementById('noItem');
       const orderSummary = document.getElementById('orderSummary');
       const openConfirm = document.getElementById('openConfirm');
-
       if (!selectedItem) {
         noItem.classList.remove('hidden');
         orderSummary.classList.add('hidden');
@@ -1157,22 +928,18 @@
         document.getElementById('sumPrice').textContent = selectedItem.dataset.price;
         document.getElementById('sumTotal').textContent = selectedItem.dataset.price;
       }
-
       document.getElementById('sumPay').textContent = selectedPayment || "-";
       document.getElementById('sumId').textContent = document.getElementById('inputId').value || "-";
       document.getElementById('sumWA').textContent = document.getElementById('inputWA').value ? "+62" + document.getElementById('inputWA').value : "-";
       document.getElementById('sumPromo').textContent = document.getElementById('inputPromo').value || "-";
-
       const idValid = document.getElementById('inputId').value.trim() !== "" && !document.getElementById('inputId').classList.contains('error');
       const waValid = document.getElementById('inputWA').value.trim().length >= 8 && !document.getElementById('inputWA').classList.contains('error');
       const valid = idValid && selectedItem && selectedPayment && waValid;
-
       openConfirm.disabled = !valid;
     }
 
     document.getElementById('inputId').addEventListener('input', function() { validateNumberInput(this, document.getElementById('idError')); updateSummary(); });
     document.getElementById('inputWA').addEventListener('input', function() { validateNumberInput(this, document.getElementById('waError')); updateSummary(); });
-
     document.getElementById('applyPromo').addEventListener('click', () => {
       const promoCode = document.getElementById('inputPromo').value.trim();
       const promoMsg = document.getElementById('promoMsg');
@@ -1219,12 +986,12 @@
       document.getElementById('modal').classList.remove('flex');
       document.getElementById('modal').classList.add('hidden');
     }
+
     document.getElementById('closeModal').addEventListener('click', closeModal);
     document.getElementById('cancelBtn').addEventListener('click', closeModal);
-
     document.getElementById('sendBtn').addEventListener('click', () => {
       const message = [
-        "HALO ADMIN, SAYA INGIN TOP UP FREE FIRE",
+        "HALO ADMIN, SAYA INGIN TOP UP HONOR OF KINGS",
         "",
         `DETAIL PESANAN:`,
         `• ITEM: ${selectedItem.dataset.diamonds}`,
@@ -1248,9 +1015,6 @@
       initializeProducts();
       initializePaymentOptions();
       updateSummary();
-      document.querySelectorAll('.category-tab').forEach(tab => {
-        tab.addEventListener('click', () => switchCategory(tab.dataset.category));
-      });
     });
   </script>
 </body>
